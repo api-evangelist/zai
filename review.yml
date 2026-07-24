@@ -1,0 +1,125 @@
+aid: zai
+name: Zai
+review:
+  question: Does Zai publish a real public developer portal with downloadable OpenAPI specifications?
+  answer: true
+  date: '2026-07-24'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    Zai (hellozai.com, formerly Assembly Payments / Assembly) runs a genuine,
+    live public developer portal at https://developer.hellozai.com (ReadMe.io
+    hosted; HTTP 200), with guides, an API reference, a developer checklist,
+    webhook docs, an interactive dashboard (https://dashboard.hellozai.com) and
+    an llms.txt agent index at https://developer.hellozai.com/llms.txt. It is a
+    true API-first Australian payments / Payments-as-a-Service provider serving
+    platforms and marketplaces, layered over Australia's New Payments Platform
+    (NPP) via PayID and PayTo rails.
+
+    Downloadable machine-readable specs are real and were harvested verbatim.
+    The portal references four separate OpenAPI documents published on
+    SwaggerHub under the AssemblyPlatforms organisation, each of which parses as
+    a valid OpenAPI 3.x document:
+      1. Assembly API 2.3 (OpenAPI 3.0.0, 89 paths) — core payments/wallet/marketplace.
+      2. Virtual Accounts and PayIDs 0.12-external (OpenAPI 3.0.0, 8 paths) — NPP PayID.
+      3. PayTo 1.4-external (OpenAPI 3.0.1, 10 paths) — NPP PayTo mandated debits.
+      4. Asynchronous API 1.0.0 (OpenAPI 3.0.0, 3 paths) — long-running operations.
+
+    Auth model: OAuth2 client-credentials is the primary scheme on the core
+    Assembly API and Asynchronous API (token endpoint
+    https://au-0000.(sandbox.)auth.assemblypay.com/tokens; the Async API also
+    documents HTTP basic auth); the PayTo API uses HTTP bearer-token auth. A
+    live OpenID configuration is served anonymously at
+    https://au-0000.auth.assemblypay.com/.well-known/openid-configuration
+    (issuer https://au-0000.auth.assemblypay.com). Environments: Live
+    (production) and Pre-live (sandbox). Webhooks with HMAC signature
+    verification are documented. No public Postman workspace, GraphQL, gRPC or
+    AsyncAPI document was found. Home market: Australia (Melbourne HQ).
+  developerPortal:
+    url: https://developer.hellozai.com/
+    httpStatus: 200
+    confirmed: true
+    platform: ReadMe.io
+    llmsTxt: https://developer.hellozai.com/llms.txt
+    dashboard: https://dashboard.hellozai.com/
+  openapiHarvested: true
+  specsCount: 4
+  specs:
+    - file: openapi/zai-assembly-api.json
+      title: Assembly API
+      version: '2.3'
+      openapi: 3.0.0
+      paths: 89
+      source: https://api.swaggerhub.com/apis/AssemblyPlatforms/assembly-api/2.3/swagger.json
+      httpStatus: 200
+      fetched: '2026-07-24'
+    - file: openapi/zai-virtual-accounts-payid.json
+      title: Virtual Accounts and PayIDs
+      version: 0.12-external
+      openapi: 3.0.0
+      paths: 8
+      source: https://api.swaggerhub.com/apis/AssemblyPlatforms/VirtualAccounts/0.12-external/swagger.json
+      httpStatus: 200
+      fetched: '2026-07-24'
+    - file: openapi/zai-payto.json
+      title: PayTo
+      version: 1.4-external
+      openapi: 3.0.1
+      paths: 10
+      source: https://api.swaggerhub.com/apis/AssemblyPlatforms/PayTo/1.4-external/swagger.json
+      httpStatus: 200
+      fetched: '2026-07-24'
+    - file: openapi/zai-async-api.json
+      title: Asynchronous API
+      version: 1.0.0
+      openapi: 3.0.0
+      paths: 3
+      source: https://api.swaggerhub.com/apis/AssemblyPlatforms/assembly-async-api/1.0.0/swagger.json
+      httpStatus: 200
+      fetched: '2026-07-24'
+  authModel:
+    primary: OAuth2 client-credentials
+    tokenEndpoint: https://au-0000.auth.assemblypay.com/tokens
+    sandboxTokenEndpoint: https://au-0000.sandbox.auth.assemblypay.com/tokens
+    openidConfiguration: https://au-0000.auth.assemblypay.com/.well-known/openid-configuration
+    payto: HTTP bearer token
+    async: OAuth2 client-credentials or HTTP basic
+  webhooks:
+    documented: true
+    signatureVerification: true
+    url: https://developer.hellozai.com/docs/webhooks
+  postman: false
+  graphql: false
+  homeMarket: Australia
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://secure.api.promisepay.com
+      documented: true
+      note: Core Assembly API production host; legacy promisepay.com domain per the 2.3 spec servers.
+    - protocol: REST
+      scheme: https
+      baseURL: https://au-0000.api.assemblypay.com
+      documented: true
+      note: NPP Virtual Accounts / PayID and PayTo (payto/) production host.
+    - protocol: REST
+      scheme: https
+      baseURL: https://tnq.api.assemblypay.com/
+      documented: true
+      note: Asynchronous API production host.
+sources:
+  - url: https://developer.hellozai.com/docs
+    type: Documentation
+    httpStatus: 200
+  - url: https://developer.hellozai.com/reference/overview
+    type: APIReference
+    httpStatus: 200
+  - url: https://developer.hellozai.com/llms.txt
+    type: AgentIndex
+    httpStatus: 200
+  - url: https://developer.hellozai.com/docs/webhooks
+    type: Documentation
+    httpStatus: 200
+  - url: https://api.swaggerhub.com/apis/AssemblyPlatforms/assembly-api/2.3/swagger.json
+    type: OpenAPI
+    httpStatus: 200

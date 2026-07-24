@@ -1,0 +1,164 @@
+aid: zai
+url: https://raw.githubusercontent.com/api-evangelist/zai/refs/heads/main/apis.yml
+name: Zai
+kind: company
+description: >-
+  Zai (hellozai.com, formerly Assembly Payments / Assembly) is an Australian
+  payments and Payments-as-a-Service provider headquartered in Melbourne. Zai
+  gives platforms, marketplaces and vertical software companies a programmable
+  way to onboard users, hold funds in managed wallet accounts, collect pay-ins
+  (card, direct debit, BPAY, PayID), and disburse pay-outs across many parties
+  in a single transaction flow. It is API-first: the Assembly API exposes wallet
+  accounts, users, items, transactions, bank accounts, card accounts, fees,
+  callbacks and batch disbursements, layered with Australia's New Payments
+  Platform rails through dedicated Virtual Accounts / PayID and PayTo APIs, plus
+  an Asynchronous API for long-running operations. Authentication is OAuth2
+  client-credentials (bearer tokens on PayTo), with a Live and Pre-live
+  (sandbox) environment, webhooks with signature verification, and a developer
+  dashboard. Positioned as the embedded-payments and marketplace-money-movement
+  layer for the Australian market and platforms operating there.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Australia
+- Payment Gateway
+- Payment Processing
+- Marketplace Payments
+- Payments-as-a-Service
+- Real-Time Payments
+- Account-to-Account
+- Open Banking
+- PayTo
+- PayID
+- NPP
+- Direct Debit
+- Digital Wallets
+- Payouts
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: zai:zai-assembly-api
+  name: Zai Assembly API
+  description: >-
+    Zai's core payments platform API. Onboard users, create and manage wallet
+    accounts, items (transaction records), bank and card accounts, companies,
+    fees, tokens, callbacks and batch transactions to collect pay-ins and
+    disburse multi-party pay-outs across a marketplace or platform. OpenAPI
+    3.0.0, version 2.3, 89 documented paths, secured with OAuth2
+    client-credentials.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Payments
+  - Wallet Accounts
+  - Marketplace
+  - Pay-ins
+  - Payouts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-assembly-api.json
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+- aid: zai:zai-virtual-accounts-payid-api
+  name: Zai Virtual Accounts and PayIDs API
+  description: >-
+    Create and manage Virtual Accounts and PayIDs on the New Payments Platform
+    (NPP), letting platforms receive real-time account-to-account pay-ins to
+    uniquely addressable virtual accounts. OpenAPI 3.0.0, version 0.12-external,
+    8 documented paths on the assemblypay.com host.
+  humanURL: https://developer.hellozai.com/reference/overview-va
+  baseURL: https://au-0000.api.assemblypay.com
+  tags:
+  - PayID
+  - Virtual Accounts
+  - NPP
+  - Real-Time Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-virtual-accounts-payid.json
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+- aid: zai:zai-payto-api
+  name: Zai PayTo API
+  description: >-
+    Create and manage PayTo agreements (mandated real-time debits) and initiate
+    payments against them over the New Payments Platform. OpenAPI 3.0.1, version
+    1.4-external, 10 documented paths, secured with bearer-token authentication.
+  humanURL: https://developer.hellozai.com/reference/overview-1
+  baseURL: https://au-0000.api.assemblypay.com/payto/
+  tags:
+  - PayTo
+  - Mandates
+  - NPP
+  - Direct Debit
+  - Real-Time Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-payto.json
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+- aid: zai:zai-async-api
+  name: Zai Asynchronous API
+  description: >-
+    Asynchronous API for submitting long-running operations and retrieving their
+    results without blocking, complementing the synchronous Assembly API.
+    OpenAPI 3.0.0, version 1.0.0, 3 documented paths, supporting OAuth2
+    client-credentials and basic authentication.
+  humanURL: https://developer.hellozai.com/reference/async-overview
+  baseURL: https://tnq.api.assemblypay.com/
+  tags:
+  - Async
+  - Batch
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-async-api.json
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+common:
+- type: Website
+  url: https://www.hellozai.com/
+- type: DeveloperPortal
+  url: https://developer.hellozai.com/
+- type: Documentation
+  url: https://developer.hellozai.com/docs
+- type: APIReference
+  url: https://developer.hellozai.com/reference/overview
+- type: GettingStarted
+  url: https://developer.hellozai.com/docs/developer-checklist
+- type: Authentication
+  url: https://developer.hellozai.com/reference/token
+- type: Webhooks
+  url: https://developer.hellozai.com/docs/webhooks
+- type: StatusPage
+  url: https://status.hellozai.com/
+- type: Pricing
+  url: https://www.hellozai.com/pricing
+- type: Blog
+  url: https://blog.hellozai.com/
+- type: Support
+  url: https://support.hellozai.com/
+- type: SignUp
+  url: https://dashboard.hellozai.com/
+- type: TermsOfService
+  url: https://www.hellozai.com/company/policies/terms-conditions
+- type: PrivacyPolicy
+  url: https://www.hellozai.com/company/policies/privacy-policy
+- type: Compliance
+  url: https://www.hellozai.com/company/compliance
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hellozai/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
