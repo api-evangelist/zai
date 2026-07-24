@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+source: probed /.well-known/* on Zai auth + API + docs hosts (2026-07-24)
+hosts:
+  - host: https://au-0000.auth.assemblypay.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: zai-openid-configuration.json
+        note: Minimal OIDC discovery document (issuer + jwks_uri only).
+      - path: /.well-known/jwks.json
+        status: 200
+        note: JSON Web Key Set for validating issued bearer tokens.
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://au-0000.sandbox.auth.assemblypay.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: zai-sandbox-openid-configuration.json
+        note: Pre-live (sandbox) OIDC discovery document.
+  - host: https://secure.api.promisepay.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /openapi.json
+        status: 404
+  - host: https://www.hellozai.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://developer.hellozai.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /llms.txt
+        status: 200
+        note: Published llms.txt index; saved verbatim to llms/zai-llms.txt.

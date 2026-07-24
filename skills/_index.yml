@@ -1,0 +1,16 @@
+generated: '2026-06-20'
+method: generated
+source: grounded in openapi/ operationIds + conventions/errors artifacts
+skills:
+  - file: zai-onboard-user-and-collect-payment.md
+    name: Onboard a user and collect a marketplace payment
+    api: openapi/zai-assembly-api.json
+    operations: [token, createUser, createCardAccount, createItem, makePayment, showItemStatus]
+  - file: zai-create-payto-agreement-and-collect.md
+    name: Create a PayTo agreement and collect a payment
+    api: openapi/zai-payto.json
+    operations: [validateAgreement, createAgreement, initiatePaymentRequest, getInitiatePaymentStatus, getAgreementDetails]
+  - file: zai-issue-virtual-account-and-payid.md
+    name: Issue a Virtual Account and register a PayID
+    api: openapi/zai-virtual-accounts-payid.json
+    operations: [createVirtualAccount, registerPayID, getPayID, showVirtualAccount, updatePayIdStatus]

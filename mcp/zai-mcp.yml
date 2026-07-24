@@ -1,0 +1,384 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: derived from openapi/ operations (no official hosted MCP server found as of 2026-07)
+server:
+  name: zai
+  transport: http
+  note: "candidate \u2014 no first-party MCP server published; tools mapped 1:1 from OpenAPI operations"
+tools:
+- name: token
+  description: Token
+  source_operation: openapi/zai-assembly-api.json#token
+- name: show_address
+  description: Show Address
+  source_operation: openapi/zai-assembly-api.json#showAddress
+- name: show_bank_account
+  description: Show Bank Account
+  source_operation: openapi/zai-assembly-api.json#showBankAccount
+- name: redact_bank_account
+  description: Redact Bank Account
+  source_operation: openapi/zai-assembly-api.json#redactBankAccount
+- name: send_penny_amount
+  description: Send Penny Amount
+  source_operation: openapi/zai-assembly-api.json#sendPennyAmount
+- name: create_bank_account
+  description: Create Bank Account
+  source_operation: openapi/zai-assembly-api.json#createBankAccount
+- name: verify_penny_amount
+  description: Verify Penny Amount
+  source_operation: openapi/zai-assembly-api.json#verifyPennyAmount
+- name: show_bank_account_user
+  description: Show Bank Account User
+  source_operation: openapi/zai-assembly-api.json#showBankAccountUser
+- name: validate_routing_number
+  description: Validate Routing Number
+  source_operation: openapi/zai-assembly-api.json#validateRoutingNumber
+- name: show_bpay_account
+  description: Show BPay Account
+  source_operation: openapi/zai-assembly-api.json#showBPayAccount
+- name: create_bpay_account
+  description: Create BPay Account
+  source_operation: openapi/zai-assembly-api.json#createBPayAccount
+- name: show_bpay_account_user
+  description: Show BPay Account User
+  source_operation: openapi/zai-assembly-api.json#showBPayAccountUser
+- name: bill_payment
+  description: Pay a Bill
+  source_operation: openapi/zai-assembly-api.json#billPayment
+- name: list_sub_wallets
+  description: List Sub-wallets
+  source_operation: openapi/zai-assembly-api.json#listSubWallets
+- name: create_sub_wallet
+  description: Create Sub-wallet
+  source_operation: openapi/zai-assembly-api.json#createSubWallet
+- name: list_user_bpay_accounts
+  description: List User's BPay Accounts
+  source_operation: openapi/zai-assembly-api.json#listUserBPayAccounts
+- name: show_callback
+  description: Show Callback
+  source_operation: openapi/zai-assembly-api.json#showCallback
+- name: delete_callback
+  description: Delete Callback
+  source_operation: openapi/zai-assembly-api.json#deleteCallback
+- name: update_callback
+  description: Update Callback
+  source_operation: openapi/zai-assembly-api.json#updateCallback
+- name: list_callback_response
+  description: List Callback Responses
+  source_operation: openapi/zai-assembly-api.json#listCallbackResponse
+- name: show_callback_response
+  description: Show Callback Response
+  source_operation: openapi/zai-assembly-api.json#showCallbackResponse
+- name: list_callbacks
+  description: List Callbacks
+  source_operation: openapi/zai-assembly-api.json#listCallbacks
+- name: create_callback
+  description: Create Callback
+  source_operation: openapi/zai-assembly-api.json#createCallback
+- name: create_card_account
+  description: Create Card Account
+  source_operation: openapi/zai-assembly-api.json#createCardAccount
+- name: show_card_account_user
+  description: Show Card Account User
+  source_operation: openapi/zai-assembly-api.json#showCardAccountUser
+- name: verify_card
+  description: Verify Card
+  source_operation: openapi/zai-assembly-api.json#verifyCard
+- name: show_card_account
+  description: Show Card Account
+  source_operation: openapi/zai-assembly-api.json#showCardAccount
+- name: redact_card_account
+  description: Redact Card Account
+  source_operation: openapi/zai-assembly-api.json#redactCardAccount
+- name: list_companies
+  description: List Companies
+  source_operation: openapi/zai-assembly-api.json#listCompanies
+- name: create_company
+  description: Create Company
+  source_operation: openapi/zai-assembly-api.json#createCompany
+- name: show_company
+  description: Show Company
+  source_operation: openapi/zai-assembly-api.json#showCompany
+- name: update_company
+  description: Update Company
+  source_operation: openapi/zai-assembly-api.json#updateCompany
+- name: list_direct_debit_authorities
+  description: List Direct Debit Authorities
+  source_operation: openapi/zai-assembly-api.json#listDirectDebitAuthorities
+- name: create_direct_debit_authority
+  description: Create Direct Debit Authority
+  source_operation: openapi/zai-assembly-api.json#createDirectDebitAuthority
+- name: show_direct_debit_authority
+  description: Show Direct Debit Authority
+  source_operation: openapi/zai-assembly-api.json#showDirectDebitAuthority
+- name: list_fees
+  description: List Fees
+  source_operation: openapi/zai-assembly-api.json#listFees
+- name: create_fee
+  description: Create fee
+  source_operation: openapi/zai-assembly-api.json#createFee
+- name: show_fee
+  description: Show Fee
+  source_operation: openapi/zai-assembly-api.json#showFee
+- name: list_charges
+  description: List Charges
+  source_operation: openapi/zai-assembly-api.json#listCharges
+- name: create_charge
+  description: Create Charge
+  source_operation: openapi/zai-assembly-api.json#createCharge
+- name: show_charge
+  description: Show Charge
+  source_operation: openapi/zai-assembly-api.json#showCharge
+- name: show_charge_status
+  description: Show Charge Status
+  source_operation: openapi/zai-assembly-api.json#showChargeStatus
+- name: show_charge_buyer
+  description: Show Charge Buyer
+  source_operation: openapi/zai-assembly-api.json#showChargeBuyer
+- name: show_marketplace
+  description: Show Marketplace
+  source_operation: openapi/zai-assembly-api.json#showMarketplace
+- name: generate_token
+  description: Generate Token
+  source_operation: openapi/zai-assembly-api.json#generateToken
+- name: health_check
+  description: Health check
+  source_operation: openapi/zai-assembly-api.json#healthCheck
+- name: list_transactions
+  description: List Transactions
+  source_operation: openapi/zai-assembly-api.json#listTransactions
+- name: show_transaction_bank_account
+  description: Show Transaction Bank Account
+  source_operation: openapi/zai-assembly-api.json#showTransactionBankAccount
+- name: show_transaction
+  description: Show Transaction
+  source_operation: openapi/zai-assembly-api.json#showTransaction
+- name: show_transaction_card_account
+  description: Show Transaction Card Account
+  source_operation: openapi/zai-assembly-api.json#showTransactionCardAccount
+- name: show_transaction_fees
+  description: Show Transaction Fees
+  source_operation: openapi/zai-assembly-api.json#showTransactionFees
+- name: show_transaction_wallet_account
+  description: Show Transaction Wallet Account
+  source_operation: openapi/zai-assembly-api.json#showTransactionWalletAccount
+- name: show_transaction_user
+  description: Show Transaction User
+  source_operation: openapi/zai-assembly-api.json#showTransactionUser
+- name: list_batch_transactions
+  description: List Batch Transactions
+  source_operation: openapi/zai-assembly-api.json#listBatchTransactions
+- name: show_batch_transaction
+  description: Show Batch Transaction
+  source_operation: openapi/zai-assembly-api.json#showBatchTransaction
+- name: list_disbursement
+  description: List Disbursements
+  source_operation: openapi/zai-assembly-api.json#listDisbursement
+- name: show_disbursement
+  description: Show Disbursement
+  source_operation: openapi/zai-assembly-api.json#showDisbursement
+- name: show_disbursement_transactions
+  description: Show Disbursement Transactions
+  source_operation: openapi/zai-assembly-api.json#showDisbursementTransactions
+- name: show_disbursement_wallet_accounts
+  description: Show Disbursement Wallet Accounts
+  source_operation: openapi/zai-assembly-api.json#showDisbursementWalletAccounts
+- name: show_sub_wallet
+  description: Show Sub-wallet
+  source_operation: openapi/zai-assembly-api.json#showSubWallet
+- name: delete_sub_wallet
+  description: Redact Sub-wallet
+  source_operation: openapi/zai-assembly-api.json#deleteSubWallet
+- name: update_sub_wallet
+  description: Update Sub-wallet
+  source_operation: openapi/zai-assembly-api.json#updateSubWallet
+- name: transfer_sub_wallet
+  description: Fund transfers
+  source_operation: openapi/zai-assembly-api.json#transferSubWallet
+- name: show_sub_wallet_transactions
+  description: List Sub-wallet transactions
+  source_operation: openapi/zai-assembly-api.json#showSubWalletTransactions
+- name: bill_payment_sub_wallet
+  description: Pay a Bill
+  source_operation: openapi/zai-assembly-api.json#billPaymentSubWallet
+- name: withdraw_funds_sub_wallet
+  description: Withdraw Funds
+  source_operation: openapi/zai-assembly-api.json#withdrawFundsSubWallet
+- name: show_sub_wallet_user
+  description: Show Sub-wallet User
+  source_operation: openapi/zai-assembly-api.json#showSubWalletUser
+- name: show_sub_wallet_wallet_account
+  description: Show the Wallet Account of a Sub-wallet
+  source_operation: openapi/zai-assembly-api.json#showSubWalletWalletAccount
+- name: show_disbursement_bank_accounts
+  description: Show Disbursement Bank Accounts
+  source_operation: openapi/zai-assembly-api.json#showDisbursementBankAccounts
+- name: show_disbursement_users
+  description: Show Disbursement Users
+  source_operation: openapi/zai-assembly-api.json#showDisbursementUsers
+- name: show_disbursement_items
+  description: Show Disbursement Items
+  source_operation: openapi/zai-assembly-api.json#showDisbursementItems
+- name: show_user_card_account
+  description: Show User Card Account
+  source_operation: openapi/zai-assembly-api.json#showUserCardAccount
+- name: show_user
+  description: Show User
+  source_operation: openapi/zai-assembly-api.json#showUser
+- name: update_user
+  description: Update User
+  source_operation: openapi/zai-assembly-api.json#updateUser
+- name: verify_user
+  description: Verify User (Prelive Only)
+  source_operation: openapi/zai-assembly-api.json#verifyUser
+- name: show_user_bank_account
+  description: Show User Bank Account
+  source_operation: openapi/zai-assembly-api.json#showUserBankAccount
+- name: set_user_disbursement_account
+  description: Set User Disbursement Account
+  source_operation: openapi/zai-assembly-api.json#setUserDisbursementAccount
+- name: list_users
+  description: List Users
+  source_operation: openapi/zai-assembly-api.json#listUsers
+- name: create_user
+  description: Create User
+  source_operation: openapi/zai-assembly-api.json#createUser
+- name: list_user_items
+  description: List User Items
+  source_operation: openapi/zai-assembly-api.json#listUserItems
+- name: show_user_wallet_accounts
+  description: Show User Wallet Account
+  source_operation: openapi/zai-assembly-api.json#showUserWalletAccounts
+- name: show_wallet_account_user
+  description: Show Wallet Account User
+  source_operation: openapi/zai-assembly-api.json#showWalletAccountUser
+- name: withdraw_funds
+  description: Withdraw Funds
+  source_operation: openapi/zai-assembly-api.json#withdrawFunds
+- name: show_wallet_account
+  description: Show Wallet Account
+  source_operation: openapi/zai-assembly-api.json#showWalletAccount
+- name: show_wallet_account_nppdetails
+  description: Show Wallet Account NPP Details
+  source_operation: openapi/zai-assembly-api.json#showWalletAccountNPPDetails
+- name: show_wallet_account_nbpaydetails
+  description: Show Wallet Account BPAY Details
+  source_operation: openapi/zai-assembly-api.json#showWalletAccountNBPAYDetails
+- name: list_items
+  description: List Items
+  source_operation: openapi/zai-assembly-api.json#listItems
+- name: create_item
+  description: Create Item
+  source_operation: openapi/zai-assembly-api.json#createItem
+- name: show_item
+  description: Show Item
+  source_operation: openapi/zai-assembly-api.json#showItem
+- name: delete_item
+  description: Delete Item
+  source_operation: openapi/zai-assembly-api.json#deleteItem
+- name: update_item
+  description: Update Item
+  source_operation: openapi/zai-assembly-api.json#updateItem
+- name: show_item_seller
+  description: Show Item Seller
+  source_operation: openapi/zai-assembly-api.json#showItemSeller
+- name: show_item_buyer
+  description: Show Item Buyer
+  source_operation: openapi/zai-assembly-api.json#showItemBuyer
+- name: show_item_fees
+  description: Show Item Fees
+  source_operation: openapi/zai-assembly-api.json#showItemFees
+- name: show_item_wire_details
+  description: Show Item Wire Details
+  source_operation: openapi/zai-assembly-api.json#showItemWireDetails
+- name: list_item_transactions
+  description: List Item Transactions
+  source_operation: openapi/zai-assembly-api.json#listItemTransactions
+- name: list_item_batch_transactions
+  description: List Item Batch Transactions
+  source_operation: openapi/zai-assembly-api.json#listItemBatchTransactions
+- name: show_item_status
+  description: Show Item Status
+  source_operation: openapi/zai-assembly-api.json#showItemStatus
+- name: make_payment
+  description: Make Payment
+  source_operation: openapi/zai-assembly-api.json#makePayment
+- name: make_payment_async
+  description: Make an async Payment
+  source_operation: openapi/zai-assembly-api.json#makePaymentAsync
+- name: cancel_item
+  description: Cancel
+  source_operation: openapi/zai-assembly-api.json#cancelItem
+- name: refund
+  description: Refund
+  source_operation: openapi/zai-assembly-api.json#refund
+- name: authorize_payment
+  description: Authorize Payment
+  source_operation: openapi/zai-assembly-api.json#authorizePayment
+- name: capture_payment
+  description: Capture Payment
+  source_operation: openapi/zai-assembly-api.json#capturePayment
+- name: void_payment
+  description: Void Payment
+  source_operation: openapi/zai-assembly-api.json#voidPayment
+- name: release_payment
+  description: Release Payment (Deprecated - Do Not Use)
+  source_operation: openapi/zai-assembly-api.json#releasePayment
+- name: initiate_payment_request
+  description: Initiate PayTo Payment
+  source_operation: openapi/zai-payto.json#initiatePaymentRequest
+- name: create_agreement
+  description: Create PayTo Agreement
+  source_operation: openapi/zai-payto.json#createAgreement
+- name: validate_agreement
+  description: Validate PayTo Agreement
+  source_operation: openapi/zai-payto.json#validateAgreement
+- name: amend_agreement_status
+  description: Amend PayTo Agreement Status
+  source_operation: openapi/zai-payto.json#amendAgreementStatus
+- name: recall_agreement_action
+  description: Recall PayTo Agreement
+  source_operation: openapi/zai-payto.json#recallAgreementAction
+- name: amend_agreement_details
+  description: Amend PayTo Agreement Details
+  source_operation: openapi/zai-payto.json#amendAgreementDetails
+- name: get_initiate_payment_status
+  description: Get PayTo Payment Initiation Request Details
+  source_operation: openapi/zai-payto.json#getInitiatePaymentStatus
+- name: get_initiate_payment_status_list
+  description: Get All PayTo Payment Initiation Requests for an Agreement
+  source_operation: openapi/zai-payto.json#getInitiatePaymentStatusList
+- name: get_agreement_details
+  description: Get PayTo Agreement Details
+  source_operation: openapi/zai-payto.json#getAgreementDetails
+- name: get_agreements_by_user
+  description: Get All PayTo Agreements for a User
+  source_operation: openapi/zai-payto.json#getAgreementsByUser
+- name: create_virtual_account
+  description: Create Virtual Account
+  source_operation: openapi/zai-virtual-accounts-payid.json#createVirtualAccount
+- name: list_virtual_account_by_wallet_account
+  description: List Virtual Accounts
+  source_operation: openapi/zai-virtual-accounts-payid.json#listVirtualAccountByWalletAccount
+- name: show_virtual_account
+  description: Show Virtual Account
+  source_operation: openapi/zai-virtual-accounts-payid.json#showVirtualAccount
+- name: update_virtual_account_akaname
+  description: Update AKA Names
+  source_operation: openapi/zai-virtual-accounts-payid.json#updateVirtualAccountAKAName
+- name: update_virtual_account_account_name
+  description: Update Account Name
+  source_operation: openapi/zai-virtual-accounts-payid.json#updateVirtualAccountAccountName
+- name: update_virtual_account
+  description: Update Virtual Account Status
+  source_operation: openapi/zai-virtual-accounts-payid.json#updateVirtualAccount
+- name: register_pay_id
+  description: Register PayID
+  source_operation: openapi/zai-virtual-accounts-payid.json#registerPayID
+- name: update_pay_id_status
+  description: Update PayID Status
+  source_operation: openapi/zai-virtual-accounts-payid.json#updatePayIdStatus
+- name: get_pay_id
+  description: Retrieve a PayID
+  source_operation: openapi/zai-virtual-accounts-payid.json#getPayID

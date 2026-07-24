@@ -1,0 +1,59 @@
+generated: '2026-06-20'
+method: searched
+source: https://developer.hellozai.com/docs/test-data
+environments:
+  live: https://secure.api.promisepay.com
+  pre_live: https://test.api.promisepay.com
+  auth_live: https://au-0000.auth.assemblypay.com/tokens
+  auth_sandbox: https://au-0000.sandbox.auth.assemblypay.com/tokens
+  note: >-
+    Zai calls its test environment "Pre-live". Verify User (verifyUser) works
+    only in Pre-live. Penny verification is US-only.
+test_cards:
+  amex: "3434 3434 343 4343"
+  mastercard:
+    - "5555 5555 5555 4444"
+    - "5454 5454 5454 5454"
+    - "2221 0000 0000 0009"
+  mastercard_debit: "5163 6136 1361 3613"
+  visa:
+    - "4444 3333 2222 1111"
+    - "4911 8300 0000 0000"
+    - "4917 6100 0000 0000"
+  visa_debit:
+    - "4462 0300 0000 0000"
+    - "4917 6100 0000 0003"
+  expiry: Any date up to seven years in the future
+  cvv: "123"
+test_mobile:
+  number: Any valid international format, e.g. +61 412 341 234
+  pin: "123456"
+test_bank_accounts:
+  note: >-
+    No valid test data for bank accounts in Pre-live — any placeholder value is
+    accepted.
+test_bpay_payouts:
+  - biller_code: "93807"
+    crn: "235645806"
+    amount: "5000"
+    outcome: Success
+  - biller_code: "7997"
+    crn: "2134567"
+    outcome: Invalid / inactive biller
+  - biller_code: "93906"
+    crn: "158400020000"
+    outcome: Invalid customer reference
+  - biller_code: "93864"
+    crn: "8136748"
+    outcome: Biller rejection
+  - biller_code: "93880"
+    crn: "713200085114"
+    amount: "450000"
+    outcome: Exceeds maximum amount
+  - biller_code: "600023"
+    crn: "180181234568"
+    outcome: Invalid reference
+  - biller_code: "600023"
+    crn: "774681234562"
+    amount: "11000"
+    outcome: Biller rejection

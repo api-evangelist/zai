@@ -1,0 +1,779 @@
+generated: '2026-06-20'
+method: derived
+source: derived by binding candidate MCP tools to OpenAPI operationIds
+surfaces:
+  openapi:
+  - openapi/zai-assembly-api.json
+  - openapi/zai-payto.json
+  - openapi/zai-virtual-accounts-payid.json
+  - openapi/zai-async-api.json
+  graphql: null
+  mcp: candidate (no hosted server; tools derived from OpenAPI)
+crosswalk:
+- tool: token
+  category: Authentication
+  rest:
+  - token
+  binding: rest
+  confidence: high
+- tool: show_address
+  category: Addresses
+  rest:
+  - showAddress
+  binding: rest
+  confidence: high
+- tool: show_bank_account
+  category: Bank Accounts
+  rest:
+  - showBankAccount
+  binding: rest
+  confidence: high
+- tool: redact_bank_account
+  category: Bank Accounts
+  rest:
+  - redactBankAccount
+  binding: rest
+  confidence: high
+- tool: send_penny_amount
+  category: Bank Accounts
+  rest:
+  - sendPennyAmount
+  binding: rest
+  confidence: high
+- tool: create_bank_account
+  category: Bank Accounts
+  rest:
+  - createBankAccount
+  binding: rest
+  confidence: high
+- tool: verify_penny_amount
+  category: Bank Accounts
+  rest:
+  - verifyPennyAmount
+  binding: rest
+  confidence: high
+- tool: show_bank_account_user
+  category: Bank Accounts
+  rest:
+  - showBankAccountUser
+  binding: rest
+  confidence: high
+- tool: validate_routing_number
+  category: Bank Accounts
+  rest:
+  - validateRoutingNumber
+  binding: rest
+  confidence: high
+- tool: show_bpay_account
+  category: BPay Accounts
+  rest:
+  - showBPayAccount
+  binding: rest
+  confidence: high
+- tool: create_bpay_account
+  category: BPay Accounts
+  rest:
+  - createBPayAccount
+  binding: rest
+  confidence: high
+- tool: show_bpay_account_user
+  category: BPay Accounts
+  rest:
+  - showBPayAccountUser
+  binding: rest
+  confidence: high
+- tool: bill_payment
+  category: Wallet Accounts
+  rest:
+  - billPayment
+  binding: rest
+  confidence: high
+- tool: list_sub_wallets
+  category: Sub-wallets
+  rest:
+  - listSubWallets
+  binding: rest
+  confidence: high
+- tool: create_sub_wallet
+  category: Sub-wallets
+  rest:
+  - createSubWallet
+  binding: rest
+  confidence: high
+- tool: list_user_bpay_accounts
+  category: Users
+  rest:
+  - listUserBPayAccounts
+  binding: rest
+  confidence: high
+- tool: show_callback
+  category: Callbacks
+  rest:
+  - showCallback
+  binding: rest
+  confidence: high
+- tool: delete_callback
+  category: Callbacks
+  rest:
+  - deleteCallback
+  binding: rest
+  confidence: high
+- tool: update_callback
+  category: Callbacks
+  rest:
+  - updateCallback
+  binding: rest
+  confidence: high
+- tool: list_callback_response
+  category: Callbacks
+  rest:
+  - listCallbackResponse
+  binding: rest
+  confidence: high
+- tool: show_callback_response
+  category: Callbacks
+  rest:
+  - showCallbackResponse
+  binding: rest
+  confidence: high
+- tool: list_callbacks
+  category: Callbacks
+  rest:
+  - listCallbacks
+  binding: rest
+  confidence: high
+- tool: create_callback
+  category: Callbacks
+  rest:
+  - createCallback
+  binding: rest
+  confidence: high
+- tool: create_card_account
+  category: Card Accounts
+  rest:
+  - createCardAccount
+  binding: rest
+  confidence: high
+- tool: show_card_account_user
+  category: Card Accounts
+  rest:
+  - showCardAccountUser
+  binding: rest
+  confidence: high
+- tool: verify_card
+  category: Card Accounts
+  rest:
+  - verifyCard
+  binding: rest
+  confidence: high
+- tool: show_card_account
+  category: Card Accounts
+  rest:
+  - showCardAccount
+  binding: rest
+  confidence: high
+- tool: redact_card_account
+  category: Card Accounts
+  rest:
+  - redactCardAccount
+  binding: rest
+  confidence: high
+- tool: list_companies
+  category: Companies
+  rest:
+  - listCompanies
+  binding: rest
+  confidence: high
+- tool: create_company
+  category: Companies
+  rest:
+  - createCompany
+  binding: rest
+  confidence: high
+- tool: show_company
+  category: Companies
+  rest:
+  - showCompany
+  binding: rest
+  confidence: high
+- tool: update_company
+  category: Companies
+  rest:
+  - updateCompany
+  binding: rest
+  confidence: high
+- tool: list_direct_debit_authorities
+  category: Direct Debit Authorities
+  rest:
+  - listDirectDebitAuthorities
+  binding: rest
+  confidence: high
+- tool: create_direct_debit_authority
+  category: Direct Debit Authorities
+  rest:
+  - createDirectDebitAuthority
+  binding: rest
+  confidence: high
+- tool: show_direct_debit_authority
+  category: Direct Debit Authorities
+  rest:
+  - showDirectDebitAuthority
+  binding: rest
+  confidence: high
+- tool: list_fees
+  category: Fees
+  rest:
+  - listFees
+  binding: rest
+  confidence: high
+- tool: create_fee
+  category: Fees
+  rest:
+  - createFee
+  binding: rest
+  confidence: high
+- tool: show_fee
+  category: Fees
+  rest:
+  - showFee
+  binding: rest
+  confidence: high
+- tool: list_charges
+  category: Charges
+  rest:
+  - listCharges
+  binding: rest
+  confidence: high
+- tool: create_charge
+  category: Charges
+  rest:
+  - createCharge
+  binding: rest
+  confidence: high
+- tool: show_charge
+  category: Charges
+  rest:
+  - showCharge
+  binding: rest
+  confidence: high
+- tool: show_charge_status
+  category: Charges
+  rest:
+  - showChargeStatus
+  binding: rest
+  confidence: high
+- tool: show_charge_buyer
+  category: Charges
+  rest:
+  - showChargeBuyer
+  binding: rest
+  confidence: high
+- tool: show_marketplace
+  category: Marketplaces
+  rest:
+  - showMarketplace
+  binding: rest
+  confidence: high
+- tool: generate_token
+  category: Token Auth
+  rest:
+  - generateToken
+  binding: rest
+  confidence: high
+- tool: health_check
+  category: Tools
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+- tool: list_transactions
+  category: Transactions
+  rest:
+  - listTransactions
+  binding: rest
+  confidence: high
+- tool: show_transaction_bank_account
+  category: Transactions
+  rest:
+  - showTransactionBankAccount
+  binding: rest
+  confidence: high
+- tool: show_transaction
+  category: Transactions
+  rest:
+  - showTransaction
+  binding: rest
+  confidence: high
+- tool: show_transaction_card_account
+  category: Transactions
+  rest:
+  - showTransactionCardAccount
+  binding: rest
+  confidence: high
+- tool: show_transaction_fees
+  category: Transactions
+  rest:
+  - showTransactionFees
+  binding: rest
+  confidence: high
+- tool: show_transaction_wallet_account
+  category: Transactions
+  rest:
+  - showTransactionWalletAccount
+  binding: rest
+  confidence: high
+- tool: show_transaction_user
+  category: Transactions
+  rest:
+  - showTransactionUser
+  binding: rest
+  confidence: high
+- tool: list_batch_transactions
+  category: Batch Transactions
+  rest:
+  - listBatchTransactions
+  binding: rest
+  confidence: high
+- tool: show_batch_transaction
+  category: Batch Transactions
+  rest:
+  - showBatchTransaction
+  binding: rest
+  confidence: high
+- tool: list_disbursement
+  category: Disbursements
+  rest:
+  - listDisbursement
+  binding: rest
+  confidence: high
+- tool: show_disbursement
+  category: Disbursements
+  rest:
+  - showDisbursement
+  binding: rest
+  confidence: high
+- tool: show_disbursement_transactions
+  category: Disbursements
+  rest:
+  - showDisbursementTransactions
+  binding: rest
+  confidence: high
+- tool: show_disbursement_wallet_accounts
+  category: Disbursements
+  rest:
+  - showDisbursementWalletAccounts
+  binding: rest
+  confidence: high
+- tool: show_sub_wallet
+  category: Sub-wallets
+  rest:
+  - showSubWallet
+  binding: rest
+  confidence: high
+- tool: delete_sub_wallet
+  category: Sub-wallets
+  rest:
+  - deleteSubWallet
+  binding: rest
+  confidence: high
+- tool: update_sub_wallet
+  category: Sub-wallets
+  rest:
+  - updateSubWallet
+  binding: rest
+  confidence: high
+- tool: transfer_sub_wallet
+  category: Sub-wallets
+  rest:
+  - transferSubWallet
+  binding: rest
+  confidence: high
+- tool: show_sub_wallet_transactions
+  category: Sub-wallets
+  rest:
+  - showSubWalletTransactions
+  binding: rest
+  confidence: high
+- tool: bill_payment_sub_wallet
+  category: Sub-wallets
+  rest:
+  - billPaymentSubWallet
+  binding: rest
+  confidence: high
+- tool: withdraw_funds_sub_wallet
+  category: Sub-wallets
+  rest:
+  - withdrawFundsSubWallet
+  binding: rest
+  confidence: high
+- tool: show_sub_wallet_user
+  category: Sub-wallets
+  rest:
+  - showSubWalletUser
+  binding: rest
+  confidence: high
+- tool: show_sub_wallet_wallet_account
+  category: Sub-wallets
+  rest:
+  - showSubWalletWalletAccount
+  binding: rest
+  confidence: high
+- tool: show_disbursement_bank_accounts
+  category: Disbursements
+  rest:
+  - showDisbursementBankAccounts
+  binding: rest
+  confidence: high
+- tool: show_disbursement_users
+  category: Disbursements
+  rest:
+  - showDisbursementUsers
+  binding: rest
+  confidence: high
+- tool: show_disbursement_items
+  category: Disbursements
+  rest:
+  - showDisbursementItems
+  binding: rest
+  confidence: high
+- tool: show_user_card_account
+  category: Users
+  rest:
+  - showUserCardAccount
+  binding: rest
+  confidence: high
+- tool: show_user
+  category: Users
+  rest:
+  - showUser
+  binding: rest
+  confidence: high
+- tool: update_user
+  category: Users
+  rest:
+  - updateUser
+  binding: rest
+  confidence: high
+- tool: verify_user
+  category: Users
+  rest:
+  - verifyUser
+  binding: rest
+  confidence: high
+- tool: show_user_bank_account
+  category: Users
+  rest:
+  - showUserBankAccount
+  binding: rest
+  confidence: high
+- tool: set_user_disbursement_account
+  category: Users
+  rest:
+  - setUserDisbursementAccount
+  binding: rest
+  confidence: high
+- tool: list_users
+  category: Users
+  rest:
+  - listUsers
+  binding: rest
+  confidence: high
+- tool: create_user
+  category: Users
+  rest:
+  - createUser
+  binding: rest
+  confidence: high
+- tool: list_user_items
+  category: Users
+  rest:
+  - listUserItems
+  binding: rest
+  confidence: high
+- tool: show_user_wallet_accounts
+  category: Users
+  rest:
+  - showUserWalletAccounts
+  binding: rest
+  confidence: high
+- tool: show_wallet_account_user
+  category: Wallet Accounts
+  rest:
+  - showWalletAccountUser
+  binding: rest
+  confidence: high
+- tool: withdraw_funds
+  category: Wallet Accounts
+  rest:
+  - withdrawFunds
+  binding: rest
+  confidence: high
+- tool: show_wallet_account
+  category: Wallet Accounts
+  rest:
+  - showWalletAccount
+  binding: rest
+  confidence: high
+- tool: show_wallet_account_nppdetails
+  category: Wallet Accounts
+  rest:
+  - showWalletAccountNPPDetails
+  binding: rest
+  confidence: high
+- tool: show_wallet_account_nbpaydetails
+  category: Wallet Accounts
+  rest:
+  - showWalletAccountNBPAYDetails
+  binding: rest
+  confidence: high
+- tool: list_items
+  category: Items
+  rest:
+  - listItems
+  binding: rest
+  confidence: high
+- tool: create_item
+  category: Items
+  rest:
+  - createItem
+  binding: rest
+  confidence: high
+- tool: show_item
+  category: Items
+  rest:
+  - showItem
+  binding: rest
+  confidence: high
+- tool: delete_item
+  category: Items
+  rest:
+  - deleteItem
+  binding: rest
+  confidence: high
+- tool: update_item
+  category: Items
+  rest:
+  - updateItem
+  binding: rest
+  confidence: high
+- tool: show_item_seller
+  category: Items
+  rest:
+  - showItemSeller
+  binding: rest
+  confidence: high
+- tool: show_item_buyer
+  category: Items
+  rest:
+  - showItemBuyer
+  binding: rest
+  confidence: high
+- tool: show_item_fees
+  category: Items
+  rest:
+  - showItemFees
+  binding: rest
+  confidence: high
+- tool: show_item_wire_details
+  category: Items
+  rest:
+  - showItemWireDetails
+  binding: rest
+  confidence: high
+- tool: list_item_transactions
+  category: Items
+  rest:
+  - listItemTransactions
+  binding: rest
+  confidence: high
+- tool: list_item_batch_transactions
+  category: Items
+  rest:
+  - listItemBatchTransactions
+  binding: rest
+  confidence: high
+- tool: show_item_status
+  category: Items
+  rest:
+  - showItemStatus
+  binding: rest
+  confidence: high
+- tool: make_payment
+  category: Item Actions
+  rest:
+  - makePayment
+  binding: rest
+  confidence: high
+- tool: make_payment_async
+  category: Item Actions
+  rest:
+  - makePaymentAsync
+  binding: rest
+  confidence: high
+- tool: cancel_item
+  category: Item Actions
+  rest:
+  - cancelItem
+  binding: rest
+  confidence: high
+- tool: refund
+  category: Item Actions
+  rest:
+  - refund
+  binding: rest
+  confidence: high
+- tool: authorize_payment
+  category: Item Actions
+  rest:
+  - authorizePayment
+  binding: rest
+  confidence: high
+- tool: capture_payment
+  category: Item Actions
+  rest:
+  - capturePayment
+  binding: rest
+  confidence: high
+- tool: void_payment
+  category: Item Actions
+  rest:
+  - voidPayment
+  binding: rest
+  confidence: high
+- tool: release_payment
+  category: Item Actions
+  rest:
+  - releasePayment
+  binding: rest
+  confidence: high
+- tool: initiate_payment_request
+  category: PayTo Payments
+  rest:
+  - initiatePaymentRequest
+  binding: rest
+  confidence: high
+- tool: create_agreement
+  category: PayTo Agreements
+  rest:
+  - createAgreement
+  binding: rest
+  confidence: high
+- tool: validate_agreement
+  category: PayTo Agreements
+  rest:
+  - validateAgreement
+  binding: rest
+  confidence: high
+- tool: amend_agreement_status
+  category: PayTo Agreements
+  rest:
+  - amendAgreementStatus
+  binding: rest
+  confidence: high
+- tool: recall_agreement_action
+  category: PayTo Agreements
+  rest:
+  - recallAgreementAction
+  binding: rest
+  confidence: high
+- tool: amend_agreement_details
+  category: PayTo Agreements
+  rest:
+  - amendAgreementDetails
+  binding: rest
+  confidence: high
+- tool: get_initiate_payment_status
+  category: PayTo Payments
+  rest:
+  - getInitiatePaymentStatus
+  binding: rest
+  confidence: high
+- tool: get_initiate_payment_status_list
+  category: PayTo Payments
+  rest:
+  - getInitiatePaymentStatusList
+  binding: rest
+  confidence: high
+- tool: get_agreement_details
+  category: PayTo Agreements
+  rest:
+  - getAgreementDetails
+  binding: rest
+  confidence: high
+- tool: get_agreements_by_user
+  category: PayTo Agreements
+  rest:
+  - getAgreementsByUser
+  binding: rest
+  confidence: high
+- tool: create_virtual_account
+  category: Virtual Accounts
+  rest:
+  - createVirtualAccount
+  binding: rest
+  confidence: high
+- tool: list_virtual_account_by_wallet_account
+  category: Virtual Accounts
+  rest:
+  - listVirtualAccountByWalletAccount
+  binding: rest
+  confidence: high
+- tool: show_virtual_account
+  category: Virtual Accounts
+  rest:
+  - showVirtualAccount
+  binding: rest
+  confidence: high
+- tool: update_virtual_account_akaname
+  category: Virtual Accounts
+  rest:
+  - updateVirtualAccountAKAName
+  binding: rest
+  confidence: high
+- tool: update_virtual_account_account_name
+  category: Virtual Accounts
+  rest:
+  - updateVirtualAccountAccountName
+  binding: rest
+  confidence: high
+- tool: update_virtual_account
+  category: Virtual Accounts
+  rest:
+  - updateVirtualAccount
+  binding: rest
+  confidence: high
+- tool: register_pay_id
+  category: PayIDs
+  rest:
+  - registerPayID
+  binding: rest
+  confidence: high
+- tool: update_pay_id_status
+  category: PayIDs
+  rest:
+  - updatePayIdStatus
+  binding: rest
+  confidence: high
+- tool: get_pay_id
+  category: PayIDs
+  rest:
+  - getPayID
+  binding: rest
+  confidence: high
+mcp_only: []
+rest_only:
+- operation: PATCH /items/{id}/make_payment
+  spec: openapi/zai-async-api.json
+  reason: no operationId in spec
+- operation: GET /request/{request_id}/status
+  spec: openapi/zai-async-api.json
+  reason: no operationId in spec
+- operation: GET /request/{request_id}/callbacks
+  spec: openapi/zai-async-api.json
+  reason: no operationId in spec
+coverage:
+  tools_named: 125
+  tools_bound: 125
+  mcp_only: 0
+  rest_ops_total: 128
+  rest_ops_with_tool: 125

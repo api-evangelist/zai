@@ -1,0 +1,31 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/zai-assembly-api.json, openapi/zai-async-api.json, openapi/zai-payto.json
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oAuth2ClientCredentials
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+    scopes: 0
+  description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+  sources:
+  - openapi/zai-assembly-api.json
+  - openapi/zai-async-api.json
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/zai-async-api.json
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/zai-payto.json

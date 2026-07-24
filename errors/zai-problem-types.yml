@@ -1,0 +1,84 @@
+generated: '2026-06-20'
+method: derived
+format: custom
+source: openapi/zai-assembly-api.json, openapi/zai-payto.json, openapi/zai-virtual-accounts-payid.json,
+  openapi/zai-async-api.json
+envelope:
+  assembly_api: '{"error":"..."} or {"errors":{"field":{...}}}'
+  payto_api: '{"errors":[{"error_code":"PAYT-ERR-XXXX","error_message":"..."}]}'
+note: Not RFC 9457. Assembly API returns a simple error/errors envelope; PayTo returns a coded errors[]
+  array. See errors/zai-error-codes.yml for the PayTo error-code registry.
+http_responses:
+- status: 400
+  spec: openapi/zai-assembly-api.json
+  description: Request not parseable, grant type invalid or properties missing
+- status: 401
+  spec: openapi/zai-assembly-api.json
+  description: We can't resolve the supplied credentials
+- status: 422
+  spec: openapi/zai-assembly-api.json
+  description: One or more property values are unprocessable
+- status: 500
+  spec: openapi/zai-assembly-api.json
+  description: We have a problem, which we have logged. Please try again later and if it still doesn't
+    work, contact us.
+- status: 400
+  spec: openapi/zai-async-api.json
+  description: Missing or invalid item ID or account ID
+- status: 401
+  spec: openapi/zai-async-api.json
+  description: Invalid authentication header
+- status: 409
+  spec: openapi/zai-async-api.json
+  description: Duplicate request conflict
+- status: 503
+  spec: openapi/zai-async-api.json
+  description: The end point handling your request has received an interrupt or terminate signal. Please
+    try again.
+- status: 400
+  spec: openapi/zai-payto.json
+  description: 'Bad Request Error Code Error Message PAYT-ERR-1050 Mandatory info missing: [FieldName]
+    cannot be null or empty. PAYT-ERR-1051 Invalid Data: [FieldName] provided is invalid. PAYT-ERR-1052
+    Invalid Data:'
+- status: 401
+  spec: openapi/zai-payto.json
+  description: Unauthorised Error Code Error Message PAYT-ERR-1000 Invalid or missing authorisation token.
+- status: 403
+  spec: openapi/zai-payto.json
+  description: 'Forbidden Error Code Error Message PAYT-ERR-1001 PayTo feature not available. PAYT-ERR-1002
+    Request rejected: User associated with the agreement is not active.'
+- status: 404
+  spec: openapi/zai-payto.json
+  description: Not Found Error Code Error Message PAYT-ERR-2500 Agreement with provided uuid does not
+    exist. PAYT-ERR-2511 Payment request with provided uuid does not exist.
+- status: 409
+  spec: openapi/zai-payto.json
+  description: 'Conflict Error Code Error Message PAYT-ERR-2516 A payment is already in progress for the
+    agreement. Please try again if the current payment request is unsuccessful. PAYT-ERR-2517 Invalid
+    request: Paym'
+- status: 410
+  spec: openapi/zai-payto.json
+  description: Resource Unavailable Error Code Error Message PAYT-ERR-2101 Agreement creation is allowed
+    only within a limited time period post validation. Please validate the agreement details again.
+- status: 500
+  spec: openapi/zai-payto.json
+  description: Internal Server Error Error Code Error Message PAYT-ERR-1003 An error occurred processing
+    your request. Please try again.
+- status: 400
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Bad Request
+- status: 401
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Unauthorized
+- status: 403
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Forbidden
+- status: 404
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Not Found
+- status: 409
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Conflict
+- status: 500
+  spec: openapi/zai-virtual-accounts-payid.json
+  description: Internal Server Error

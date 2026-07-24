@@ -1,0 +1,108 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ schemas + object reference semantics (developer.hellozai.com)
+entities:
+- address
+- bank_account
+- batch_transaction
+- bpay_account
+- callback
+- card_account
+- charge
+- company
+- direct_debit_authority
+- disbursement
+- fee
+- item
+- marketplace
+- payid
+- payto_agreement
+- payto_payment
+- sub_wallet
+- transaction
+- user
+- virtual_account
+- wallet_account
+relationships:
+- from: item
+  type: belongs_to
+  to: user
+  via: buyer_id
+- from: item
+  type: belongs_to
+  to: user
+  via: seller_id
+- from: item
+  type: has_many
+  to: fee
+  via: fees
+- from: item
+  type: has_many
+  to: transaction
+  via: transactions
+- from: user
+  type: has_one
+  to: wallet_account
+  via: wallet_account
+- from: user
+  type: has_many
+  to: bank_account
+  via: bank_accounts
+- from: user
+  type: has_many
+  to: card_account
+  via: card_accounts
+- from: user
+  type: has_many
+  to: item
+  via: items
+- from: user
+  type: has_one
+  to: company
+  via: company
+- from: wallet_account
+  type: has_many
+  to: sub_wallet
+  via: sub_wallets
+- from: wallet_account
+  type: has_many
+  to: virtual_account
+  via: virtual_accounts
+- from: virtual_account
+  type: has_many
+  to: payid
+  via: pay_ids
+- from: charge
+  type: belongs_to
+  to: user
+  via: user_id
+- from: charge
+  type: belongs_to
+  to: card_account
+  via: account_id
+- from: transaction
+  type: belongs_to
+  to: wallet_account
+  via: wallet_account
+- from: batch_transaction
+  type: has_many
+  to: disbursement
+  via: disbursements
+- from: direct_debit_authority
+  type: belongs_to
+  to: bank_account
+  via: bank_account_id
+- from: payto_payment
+  type: belongs_to
+  to: payto_agreement
+  via: agreement_uuid
+- from: payto_agreement
+  type: belongs_to
+  to: user
+  via: user_external_id
+- from: bpay_account
+  type: belongs_to
+  to: user
+  via: user_id
+id_notes: Assembly IDs are client-supplied external identifiers for users/items (buyer_id/seller_id);
+  most other resources use server-generated UUIDs. PayTo agreements/payments are keyed by UUID.

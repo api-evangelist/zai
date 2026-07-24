@@ -2,21 +2,17 @@ aid: zai
 url: https://raw.githubusercontent.com/api-evangelist/zai/refs/heads/main/apis.yml
 name: Zai
 kind: company
-description: >-
-  Zai (hellozai.com, formerly Assembly Payments / Assembly) is an Australian
-  payments and Payments-as-a-Service provider headquartered in Melbourne. Zai
-  gives platforms, marketplaces and vertical software companies a programmable
-  way to onboard users, hold funds in managed wallet accounts, collect pay-ins
-  (card, direct debit, BPAY, PayID), and disburse pay-outs across many parties
-  in a single transaction flow. It is API-first: the Assembly API exposes wallet
-  accounts, users, items, transactions, bank accounts, card accounts, fees,
-  callbacks and batch disbursements, layered with Australia's New Payments
-  Platform rails through dedicated Virtual Accounts / PayID and PayTo APIs, plus
-  an Asynchronous API for long-running operations. Authentication is OAuth2
-  client-credentials (bearer tokens on PayTo), with a Live and Pre-live
-  (sandbox) environment, webhooks with signature verification, and a developer
-  dashboard. Positioned as the embedded-payments and marketplace-money-movement
-  layer for the Australian market and platforms operating there.
+description: 'Zai (hellozai.com, formerly Assembly Payments / Assembly) is an Australian payments and
+  Payments-as-a-Service provider headquartered in Melbourne. Zai gives platforms, marketplaces and vertical
+  software companies a programmable way to onboard users, hold funds in managed wallet accounts, collect
+  pay-ins (card, direct debit, BPAY, PayID), and disburse pay-outs across many parties in a single transaction
+  flow. It is API-first: the Assembly API exposes wallet accounts, users, items, transactions, bank accounts,
+  card accounts, fees, callbacks and batch disbursements, layered with Australia''s New Payments Platform
+  rails through dedicated Virtual Accounts / PayID and PayTo APIs, plus an Asynchronous API for long-running
+  operations. Authentication is OAuth2 client-credentials (bearer tokens on PayTo), with a Live and Pre-live
+  (sandbox) environment, webhooks with signature verification, and a developer dashboard. Positioned as
+  the embedded-payments and marketplace-money-movement layer for the Australian market and platforms operating
+  there.'
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Payments
@@ -40,13 +36,10 @@ specificationVersion: '0.19'
 apis:
 - aid: zai:zai-assembly-api
   name: Zai Assembly API
-  description: >-
-    Zai's core payments platform API. Onboard users, create and manage wallet
-    accounts, items (transaction records), bank and card accounts, companies,
-    fees, tokens, callbacks and batch transactions to collect pay-ins and
-    disburse multi-party pay-outs across a marketplace or platform. OpenAPI
-    3.0.0, version 2.3, 89 documented paths, secured with OAuth2
-    client-credentials.
+  description: Zai's core payments platform API. Onboard users, create and manage wallet accounts, items
+    (transaction records), bank and card accounts, companies, fees, tokens, callbacks and batch transactions
+    to collect pay-ins and disburse multi-party pay-outs across a marketplace or platform. OpenAPI 3.0.0,
+    version 2.3, 89 documented paths, secured with OAuth2 client-credentials.
   humanURL: https://developer.hellozai.com/reference/overview
   baseURL: https://secure.api.promisepay.com
   tags:
@@ -64,13 +57,13 @@ apis:
     url: https://developer.hellozai.com/reference/overview
   - type: Authentication
     url: https://developer.hellozai.com/reference/token
+  - type: Overlay
+    url: overlays/zai-assembly-api-overlay.yaml
 - aid: zai:zai-virtual-accounts-payid-api
   name: Zai Virtual Accounts and PayIDs API
-  description: >-
-    Create and manage Virtual Accounts and PayIDs on the New Payments Platform
-    (NPP), letting platforms receive real-time account-to-account pay-ins to
-    uniquely addressable virtual accounts. OpenAPI 3.0.0, version 0.12-external,
-    8 documented paths on the assemblypay.com host.
+  description: Create and manage Virtual Accounts and PayIDs on the New Payments Platform (NPP), letting
+    platforms receive real-time account-to-account pay-ins to uniquely addressable virtual accounts. OpenAPI
+    3.0.0, version 0.12-external, 8 documented paths on the assemblypay.com host.
   humanURL: https://developer.hellozai.com/reference/overview-va
   baseURL: https://au-0000.api.assemblypay.com
   tags:
@@ -85,12 +78,13 @@ apis:
     url: https://developer.hellozai.com/reference/overview-va
   - type: APIReference
     url: https://developer.hellozai.com/reference/overview-va
+  - type: Overlay
+    url: overlays/zai-virtual-accounts-payid-overlay.yaml
 - aid: zai:zai-payto-api
   name: Zai PayTo API
-  description: >-
-    Create and manage PayTo agreements (mandated real-time debits) and initiate
-    payments against them over the New Payments Platform. OpenAPI 3.0.1, version
-    1.4-external, 10 documented paths, secured with bearer-token authentication.
+  description: Create and manage PayTo agreements (mandated real-time debits) and initiate payments against
+    them over the New Payments Platform. OpenAPI 3.0.1, version 1.4-external, 10 documented paths, secured
+    with bearer-token authentication.
   humanURL: https://developer.hellozai.com/reference/overview-1
   baseURL: https://au-0000.api.assemblypay.com/payto/
   tags:
@@ -106,13 +100,13 @@ apis:
     url: https://developer.hellozai.com/docs/payto
   - type: APIReference
     url: https://developer.hellozai.com/reference/overview-1
+  - type: Overlay
+    url: overlays/zai-payto-overlay.yaml
 - aid: zai:zai-async-api
   name: Zai Asynchronous API
-  description: >-
-    Asynchronous API for submitting long-running operations and retrieving their
-    results without blocking, complementing the synchronous Assembly API.
-    OpenAPI 3.0.0, version 1.0.0, 3 documented paths, supporting OAuth2
-    client-credentials and basic authentication.
+  description: Asynchronous API for submitting long-running operations and retrieving their results without
+    blocking, complementing the synchronous Assembly API. OpenAPI 3.0.0, version 1.0.0, 3 documented paths,
+    supporting OAuth2 client-credentials and basic authentication.
   humanURL: https://developer.hellozai.com/reference/async-overview
   baseURL: https://tnq.api.assemblypay.com/
   tags:
@@ -126,7 +120,17 @@ apis:
     url: https://developer.hellozai.com/reference/async-overview
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
+  - type: Overlay
+    url: overlays/zai-async-api-overlay.yaml
 common:
+- type: AgenticAccess
+  url: agentic-access/zai-agentic-access.yml
+- type: DomainSecurity
+  url: security/zai-domain-security.yml
+- type: OAuthScopes
+  url: scopes/zai-scopes.yml
+- type: Authentication
+  url: authentication/zai-authentication.yml
 - type: Website
   url: https://www.hellozai.com/
 - type: DeveloperPortal
@@ -159,6 +163,36 @@ common:
   url: https://www.hellozai.com/company/compliance
 - type: LinkedIn
   url: https://www.linkedin.com/company/hellozai/
+- type: Packages
+  url: packages/zai-packages.yml
+- type: SDKs
+  url: packages/zai-packages.yml
+- type: WellKnown
+  url: well-known/zai-well-known.yml
+- type: MCPServer
+  url: mcp/zai-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/zai-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/zai-llms.txt
+- type: Conformance
+  url: conformance/zai-conformance.yml
+- type: ErrorCatalog
+  url: errors/zai-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/zai-lifecycle.yml
+- type: Conventions
+  url: conventions/zai-conventions.yml
+- type: Webhooks
+  url: asyncapi/zai-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/zai-sandbox.yml
+- type: DataModel
+  url: data-model/zai-data-model.yml
+- type: GitHubOrganization
+  url: https://github.com/AssemblyPayments
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

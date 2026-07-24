@@ -1,0 +1,315 @@
+generated: '2026-06-20'
+method: searched
+format: coded-registry
+source: openapi/zai-payto.json response descriptions (PayTo error-code tables)
+envelope: '{"errors":[{"error_code":"PAYT-ERR-XXXX","error_message":"..."}]}'
+error_codes:
+- code: PAYT-ERR-1000
+  http_status: 401
+  message: Invalid or missing authorisation token.
+- code: PAYT-ERR-1001
+  http_status: 403
+  message: PayTo feature not available.
+- code: PAYT-ERR-1002
+  http_status: 403
+  message: 'Request rejected: User associated with the agreement is not active.'
+- code: PAYT-ERR-1003
+  http_status: 500
+  message: An error occurred processing your request. Please try again.
+- code: PAYT-ERR-1004
+  http_status: 403
+  message: User with provided user_external_id does not exist.
+- code: PAYT-ERR-1050
+  http_status: 400
+  message: 'Mandatory info missing: [FieldName] cannot be null or empty.'
+- code: PAYT-ERR-1051
+  http_status: 400
+  message: 'Invalid Data: [FieldName] provided is invalid.'
+- code: PAYT-ERR-1052
+  http_status: 400
+  message: 'Invalid Data: [FieldName] provided should contain any of the values [Acceptable values].'
+- code: PAYT-ERR-1053
+  http_status: 400
+  message: 'Invalid Data: [FieldName] provided is invalid. Expected format [DateFormat].'
+- code: PAYT-ERR-1054
+  http_status: 400
+  message: 'Invalid Data: [FieldName] length is invalid. Expected minimum [MinLength] and maximum [MaxLength].'
+- code: PAYT-ERR-1057
+  http_status: 400
+  message: 'Unrecognized Field: [FieldName] is not a valid field.'
+- code: PAYT-ERR-1058
+  http_status: 400
+  message: 'Invalid Request: request provided is not well-formatted.'
+- code: PAYT-ERR-2000
+  http_status: 404
+  message: Active user with provided user_external_id does not exist.
+- code: PAYT-ERR-2001
+  http_status: 400
+  message: Either description or short_description should be provided.
+- code: PAYT-ERR-2002
+  http_status: 400
+  message: Response_Requested_By date must be a future date and less than 5 days.
+- code: PAYT-ERR-2004
+  http_status: 400
+  message: PayID details are not supported for migrated agreements.
+- code: PAYT-ERR-2005
+  http_status: 400
+  message: validity_start_date should be either current date OR future date.
+- code: PAYT-ERR-2006
+  http_status: 400
+  message: validity_end_date should be greater than OR same as validity_start_date.
+- code: PAYT-ERR-2008
+  http_status: 400
+  message: validity_end_date should not be provided if agreement should be auto-renewed.
+- code: PAYT-ERR-2009
+  http_status: 400
+  message: account_details in the request are invalid as per the account_type provided.
+- code: PAYT-ERR-2010
+  http_status: 400
+  message: Either account (bsb/account number) or PayID details should be provided.
+- code: PAYT-ERR-2011
+  http_status: 400
+  message: Invalid PayID format for the PayID type provided.
+- code: PAYT-ERR-2013
+  http_status: 400
+  message: debtor_id_type is mandatory along with debtor_id.
+- code: PAYT-ERR-2014
+  http_status: 400
+  message: Invalid debtor_id_type for the debtor_type provided.
+- code: PAYT-ERR-2015
+  http_status: 400
+  message: Date provided in first_payment_info should be between validity_start_date and validity_end_date
+    OR can be same as validity_start_date and validity_end_date.
+- code: PAYT-ERR-2016
+  http_status: 400
+  message: Date provided in last_payment_info should be between validity_start_date and validity_end_date
+    OR can be same as validity_start_date and validity_end_date.
+- code: PAYT-ERR-2018
+  http_status: 400
+  message: payment_amount should be less than maximum amount.
+- code: PAYT-ERR-2019
+  http_status: 400
+  message: Amount provided in last_payment_info should be less than or equal to maximum amount.
+- code: PAYT-ERR-2020
+  http_status: 400
+  message: Amount provided in first_payment_info should be less than or equal to maximum amount.
+- code: PAYT-ERR-2021
+  http_status: 400
+  message: Date provided in last_payment_info should be same OR after the date provided in first_payment_info.
+- code: PAYT-ERR-2025
+  http_status: 400
+  message: Incorrect value provided for either of these fields - frequency, point_in_time, count_per_period.
+    The combination provided should be valid.
+- code: PAYT-ERR-2027
+  http_status: 400
+  message: Active direct debit agreement which needs to be migrated does not exist for the user.
+- code: PAYT-ERR-2028
+  http_status: 400
+  message: Response_Requested_By is applicable only for AUPM agreements with 'ATTENDED' priority type.
+- code: PAYT-ERR-2029
+  http_status: 400
+  message: For FIXE/BALN type of agreements, specifying payment amount is mandatory.
+- code: PAYT-ERR-2030
+  http_status: 400
+  message: For FIXE/BALN type of agreements, specifying maximum amount is not applicable.
+- code: PAYT-ERR-2031
+  http_status: 400
+  message: 'Invalid Data: Please provide info for all parameters under agreement_info.payment_terms.maximum_amount_info'
+- code: PAYT-ERR-2100
+  http_status: 404
+  message: Agreement should be in VALIDATED state for creation.
+- code: PAYT-ERR-2101
+  http_status: 410
+  message: Agreement creation is allowed only within a limited time period post validation. Please validate
+    the agreement details again.
+- code: PAYT-ERR-2102
+  http_status: 400
+  message: 'Invalid format for url param: agreement_uuid.'
+- code: PAYT-ERR-2200
+  http_status: 404
+  message: Agreement with provided uuid does not exist.
+- code: PAYT-ERR-2201
+  http_status: 409
+  message: A status amendment for this agreement is already in progress. Please try again later.
+- code: PAYT-ERR-2202
+  http_status: 400
+  message: 'Amendment request rejected: Invalid status change requested.'
+- code: PAYT-ERR-2203
+  http_status: 400
+  message: Reason code is mandatory while suspending or cancelling an agreement.
+- code: PAYT-ERR-2204
+  http_status: 403
+  message: Agreement can be resumed only by the same party who suspended it.
+- code: PAYT-ERR-2300
+  http_status: 404
+  message: Agreement with provided uuid does not exist.
+- code: PAYT-ERR-2301
+  http_status: 409
+  message: A bilateral amendment for this agreement is already in progress. Please try again later.
+- code: PAYT-ERR-2302
+  http_status: 400
+  message: Either unilateral or bilateral amendments can be requested.
+- code: PAYT-ERR-2303
+  http_status: 400
+  message: Details can be amended for 'ACTIVE' or 'SUSPENDED' agreements only.
+- code: PAYT-ERR-2304
+  http_status: 400
+  message: Either description or short_description is mandatory for an agreement.
+- code: PAYT-ERR-2305
+  http_status: 400
+  message: validity_end_date should not be provided if agreement should be auto-renewed.
+- code: PAYT-ERR-2306
+  http_status: 400
+  message: validity_end_date should be greater than OR same as validity_start_date.
+- code: PAYT-ERR-2307
+  http_status: 400
+  message: Date provided in last_payment_info should be same OR after the date provided in first_payment_info.
+- code: PAYT-ERR-2308
+  http_status: 400
+  message: Date provided in first_payment_info should be between validity_start_date and validity_end_date
+    OR can be same as validity_start_date and validity_end_date.
+- code: PAYT-ERR-2309
+  http_status: 400
+  message: Date provided in last_payment_info should be between validity_start_date and validity_end_date
+    OR can be same as validity_start_date and validity_end_date.
+- code: PAYT-ERR-2311
+  http_status: 400
+  message: Incorrect value provided for either of these fields - frequency, point_in_time, count_per_period.
+    The combination provided should be valid.
+- code: PAYT-ERR-2313
+  http_status: 400
+  message: Amount provided in last_payment_info should be less than or equal to maximum amount.
+- code: PAYT-ERR-2314
+  http_status: 400
+  message: Amount provided in first_payment_info should be less than or equal to maximum amount.
+- code: PAYT-ERR-2315
+  http_status: 400
+  message: payment_amount should be less than maximum amount.
+- code: PAYT-ERR-2316
+  http_status: 400
+  message: 'Invalid Request: At least one field should be provided for amendment.'
+- code: PAYT-ERR-2318
+  http_status: 400
+  message: 'Invalid Request: Values provided for few fields is same as existing. Please provide correct
+    info for amendment.'
+- code: PAYT-ERR-2319
+  http_status: 400
+  message: A unilateral amendment for this agreement is already in progress. Please try again later.
+- code: PAYT-ERR-2320
+  http_status: 400
+  message: Response_Requested_By is applicable only for bilateral amendment requests with 'ATTENDED' priority
+    type.
+- code: PAYT-ERR-2321
+  http_status: 400
+  message: For FIXE/BALN type of agreements, specifying payment amount is mandatory.
+- code: PAYT-ERR-2322
+  http_status: 400
+  message: For FIXE/BALN type of agreements, specifying maximum amount is not applicable.
+- code: PAYT-ERR-2400
+  http_status: 404
+  message: Agreement with provided uuid does not exist.
+- code: PAYT-ERR-2401
+  http_status: 400
+  message: 'Invalid format for url param: agreement_uuid.'
+- code: PAYT-ERR-2500
+  http_status: 404
+  message: Agreement with provided uuid does not exist.
+- code: PAYT-ERR-2501
+  http_status: 400
+  message: Payments can be initiated for ACTIVE agreements only.
+- code: PAYT-ERR-2502
+  http_status: 400
+  message: Payments can be initiated only within the agreement validity period.
+- code: PAYT-ERR-2503
+  http_status: 400
+  message: Request to recall agreement creation is already in progress. Please try again later.
+- code: PAYT-ERR-2504
+  http_status: 400
+  message: 'Recall request rejected: Any bilateral amendment is not in progress for the agreement.'
+- code: PAYT-ERR-2505
+  http_status: 400
+  message: 'Recall request rejected: Request to recall bilateral amendment is already in progress for
+    the agreement. Please try again later.<tr><td>PAYT-ERR-2506'
+- code: PAYT-ERR-2508
+  http_status: 400
+  message: 'Invalid format for url param: agreement_uuid.'
+- code: PAYT-ERR-2510
+  http_status: 400
+  message: unique_superannuation_code is mandatory along with unique_superannuation_identification.
+- code: PAYT-ERR-2511
+  http_status: 404
+  message: Payment request with provided uuid does not exist.
+- code: PAYT-ERR-2512
+  http_status: 400
+  message: Payment requested for this agreement has been cleared and settled already. Please check the
+    latest status before requesting again.
+- code: PAYT-ERR-2513
+  http_status: 400
+  message: 'Request rejected: Exceeded the maximum retry attempts allowed for the agreement.'
+- code: PAYT-ERR-2514
+  http_status: 400
+  message: 'Request rejected: Please ensure the payment is retried within valid period.'
+- code: PAYT-ERR-2516
+  http_status: 409
+  message: A payment is already in progress for the agreement. Please try again if the current payment
+    request is unsuccessful.
+- code: PAYT-ERR-2517
+  http_status: 409
+  message: 'Invalid request: Payment has been rejected already and cannot be retried. Please check reason
+    code details.'
+- code: PAYT-ERR-2518
+  http_status: 409
+  message: For migrated agreements, payment request with value exceeding $5,000 AUD cannot be initiated.
+    Please consider splitting the amount in multiple requests OR create a new agreement if the payment
+    value needs to be beyond $5,000 AUD in a single request.
+- code: PAYT-ERR-2519
+  http_status: 409
+  message: "For the last payment, the instructed amount in the payment should match the last payment terms\
+    \ in the agreement. Please initiate payments as per the agreement\u2019s payment terms."
+- code: PAYT-ERR-2520
+  http_status: 409
+  message: "For the first payment, the instructed amount in the payment should match the first payment\
+    \ terms in the agreement. Please initiate payments as per the agreement\u2019s payment terms."
+- code: PAYT-ERR-2521
+  http_status: 409
+  message: "For FIXE agreement type, the instructed amount in the payment should match the payment amount\
+    \ stated in the agreement. Please initiate payments as per the agreement\u2019s payment terms."
+- code: PAYT-ERR-2522
+  http_status: 409
+  message: "For BALN agreement type, the instructed amount in the payment should match the payment amount\
+    \ stated in the agreement. Please initiate payments as per the agreement\u2019s payment terms."
+- code: PAYT-ERR-2523
+  http_status: 409
+  message: "For BALN agreement types, the instructed amount in the payment should be either the same or\
+    \ greater than the payment amount stated in the agreement. Please initiate payments as per the agreement\u2019\
+    s payment terms."
+- code: PAYT-ERR-2524
+  http_status: 409
+  message: "For USGB/VARI agreement types, the instructed amount in the payment should be within the payment\
+    \ amount (min) and maximum amount range stated in the agreement. Please initiate payments as per the\
+    \ agreement\u2019s payment terms."
+- code: PAYT-ERR-2525
+  http_status: 409
+  message: "For USGB/VARI agreement types, the instructed amount in the payment should be either the same\
+    \ or greater than the payment amount stated in the agreement. Please initiate payments as per the\
+    \ agreement\u2019s payment terms."
+- code: PAYT-ERR-2526
+  http_status: 409
+  message: For USGB/VARI agreement types, the instructed amount in the payment should be either the same
+    or less than the maximum amount stated in the agreement. Please initiate payments as per the agreement's
+    payment terms.
+- code: PAYT-ERR-2600
+  http_status: 404
+  message: Payment request with provided uuid does not exist.
+- code: PAYT-ERR-2601
+  http_status: 400
+  message: 'Invalid Date Range: Start date should be before end date.'
+- code: PAYT-ERR-2602
+  http_status: 400
+  message: 'Invalid Date Range: Range provided should be less than or maximum upto a year.'
+- code: PAYT-ERR-4000
+  http_status: 400
+  message: end_date should be greater than start_date.
+- code: PAYT-ERR-4001
+  http_status: 400
+  message: Period between start_date and end_date cannot exceed 1 year.

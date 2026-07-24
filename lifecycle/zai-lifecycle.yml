@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  developer.hellozai.com reference specs + https://status.hellozai.com/
+versioning:
+  scheme: per-api-document
+  note: >-
+    Each API ships its own version in the OpenAPI info (Assembly 2.3, PayTo
+    1.4-external, Virtual Accounts/PayIDs 0.12-external, Async 1.0.0). No global
+    version header; the Assembly API is served without a URI version segment.
+  current:
+    assembly: "2.3"
+    payto: "1.4-external"
+    virtual-accounts-payid: "0.12-external"
+    async: "1.0.0"
+environments:
+  live: https://secure.api.promisepay.com
+  pre_live_sandbox: https://test.api.promisepay.com
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No published dated deprecation policy or RFC 8594 Sunset/Deprecation header
+    support found. Deprecations are signalled inline in the reference docs.
+status_page: https://status.hellozai.com/
+deprecated_operations:
+  - spec: openapi/zai-assembly-api.json
+    operationId: releasePayment
+    note: "Release Payment — legacy Escrow flow, marked Deprecated / Do Not Use."

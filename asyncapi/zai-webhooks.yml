@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+type: Webhooks
+source: >-
+  https://developer.hellozai.com/docs/webhooks ;
+  https://developer.hellozai.com/docs/verify-webhook-signatures
+summary: >-
+  Zai pushes real-time notifications via webhooks configured as Callbacks. A
+  Callback subscribes to an object_type; when a matching object changes, Zai
+  POSTs the "Show" representation of that object to your URL. No published
+  AsyncAPI document — this is the documented webhook catalog.
+delivery:
+  transport: https-post
+  payload: The Show (GET) response body of the changed object.
+  test_payload: '{ "message": "Zai callback test" }'
+  retry: Up to 24 hours with exponential backoff.
+  ordering: Not guaranteed — use updated_at to determine freshness.
+signature:
+  header: Webhooks-signature
+  scheme: HMAC-SHA256 over "{t}.{body}", base64 raw-URL encoded (no padding); header carries t=<timestamp>,v=<signature>.
+object_types:
+  - object_type: items
+    trigger: Item state transitions / data changes
+  - object_type: users
+    trigger: User data / state changes
+  - object_type: batch_transactions
+    trigger: Batch transaction creation + state changes
+  - object_type: accounts
+    trigger: Account state / enabled-status changes
+  - object_type: transactions
+    trigger: Transaction creation + state changes
+  - object_type: disbursements
+    trigger: Disbursement record creation
+  - object_type: companies
+    trigger: Company creation / modification
+  - object_type: virtual_accounts
+    trigger: Virtual Account status transitions (Australia / NPP)
+  - object_type: pay_ids
+    trigger: PayID status activation changes (Australia / NPP)
+  - object_type: payto_agreements
+    trigger: PayTo agreement status transitions (Australia / NPP)
+  - object_type: payto_payments
+    trigger: PayTo payment initiation request status changes (Australia / NPP)
+  - object_type: transaction_failure_advice
+    trigger: Reconciliation / transaction failure advice
+management:
+  create: openapi/zai-assembly-api.json#createCallback
+  list: openapi/zai-assembly-api.json#listCallbacks
+  responses: openapi/zai-assembly-api.json#listCallbackResponse

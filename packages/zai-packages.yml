@@ -1,0 +1,50 @@
+generated: '2026-06-20'
+method: searched
+source: https://github.com/AssemblyPayments
+note: >-
+  First-party client libraries published under the legacy Assembly Payments /
+  PromisePay GitHub org (github.com/AssemblyPayments) — Zai's predecessor brand.
+  These wrap the same core Assembly (PromisePay) REST API served today at
+  secure.api.promisepay.com. PromisePay.js is the browser tokenization library
+  referenced by the Generate Token operation.
+packages:
+  - language: ruby
+    registry: rubygems
+    name: promisepay
+    url: https://rubygems.org/gems/promisepay
+    repo: https://github.com/AssemblyPayments/promisepay-ruby
+    install: gem install promisepay
+    official: true
+  - language: php
+    registry: github
+    name: promisepay-php
+    url: https://github.com/AssemblyPayments/promisepay-php
+    install: composer require assemblypayments/promisepay-php
+    official: true
+  - language: csharp
+    registry: github
+    name: promisepay-dotnet
+    url: https://github.com/AssemblyPayments/promisepay-dotnet
+    install: "Add the PromisePayDotNet project / NuGet reference"
+    official: true
+  - language: objective-c
+    registry: github
+    name: ios-sdk
+    url: https://github.com/AssemblyPayments/ios-sdk
+    install: "CocoaPods / manual (iOS)"
+    official: true
+  - language: java
+    registry: github
+    name: android-sdk
+    url: https://github.com/AssemblyPayments/android-sdk
+    install: "Gradle / manual (Android)"
+    official: true
+  - language: javascript
+    registry: npm
+    name: promisepay
+    url: https://www.npmjs.com/package/promisepay
+    install: npm install promisepay
+    official: true
+    note: >-
+      PromisePay.js browser library for secure client-side card/bank
+      tokenization (used with the Generate Token endpoint).

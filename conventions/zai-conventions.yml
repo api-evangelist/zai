@@ -1,0 +1,52 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  developer.hellozai.com (docs + reference) ; OpenAPI components (meta schema,
+  securitySchemes) ; webhook signature-verification guide
+authentication:
+  style: oauth2-client-credentials
+  detail: >-
+    Assembly + Async APIs use OAuth2 client-credentials — exchange client
+    credentials for a bearer token at the auth issuing server
+    (au-0000.auth.assemblypay.com/tokens, sandbox
+    au-0000.sandbox.auth.assemblypay.com/tokens), then send
+    Authorization: Bearer <token>. PayTo uses a bearer JWT. See
+    authentication/zai-authentication.yml.
+idempotency:
+  supported: false
+  note: >-
+    No documented Idempotency-Key header or idempotent-retry contract found in
+    the specs or docs as of 2026-07. Retries are handled per-product (e.g. PayTo
+    payment initiation allows up to 5 retries within 24h per request, keyed by
+    payment_request_uuid).
+pagination:
+  style: limit-offset
+  request_params: [limit, offset]
+  response_fields: [meta.limit, meta.offset, meta.total]
+  note: List endpoints return a `meta` object with limit (default 10), offset (default 0) and total.
+metadata:
+  supported: partial
+  note: Users/Items accept client-supplied external identifiers (buyer_id, seller_id, user_external_id).
+request_tracing:
+  async_polling: >-
+    The Asynchronous API returns a request_id; poll GET /request/{request_id}/status
+    and /request/{request_id}/callbacks to retrieve results of long-running operations.
+versioning:
+  scheme: per-api-document
+  note: See lifecycle/zai-lifecycle.yml. No global version header.
+error_envelope:
+  assembly_api: '{"error":"..."} or {"errors":{"field":{...}}}'
+  payto_api: '{"errors":[{"error_code":"PAYT-ERR-XXXX","error_message":"..."}]}'
+  format: custom
+  reference: errors/zai-problem-types.yml, errors/zai-error-codes.yml
+webhooks:
+  signature_header: Webhooks-signature
+  signature_scheme: >-
+    HMAC-SHA256 over "{timestamp}.{raw_body}" using your webhook secret,
+    base64 raw-URL encoded (no padding). Header carries t=<timestamp>,v=<signature>;
+    verify with a constant-time compare within a tolerance window.
+  retry: Failed deliveries retried up to 24h with exponential backoff; delivery order not guaranteed.
+  reference: asyncapi/zai-webhooks.yml
+rate_limiting:
+  signalled: unknown
+  note: No documented rate-limit response headers found.

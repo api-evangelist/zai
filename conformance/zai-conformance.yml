@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://www.hellozai.com/company/compliance ; OpenAPI securitySchemes ;
+  openid-configuration discovery documents
+standards:
+  - id: oauth2-client-credentials
+    conforms: true
+    evidence: openapi securitySchemes oAuth2ClientCredentials (clientCredentials flow) on Assembly + Async APIs
+  - id: oidc-discovery
+    conforms: true
+    evidence: /.well-known/openid-configuration returns 200 on au-0000.auth.assemblypay.com (issuer + jwks_uri)
+  - id: bearer-jwt
+    conforms: true
+    evidence: PayTo API uses http bearer (JWT) securityScheme
+  - id: pci-dss
+    conforms: true
+    level: "Level 1 Service Provider"
+    evidence: "Zai is certified as a fully PCI DSS compliant Level 1 Service Provider (hellozai.com/company/compliance)"
+  - id: visa-third-party-agent
+    conforms: true
+    evidence: Registered as a Third-Party Agent by Visa; audited by Visa, MasterCard and partner banks
+  - id: npp-payto
+    conforms: true
+    evidence: PayTo + PayID + Virtual Accounts APIs operate over Australia's New Payments Platform (NPP) rails
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: error responses use custom envelopes (error/errors), not application/problem+json
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: no /.well-known/security.txt published (404 on hellozai.com + developer.hellozai.com)

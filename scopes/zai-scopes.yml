@@ -1,0 +1,17 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/zai-assembly-api.json, openapi/zai-async-api.json
+schemes:
+- name: oAuth2ClientCredentials
+  source: openapi/zai-assembly-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+  description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+- name: oAuth2ClientCredentials
+  source: openapi/zai-async-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+  description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+scopes: []
