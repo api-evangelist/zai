@@ -123,6 +123,8 @@ apis:
   - type: Overlay
     url: overlays/zai-async-api-overlay.yaml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/zai/overview
 - type: AgenticAccess
   url: agentic-access/zai-agentic-access.yml
 - type: DomainSecurity
