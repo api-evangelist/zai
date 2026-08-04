@@ -1,0 +1,884 @@
+{
+  "info": {
+    "_postman_id": "89a51f2a-9ae0-4657-8a46-b24eec1debba",
+    "name": "Asynchronous API",
+    "description": "This section covers all the Assembly asynchronous APIs.\n\nContact Support:\n Email: support@assemblypayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:54.000Z",
+    "updatedAt": "2026-07-28T03:36:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-89a51f2a-9ae0-4657-8a46-b24eec1debba"
+  },
+  "item": [
+    {
+      "name": "items",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "make_payment",
+              "item": [
+                {
+                  "name": "Make Payment",
+                  "id": "94627d81-b02c-40b8-a811-9a8ec48166a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/items/:id/make_payment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "items",
+                        ":id",
+                        "make_payment"
+                      ],
+                      "variable": [
+                        {
+                          "id": "be78db46-59c2-4b26-895a-d19e2d4dc7b8",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) ID of item to apply payment to"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint extends the original `make_payment` API endpoint to allow asynchronous processing. Clients may optionally supply a wait parameter to have the server wait up to 30 seconds for a response from internal business systems. If a response has been received in that time, it is returned immediately. Otherwise status information and links are returned. Calling the status link returns the item response if available, status information otherwise. Clients may also optionally supply a callback URL in URL-encoded format. The path parameters `{item}`, `{account}` and `{uuid}` are supported. If a callback is present, the system POSTs the internal business system response to it."
+                  },
+                  "response": [
+                    {
+                      "id": "d5887750-940a-4f2a-9eff-bae81b75d254",
+                      "name": "Response body contains the item response received within the supplied wait time. Note that the HTTP response code will reflect the internal system response.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"items\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"state\": \"voided\",\n    \"status\": 22300,\n    \"amount\": \"<integer>\",\n    \"payment_type_id\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"buyer_name\": \"<string>\",\n    \"buyer_email\": \"<email>\",\n    \"buyer_country\": \"<string>\",\n    \"seller_name\": \"<string>\",\n    \"seller_email\": \"<email>\",\n    \"seller_country\": \"<email>\",\n    \"tds_check_state\": \"<email>\",\n    \"batch_state\": \"<string>\",\n    \"invoice_url\": \"<string>\",\n    \"payout_descriptor\": \"<string>\",\n    \"remaining_amount\": \"<integer>\",\n    \"requested_release_amount\": \"<integer>\",\n    \"custom_descriptor\": \"<string>\",\n    \"net_amount\": \"<integer>\",\n    \"chargedback_amount\": \"<integer>\",\n    \"refunded_amount\": \"<integer>\",\n    \"released_amount\": \"<integer>\",\n    \"buyer_fees\": \"<integer>\",\n    \"seller_fees\": \"<integer>\",\n    \"credit_card_fee\": \"<integer>\",\n    \"paypal_fee\": \"<integer>\",\n    \"seller_url\": \"<string>\",\n    \"buyer_url\": \"<string>\",\n    \"direct_debit_fee\": \"<integer>\",\n    \"due_date\": \"<date>\",\n    \"pending_release_amount\": \"<integer>\",\n    \"dynamic_descriptor\": \"<string>\",\n    \"deposit_reference\": \"<string>\",\n    \"promisepay_fee\": \"<integer>\",\n    \"total_outstanding\": \"<integer>\",\n    \"total_amount\": \"<integer>\",\n    \"payment_method\": \"<string>\",\n    \"payment_credit_card_enabled\": \"<boolean>\",\n    \"payment_direct_debit_enabled\": \"<boolean>\",\n    \"related\": {\n      \"buyers\": \"<string>\",\n      \"sellers\": \"<string>\"\n    },\n    \"links\": {\n      \"self\": \"<string>\",\n      \"buyers\": \"<string>\",\n      \"sellers\": \"<string>\",\n      \"status\": \"<string>\",\n      \"fees\": \"<string>\",\n      \"transactions\": \"<string>\",\n      \"batch_transactions\": \"<string>\",\n      \"wire_details\": \"<string>\",\n      \"bpay_details\": \"<string>\",\n      \"tds_checks\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-d5887750-940a-4f2a-9eff-bae81b75d254"
+                    },
+                    {
+                      "id": "9f4c1e55-5c32-44b8-b380-f53c91c4e81a",
+                      "name": "Request accepted: Response contains status information and query/callback link.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"last_updated\": \"<string>\",\n  \"submission_count\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"links\": {\n    \"status\": \"<string>\",\n    \"callbacks\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-9f4c1e55-5c32-44b8-b380-f53c91c4e81a"
+                    },
+                    {
+                      "id": "92c992bb-2047-4d47-bc30-c831eea70ed9",
+                      "name": "Missing or invalid item ID or account ID",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-92c992bb-2047-4d47-bc30-c831eea70ed9"
+                    },
+                    {
+                      "id": "d3eade90-40a6-47f8-86fb-d6969190b20c",
+                      "name": "Invalid authentication header",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-d3eade90-40a6-47f8-86fb-d6969190b20c"
+                    },
+                    {
+                      "id": "2c0ddc39-3af3-4813-a593-1d490710ebaa",
+                      "name": "Duplicate request conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-2c0ddc39-3af3-4813-a593-1d490710ebaa"
+                    },
+                    {
+                      "id": "dd3eaa7a-21ed-4361-b600-05714494a050",
+                      "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/items/:id/make_payment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "items",
+                            ":id",
+                            "make_payment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-dd3eaa7a-21ed-4361-b600-05714494a050"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:55.000Z",
+                  "updatedAt": "2026-07-28T03:36:55.000Z",
+                  "uid": "35240-94627d81-b02c-40b8-a811-9a8ec48166a3"
+                }
+              ],
+              "id": "5e74dc1a-ecff-4591-be49-7b1dd18bc32e",
+              "createdAt": "2026-07-28T03:36:55.000Z",
+              "updatedAt": "2026-07-28T03:36:55.000Z",
+              "uid": "35240-5e74dc1a-ecff-4591-be49-7b1dd18bc32e"
+            }
+          ],
+          "id": "a54a30c0-ec5e-47eb-aade-68e155655fab",
+          "createdAt": "2026-07-28T03:36:55.000Z",
+          "updatedAt": "2026-07-28T03:36:55.000Z",
+          "uid": "35240-a54a30c0-ec5e-47eb-aade-68e155655fab"
+        }
+      ],
+      "id": "7c99e946-153c-4177-b385-5f78d6dad19e",
+      "createdAt": "2026-07-28T03:36:55.000Z",
+      "updatedAt": "2026-07-28T03:36:55.000Z",
+      "uid": "35240-7c99e946-153c-4177-b385-5f78d6dad19e"
+    },
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "{request_id}",
+          "item": [
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Get Request Status",
+                  "id": "56d64563-d362-4dee-a905-df9b442d9efb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/request/:request_id/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "request",
+                        ":request_id",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3477d60f-f532-4647-b634-28ac281f162c",
+                          "key": "request_id",
+                          "value": "<string>",
+                          "description": "(Required) Assembly-generated unique ID for this request."
+                        }
+                      ]
+                    },
+                    "description": "This API is applicable for asynchronous requests submitted to `make_payment` through `tnq.api.assemblypay.com`. It returns the item response if available or current status otherwise."
+                  },
+                  "response": [
+                    {
+                      "id": "f189d28a-25a4-435f-a4d9-c14b3917ddf1",
+                      "name": "Item response received from internal systems. Note that the HTTP response code will reflect the internal system response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"items\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"state\": \"voided\",\n    \"status\": 22300,\n    \"amount\": \"<integer>\",\n    \"payment_type_id\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"buyer_name\": \"<string>\",\n    \"buyer_email\": \"<email>\",\n    \"buyer_country\": \"<string>\",\n    \"seller_name\": \"<string>\",\n    \"seller_email\": \"<email>\",\n    \"seller_country\": \"<email>\",\n    \"tds_check_state\": \"<email>\",\n    \"batch_state\": \"<string>\",\n    \"invoice_url\": \"<string>\",\n    \"payout_descriptor\": \"<string>\",\n    \"remaining_amount\": \"<integer>\",\n    \"requested_release_amount\": \"<integer>\",\n    \"custom_descriptor\": \"<string>\",\n    \"net_amount\": \"<integer>\",\n    \"chargedback_amount\": \"<integer>\",\n    \"refunded_amount\": \"<integer>\",\n    \"released_amount\": \"<integer>\",\n    \"buyer_fees\": \"<integer>\",\n    \"seller_fees\": \"<integer>\",\n    \"credit_card_fee\": \"<integer>\",\n    \"paypal_fee\": \"<integer>\",\n    \"seller_url\": \"<string>\",\n    \"buyer_url\": \"<string>\",\n    \"direct_debit_fee\": \"<integer>\",\n    \"due_date\": \"<date>\",\n    \"pending_release_amount\": \"<integer>\",\n    \"dynamic_descriptor\": \"<string>\",\n    \"deposit_reference\": \"<string>\",\n    \"promisepay_fee\": \"<integer>\",\n    \"total_outstanding\": \"<integer>\",\n    \"total_amount\": \"<integer>\",\n    \"payment_method\": \"<string>\",\n    \"payment_credit_card_enabled\": \"<boolean>\",\n    \"payment_direct_debit_enabled\": \"<boolean>\",\n    \"related\": {\n      \"buyers\": \"<string>\",\n      \"sellers\": \"<string>\"\n    },\n    \"links\": {\n      \"self\": \"<string>\",\n      \"buyers\": \"<string>\",\n      \"sellers\": \"<string>\",\n      \"status\": \"<string>\",\n      \"fees\": \"<string>\",\n      \"transactions\": \"<string>\",\n      \"batch_transactions\": \"<string>\",\n      \"wire_details\": \"<string>\",\n      \"bpay_details\": \"<string>\",\n      \"tds_checks\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-f189d28a-25a4-435f-a4d9-c14b3917ddf1"
+                    },
+                    {
+                      "id": "a1552bcf-97a9-4710-afc2-03e593cdeece",
+                      "name": "Still awaiting item response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"last_updated\": \"<string>\",\n  \"submission_count\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"links\": {\n    \"status\": \"<string>\",\n    \"callbacks\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-a1552bcf-97a9-4710-afc2-03e593cdeece"
+                    },
+                    {
+                      "id": "99b74c47-c11c-4394-9da9-723852696634",
+                      "name": "Invalid authentication header",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-99b74c47-c11c-4394-9da9-723852696634"
+                    },
+                    {
+                      "id": "f2857cae-046e-4c46-8bef-41307f45d2bf",
+                      "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-f2857cae-046e-4c46-8bef-41307f45d2bf"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:55.000Z",
+                  "updatedAt": "2026-07-28T03:36:55.000Z",
+                  "uid": "35240-56d64563-d362-4dee-a905-df9b442d9efb"
+                }
+              ],
+              "id": "aa320679-b14c-45eb-ad7b-0cdb9c4ddb27",
+              "createdAt": "2026-07-28T03:36:55.000Z",
+              "updatedAt": "2026-07-28T03:36:55.000Z",
+              "uid": "35240-aa320679-b14c-45eb-ad7b-0cdb9c4ddb27"
+            },
+            {
+              "name": "callbacks",
+              "item": [
+                {
+                  "name": "Get Request Callback Details",
+                  "id": "9f75f913-03a9-40c3-a995-a855c35af54a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/request/:request_id/callbacks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "request",
+                        ":request_id",
+                        "callbacks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b2d3b914-580b-45a5-af67-131b5a3ea409",
+                          "key": "request_id",
+                          "value": "<string>",
+                          "description": "(Required) Assembly-generated unique ID for this request."
+                        }
+                      ]
+                    },
+                    "description": "This API is applicable for asynchronous requests submitted to `make_payment`. It returns information about callbacks executed upon receipt of a response to the associated request."
+                  },
+                  "response": [
+                    {
+                      "id": "2ed5d989-7216-4310-ad6c-b4d050f089bf",
+                      "name": "Callback execution details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/callbacks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "callbacks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"callbacks\": [\n    {\n      \"executed_utc\": \"<dateTime>\",\n      \"http_response\": \"<integer>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"executed_utc\": \"<dateTime>\",\n      \"http_response\": \"<integer>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"status\": \"<string>\",\n    \"callbacks\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-2ed5d989-7216-4310-ad6c-b4d050f089bf"
+                    },
+                    {
+                      "id": "6fa67e13-8b45-4518-824c-1eeee3d6f714",
+                      "name": "Invalid authentication header",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/callbacks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "callbacks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-6fa67e13-8b45-4518-824c-1eeee3d6f714"
+                    },
+                    {
+                      "id": "ed3e3151-e081-4a9e-8a60-a592900790e5",
+                      "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/request/:request_id/callbacks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            ":request_id",
+                            "callbacks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:55.000Z",
+                      "updatedAt": "2026-07-28T03:36:55.000Z",
+                      "uid": "35240-ed3e3151-e081-4a9e-8a60-a592900790e5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:55.000Z",
+                  "updatedAt": "2026-07-28T03:36:55.000Z",
+                  "uid": "35240-9f75f913-03a9-40c3-a995-a855c35af54a"
+                }
+              ],
+              "id": "8fd32813-0156-4ac4-9963-ec29cb64bd36",
+              "createdAt": "2026-07-28T03:36:55.000Z",
+              "updatedAt": "2026-07-28T03:36:55.000Z",
+              "uid": "35240-8fd32813-0156-4ac4-9963-ec29cb64bd36"
+            }
+          ],
+          "id": "2d1a1889-8ebc-4dfe-a7d1-7d3f57cafff7",
+          "createdAt": "2026-07-28T03:36:55.000Z",
+          "updatedAt": "2026-07-28T03:36:55.000Z",
+          "uid": "35240-2d1a1889-8ebc-4dfe-a7d1-7d3f57cafff7"
+        }
+      ],
+      "id": "5726756c-2670-4642-b7a2-44095c1d0981",
+      "createdAt": "2026-07-28T03:36:55.000Z",
+      "updatedAt": "2026-07-28T03:36:55.000Z",
+      "uid": "35240-5726756c-2670-4642-b7a2-44095c1d0981"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-async-api/1.0.0"
+    }
+  ]
+}

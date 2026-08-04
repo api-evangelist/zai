@@ -1,0 +1,3777 @@
+{
+  "info": {
+    "_postman_id": "09b13929-3bff-4590-a830-645c5c155ce9",
+    "name": "Virtual Accounts and PayIDs",
+    "description": "Simplify payin reconciliations by creating a dedicated _Virtual Account_ for each user on your platform.\n\nEnhance the payments experience on your platform by registering a user friendly identifier, i.e. a _PayID_, for each user's _Virtual Account_. Your users should then be able to address payins using _PayIDs_ which are easier to remember and use than a BSB and account number.\n\nThis swagger document lists APIs for _Virtual Account_ and _PayID_ creation and management.\n\n\nContact Support:\n Email: support@hellozai.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:49.000Z",
+    "updatedAt": "2026-07-28T03:36:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-09b13929-3bff-4590-a830-645c5c155ce9"
+  },
+  "item": [
+    {
+      "name": "wallet_accounts",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "virtual_accounts",
+              "item": [
+                {
+                  "name": "Create Virtual Account",
+                  "id": "52f2bf10-3eaa-4f59-be2d-01c0ebba1b09",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "wallet_accounts",
+                        ":id",
+                        "virtual_accounts"
+                      ],
+                      "variable": [
+                        {
+                          "id": "66e817c6-875b-443e-a923-9b5f210d5e97",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) _Wallet Account_ ID."
+                        }
+                      ]
+                    },
+                    "description": "Create a _Virtual Account_ for a given _Wallet Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "64075407-40d5-47f1-a39e-b50d75668046",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"routing_number\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"user_external_id\": \"<uuid>\",\n  \"wallet_account_id\": \"<uuid>\",\n  \"status\": \"closed\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"account_type\": \"NIND\",\n  \"full_legal_account_name\": \"<string>\",\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"merchant_id\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-64075407-40d5-47f1-a39e-b50d75668046"
+                    },
+                    {
+                      "id": "aa6e8cb8-4048-4e59-bbfb-969374bf1725",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-aa6e8cb8-4048-4e59-bbfb-969374bf1725"
+                    },
+                    {
+                      "id": "766856a3-1121-4456-8168-2e959cdc9068",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-766856a3-1121-4456-8168-2e959cdc9068"
+                    },
+                    {
+                      "id": "87246d47-f25c-46cd-91c3-dd3263e94431",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"virtual_accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-87246d47-f25c-46cd-91c3-dd3263e94431"
+                    },
+                    {
+                      "id": "4936c1e1-79cd-4e6b-b65c-24505abd2aea",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-4936c1e1-79cd-4e6b-b65c-24505abd2aea"
+                    },
+                    {
+                      "id": "d3b97d04-30f5-42cd-9164-1c13d10ae134",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"wallet_account_id\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-d3b97d04-30f5-42cd-9164-1c13d10ae134"
+                    },
+                    {
+                      "id": "d356a368-03b4-49f0-b721-7331d20d07e5",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-d356a368-03b4-49f0-b721-7331d20d07e5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-52f2bf10-3eaa-4f59-be2d-01c0ebba1b09"
+                },
+                {
+                  "name": "List Virtual Accounts",
+                  "id": "eeb3f854-b6f8-47b9-8440-90fa47c7043f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "wallet_accounts",
+                        ":id",
+                        "virtual_accounts"
+                      ],
+                      "variable": [
+                        {
+                          "id": "758867f3-60cc-4f1e-94cf-4fd63a7d6550",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) _Wallet Account_ ID."
+                        }
+                      ]
+                    },
+                    "description": "List _Virtual Accounts_ for a given _Wallet Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "7addb2d2-4523-4b32-bacd-3e8a068aedfa",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"virtual_accounts\": [\n    {\n      \"id\": \"<uuid>\",\n      \"routing_number\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"user_external_id\": \"<uuid>\",\n      \"wallet_account_id\": \"<uuid>\",\n      \"status\": \"pending_activation\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"account_type\": \"NIND\",\n      \"full_legal_account_name\": \"<string>\",\n      \"account_name\": \"<string>\",\n      \"aka_names\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"merchant_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"routing_number\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"user_external_id\": \"<uuid>\",\n      \"wallet_account_id\": \"<uuid>\",\n      \"status\": \"closed\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"account_type\": \"NIND\",\n      \"full_legal_account_name\": \"<string>\",\n      \"account_name\": \"<string>\",\n      \"aka_names\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"merchant_id\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-7addb2d2-4523-4b32-bacd-3e8a068aedfa"
+                    },
+                    {
+                      "id": "50e20dee-9013-4a94-90f6-3d469cde9eb6",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-50e20dee-9013-4a94-90f6-3d469cde9eb6"
+                    },
+                    {
+                      "id": "11deabae-f152-4b5c-9378-13fa6dea44e5",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-11deabae-f152-4b5c-9378-13fa6dea44e5"
+                    },
+                    {
+                      "id": "81b8085f-9f65-48cb-b077-cbe3212a3096",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"virtual_accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-81b8085f-9f65-48cb-b077-cbe3212a3096"
+                    },
+                    {
+                      "id": "0b65c8ae-dba2-4fa3-86da-67dc1365bb7b",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-0b65c8ae-dba2-4fa3-86da-67dc1365bb7b"
+                    },
+                    {
+                      "id": "b8250329-8670-4345-90dc-54f9d053ee3a",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallet_accounts/:id/virtual_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallet_accounts",
+                            ":id",
+                            "virtual_accounts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-b8250329-8670-4345-90dc-54f9d053ee3a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-eeb3f854-b6f8-47b9-8440-90fa47c7043f"
+                }
+              ],
+              "id": "8a76ab8d-77ca-47eb-83b3-1339e4818f2c",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-8a76ab8d-77ca-47eb-83b3-1339e4818f2c"
+            }
+          ],
+          "id": "aed149db-2912-41a3-a32a-911c9f88b0ed",
+          "createdAt": "2026-07-28T03:36:50.000Z",
+          "updatedAt": "2026-07-28T03:36:50.000Z",
+          "uid": "35240-aed149db-2912-41a3-a32a-911c9f88b0ed"
+        }
+      ],
+      "id": "5ea9606d-0698-47d2-be25-c5a38111e492",
+      "createdAt": "2026-07-28T03:36:50.000Z",
+      "updatedAt": "2026-07-28T03:36:50.000Z",
+      "uid": "35240-5ea9606d-0698-47d2-be25-c5a38111e492"
+    },
+    {
+      "name": "virtual_accounts",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "aka_names",
+              "item": [
+                {
+                  "name": "Update AKA Names",
+                  "id": "e01fb753-0107-4245-b06c-9f1250dbd332",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id",
+                        "aka_names"
+                      ],
+                      "variable": [
+                        {
+                          "id": "413f3eca-0864-4717-8646-89bbd991a951",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Identifies a _Virtual Account_."
+                        }
+                      ]
+                    },
+                    "description": "Replace the list of AKA Names for a _Virtual Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "970ad693-a06e-4c42-b8ce-95ea221a2569",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-970ad693-a06e-4c42-b8ce-95ea221a2569"
+                    },
+                    {
+                      "id": "e9fabc6e-130e-44c0-9380-ea5389b066fe",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-e9fabc6e-130e-44c0-9380-ea5389b066fe"
+                    },
+                    {
+                      "id": "a3933b77-5367-47a1-a06e-233f4b49da42",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-a3933b77-5367-47a1-a06e-233f4b49da42"
+                    },
+                    {
+                      "id": "f373e62a-362f-431a-b888-dcc4b4e16fdf",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-f373e62a-362f-431a-b888-dcc4b4e16fdf"
+                    },
+                    {
+                      "id": "b19bfe20-dca5-46e2-b98d-37c55a1ae6d0",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-b19bfe20-dca5-46e2-b98d-37c55a1ae6d0"
+                    },
+                    {
+                      "id": "1c1bb702-9458-48cf-b089-a225aeaa295a",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-1c1bb702-9458-48cf-b089-a225aeaa295a"
+                    },
+                    {
+                      "id": "76b1fd3d-ecc8-4a80-bd19-fdb5a1569ad1",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/aka_names",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "aka_names"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-76b1fd3d-ecc8-4a80-bd19-fdb5a1569ad1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-e01fb753-0107-4245-b06c-9f1250dbd332"
+                }
+              ],
+              "id": "301392a7-8638-495c-b003-9d9e64322365",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-301392a7-8638-495c-b003-9d9e64322365"
+            },
+            {
+              "name": "account_name",
+              "item": [
+                {
+                  "name": "Update Account Name",
+                  "id": "c361bd06-00c1-48fa-af1d-4a3b76870f84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id",
+                        "account_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5c1bea91-9fd9-4c69-add8-d3fd7594083a",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Identifies a _Virtual Account_."
+                        }
+                      ]
+                    },
+                    "description": "Change the name of a _Virtual Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "ae40b04b-f1a4-4aee-a598-1b3ad06eb9f0",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-ae40b04b-f1a4-4aee-a598-1b3ad06eb9f0"
+                    },
+                    {
+                      "id": "c8c7d7b5-9561-42e8-834e-279d8aca9154",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-c8c7d7b5-9561-42e8-834e-279d8aca9154"
+                    },
+                    {
+                      "id": "4f512668-de83-42db-9bb9-7e6b5f85bb8c",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-4f512668-de83-42db-9bb9-7e6b5f85bb8c"
+                    },
+                    {
+                      "id": "4f50b21f-faed-41b9-81d0-345f5ef4844c",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-4f50b21f-faed-41b9-81d0-345f5ef4844c"
+                    },
+                    {
+                      "id": "2e76d819-a97a-49c5-b449-9237f4e41883",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-2e76d819-a97a-49c5-b449-9237f4e41883"
+                    },
+                    {
+                      "id": "6836bc6b-87db-4d85-b56c-adfcdc455397",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-6836bc6b-87db-4d85-b56c-adfcdc455397"
+                    },
+                    {
+                      "id": "894ba646-bd52-46ab-9a90-28dc701d014f",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/account_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "account_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-894ba646-bd52-46ab-9a90-28dc701d014f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-c361bd06-00c1-48fa-af1d-4a3b76870f84"
+                }
+              ],
+              "id": "5abd8dd8-c430-4de2-9f57-3f7b0206fa70",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-5abd8dd8-c430-4de2-9f57-3f7b0206fa70"
+            },
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Update Virtual Account Status",
+                  "id": "c440600f-acf6-48c8-b4e3-ddded83b7328",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"closed\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eb610e0c-f893-442c-bc35-3ae8c9e78627",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Identifies a _Virtual Account_."
+                        }
+                      ]
+                    },
+                    "description": "Update the status of a _Virtual Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "4418e1e3-6d66-4493-b82e-ea197a3f258b",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-4418e1e3-6d66-4493-b82e-ea197a3f258b"
+                    },
+                    {
+                      "id": "9395ba85-a390-41cd-a459-770caca38689",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-9395ba85-a390-41cd-a459-770caca38689"
+                    },
+                    {
+                      "id": "1827018f-ab87-45ba-a370-1b7fe8249f60",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-1827018f-ab87-45ba-a370-1b7fe8249f60"
+                    },
+                    {
+                      "id": "f5ca1bb2-fe8d-49df-8287-78f342dc5609",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-f5ca1bb2-fe8d-49df-8287-78f342dc5609"
+                    },
+                    {
+                      "id": "f7be5062-da9b-4671-9713-acbfc846af8e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-f7be5062-da9b-4671-9713-acbfc846af8e"
+                    },
+                    {
+                      "id": "064b56d2-d0f6-49d5-ac18-230f44fb541c",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"error\": \"<string>\",\n    \"code\": \"<string>\",\n    \"pay_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-064b56d2-d0f6-49d5-ac18-230f44fb541c"
+                    },
+                    {
+                      "id": "c8d2e9d7-2f68-495a-ae87-41c8f3eae7aa",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"closed\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-c8d2e9d7-2f68-495a-ae87-41c8f3eae7aa"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-c440600f-acf6-48c8-b4e3-ddded83b7328"
+                }
+              ],
+              "id": "75f9e410-12a2-456e-94ea-723e472dbdda",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-75f9e410-12a2-456e-94ea-723e472dbdda"
+            },
+            {
+              "name": "pay_ids",
+              "item": [
+                {
+                  "name": "Register PayID",
+                  "id": "42dd295d-f4aa-4a8e-9b5b-37f60aeb0a30",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id",
+                        "pay_ids"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eb811aec-e83d-4e63-b4f0-a2b76f47c52e",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) _Virtual Account_ ID."
+                        }
+                      ]
+                    },
+                    "description": "Register a _PayID_ for a given _Virtual Account_."
+                  },
+                  "response": [
+                    {
+                      "id": "442ff17f-77cd-4808-8564-e1845da5f100",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"status\": \"pending_activation\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"virtual_accounts\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-442ff17f-77cd-4808-8564-e1845da5f100"
+                    },
+                    {
+                      "id": "679dbb30-3d6d-43da-aabb-38b7d24a9acd",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-679dbb30-3d6d-43da-aabb-38b7d24a9acd"
+                    },
+                    {
+                      "id": "e8742695-a989-44ce-9866-441325733af6",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-e8742695-a989-44ce-9866-441325733af6"
+                    },
+                    {
+                      "id": "f868fb0c-4795-4a33-9dfc-662b60f3a4ba",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"virtual_accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-f868fb0c-4795-4a33-9dfc-662b60f3a4ba"
+                    },
+                    {
+                      "id": "a98e8b05-3590-4548-af1a-4bee8539177f",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-a98e8b05-3590-4548-af1a-4bee8539177f"
+                    },
+                    {
+                      "id": "b6a4b9ed-6018-4a70-86f4-33166df787dd",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"pay_id\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-b6a4b9ed-6018-4a70-86f4-33166df787dd"
+                    },
+                    {
+                      "id": "69369adb-e19e-4146-9919-091f911b7689",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/virtual_accounts/:id/pay_ids",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "virtual_accounts",
+                            ":id",
+                            "pay_ids"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-69369adb-e19e-4146-9919-091f911b7689"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-42dd295d-f4aa-4a8e-9b5b-37f60aeb0a30"
+                }
+              ],
+              "id": "e83c20ef-3254-4d78-b60f-469b1f855ffa",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-e83c20ef-3254-4d78-b60f-469b1f855ffa"
+            },
+            {
+              "name": "Show Virtual Account",
+              "id": "a7a48c55-edc4-4f79-a6f9-dcfea5708120",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/virtual_accounts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8cfe1444-e52b-4879-bbaa-32ae6f3a4fe5",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) _Virtual Account_ ID."
+                    }
+                  ]
+                },
+                "description": "Show details of a specific _Virtual Account_ using the given `id`."
+              },
+              "response": [
+                {
+                  "id": "37a16dff-397c-431c-a47b-86c885d3cc28",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"routing_number\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"user_external_id\": \"<uuid>\",\n  \"wallet_account_id\": \"<uuid>\",\n  \"status\": \"closed\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"account_type\": \"NIND\",\n  \"full_legal_account_name\": \"<string>\",\n  \"account_name\": \"<string>\",\n  \"aka_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"merchant_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-37a16dff-397c-431c-a47b-86c885d3cc28"
+                },
+                {
+                  "id": "d156cdd7-3fe2-4a80-b934-648752648a0c",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-d156cdd7-3fe2-4a80-b934-648752648a0c"
+                },
+                {
+                  "id": "a1370d15-bcbb-4bf5-8ee6-47c262a0397c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-a1370d15-bcbb-4bf5-8ee6-47c262a0397c"
+                },
+                {
+                  "id": "2584276b-f929-4641-8ea6-0d42a6196fd2",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"virtual_accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-2584276b-f929-4641-8ea6-0d42a6196fd2"
+                },
+                {
+                  "id": "5e618952-7046-43c8-9e45-07bb4141c39d",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-5e618952-7046-43c8-9e45-07bb4141c39d"
+                },
+                {
+                  "id": "59c055fa-7a38-474b-9898-449b34418f01",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/virtual_accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "virtual_accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-59c055fa-7a38-474b-9898-449b34418f01"
+                }
+              ],
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-a7a48c55-edc4-4f79-a6f9-dcfea5708120"
+            }
+          ],
+          "id": "545ddcba-0bb2-4485-8cd5-089e4d61d31c",
+          "createdAt": "2026-07-28T03:36:50.000Z",
+          "updatedAt": "2026-07-28T03:36:50.000Z",
+          "uid": "35240-545ddcba-0bb2-4485-8cd5-089e4d61d31c"
+        }
+      ],
+      "id": "ae5722f0-9163-4651-9640-762cfdf07167",
+      "createdAt": "2026-07-28T03:36:50.000Z",
+      "updatedAt": "2026-07-28T03:36:50.000Z",
+      "uid": "35240-ae5722f0-9163-4651-9640-762cfdf07167"
+    },
+    {
+      "name": "pay_ids",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Update PayID Status",
+                  "id": "b2484be2-5f03-4276-af35-209dbf7739a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dc4efb77-70dd-4f05-bcb0-f1fb9b02ad61",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Id of the _PayID_ resource."
+                        }
+                      ]
+                    },
+                    "description": "Update the status of the _PayID_."
+                  },
+                  "response": [
+                    {
+                      "id": "06e62e50-48cc-4653-8646-85f005a36e52",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-06e62e50-48cc-4653-8646-85f005a36e52"
+                    },
+                    {
+                      "id": "7109c92e-bb2c-4880-9c9d-d48ea298f73c",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-7109c92e-bb2c-4880-9c9d-d48ea298f73c"
+                    },
+                    {
+                      "id": "2393c613-f72e-41f3-b322-7a822af26067",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-2393c613-f72e-41f3-b322-7a822af26067"
+                    },
+                    {
+                      "id": "de743b43-75fa-4f81-9d0f-0463d7b83697",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"virtual_accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-de743b43-75fa-4f81-9d0f-0463d7b83697"
+                    },
+                    {
+                      "id": "6da073c0-d07e-4768-a227-fd0c5e17770d",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-6da073c0-d07e-4768-a227-fd0c5e17770d"
+                    },
+                    {
+                      "id": "f3e31f74-703a-4a0b-bbfd-f8a7a922d5d2",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"In progress\": {\n      \"value\": {\n        \"errors\": \"An update for this PayID is already in progress. Please try again later.\"\n      }\n    },\n    \"Status not active\": {\n      \"value\": {\n        \"errors\": \"PayID must be active to deregister.\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-f3e31f74-703a-4a0b-bbfd-f8a7a922d5d2"
+                    },
+                    {
+                      "id": "2e76c265-8e1e-4f7c-9184-eb9c693ce959",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pay_ids/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pay_ids",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:36:50.000Z",
+                      "updatedAt": "2026-07-28T03:36:50.000Z",
+                      "uid": "35240-2e76c265-8e1e-4f7c-9184-eb9c693ce959"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-b2484be2-5f03-4276-af35-209dbf7739a3"
+                }
+              ],
+              "id": "4e5f8e7d-7f37-4c1c-9ac3-b8adc26e3751",
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-4e5f8e7d-7f37-4c1c-9ac3-b8adc26e3751"
+            },
+            {
+              "name": "Retrieve a PayID",
+              "id": "e88745fb-e1ee-4247-a85e-442f5e4025d0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pay_ids/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pay_ids",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b46efea4-a459-404b-a2c2-6921469bd5ce",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Id of the _PayID_ resource."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of a specific _PayID_ using the unique id parameter `id`. Only one _PayID_ record is returned."
+              },
+              "response": [
+                {
+                  "id": "a0c5ae7f-acc4-4071-a01d-1f7c30313228",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"pay_id\": \"<email>\",\n  \"type\": \"EMAIL\",\n  \"status\": \"pending_activation\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"details\": {\n    \"pay_id_name\": \"<string>\",\n    \"owner_legal_name\": \"<string>\"\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"virtual_accounts\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-a0c5ae7f-acc4-4071-a01d-1f7c30313228"
+                },
+                {
+                  "id": "2d3730fb-237a-4be4-b3c3-c65419bc6460",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-2d3730fb-237a-4be4-b3c3-c65419bc6460"
+                },
+                {
+                  "id": "331fa11e-e144-44ca-8962-4f5b6d77825f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-331fa11e-e144-44ca-8962-4f5b6d77825f"
+                },
+                {
+                  "id": "bd320d85-bae5-43e5-a54f-8ebb28926979",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"payid_per_user\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-bd320d85-bae5-43e5-a54f-8ebb28926979"
+                },
+                {
+                  "id": "3cd7e92e-2538-4920-ae83-36a8aa66b330",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-3cd7e92e-2538-4920-ae83-36a8aa66b330"
+                },
+                {
+                  "id": "457d3451-5dee-4da2-92f6-50bab272b000",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pay_ids/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pay_ids",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:36:50.000Z",
+                  "updatedAt": "2026-07-28T03:36:50.000Z",
+                  "uid": "35240-457d3451-5dee-4da2-92f6-50bab272b000"
+                }
+              ],
+              "createdAt": "2026-07-28T03:36:50.000Z",
+              "updatedAt": "2026-07-28T03:36:50.000Z",
+              "uid": "35240-e88745fb-e1ee-4247-a85e-442f5e4025d0"
+            }
+          ],
+          "id": "ce717dd5-0a6d-4a2c-99d3-19c1c2fbf9b2",
+          "createdAt": "2026-07-28T03:36:50.000Z",
+          "updatedAt": "2026-07-28T03:36:50.000Z",
+          "uid": "35240-ce717dd5-0a6d-4a2c-99d3-19c1c2fbf9b2"
+        }
+      ],
+      "id": "4a572239-a6ad-4d24-bc6f-d8679fc9a884",
+      "createdAt": "2026-07-28T03:36:50.000Z",
+      "updatedAt": "2026-07-28T03:36:50.000Z",
+      "uid": "35240-4a572239-a6ad-4d24-bc6f-d8679fc9a884"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.au-0000.api.assemblypay.com"
+    }
+  ]
+}
