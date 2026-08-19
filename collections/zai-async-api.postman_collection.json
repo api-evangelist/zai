@@ -1,0 +1,909 @@
+{
+  "item": [
+    {
+      "id": "a745f556-df07-44ec-abf5-c2eb309078af",
+      "name": "Item Actions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37179f42-190a-42db-a78e-f77e6bb9a529",
+          "name": "Make Payment",
+          "request": {
+            "name": "Make Payment",
+            "description": {
+              "content": "This endpoint extends the original `make_payment` API endpoint to allow asynchronous processing. Clients may optionally supply a wait parameter to have the server wait up to 30 seconds for a response from internal business systems. If a response has been received in that time, it is returned immediately. Otherwise status information and links are returned. Calling the status link returns the item response if available, status information otherwise. Clients may also optionally supply a callback URL in URL-encoded format. The path parameters `{item}`, `{account}` and `{uuid}` are supported. If a callback is present, the system POSTs the internal business system response to it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "items",
+                ":id",
+                "make_payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of item to apply payment to"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8abe187f-9365-4d80-9e7b-1aba214c1d7c",
+              "name": "Response body contains the item response received within the supplied wait time. Note that the HTTP response code will reflect the internal system response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": {\n    \"id\": \"7190770-1-2908\",\n    \"name\": \"Item 7190770-1-2908\",\n    \"description\": \"Test Item 7190770-1-2908\",\n    \"custom_descriptor\": null,\n    \"payout_descriptor\": null,\n    \"created_at\": \"2020-05-11T10:26:49.660Z\",\n    \"updated_at\": \"2020-05-11T10:26:49.660Z\",\n    \"state\": \"pending\",\n    \"net_amount\": 102,\n    \"chargedback_amount\": 0,\n    \"refunded_amount\": 0,\n    \"released_amount\": 0,\n    \"seller_url\": \"\",\n    \"buyer_url\": \"\",\n    \"remaining_amount\": 102,\n    \"status\": 22000,\n    \"amount\": 102,\n    \"payment_type_id\": 2,\n    \"due_date\": null,\n    \"requested_release_amount\": 0,\n    \"pending_release_amount\": 0,\n    \"dynamic_descriptor\": null,\n    \"invoice_url\": null,\n    \"deposit_reference\": \"100014012533386\",\n    \"buyer_fees\": 0,\n    \"seller_fees\": 0,\n    \"credit_card_fee\": 0,\n    \"direct_debit_fee\": 0,\n    \"paypal_fee\": 0,\n    \"promisepay_fee\": 1,\n    \"batch_state\": null,\n    \"total_outstanding\": 102,\n    \"total_amount\": 102,\n    \"currency\": \"AUD\",\n    \"payment_method\": \"pending\",\n    \"buyer_name\": \"Neol Buyer\",\n    \"buyer_email\": \"neol_buyer719013950014@assemblypayments.com\",\n    \"buyer_country\": \"AUS\",\n    \"seller_name\": \"Assembly seller71718579\",\n    \"seller_email\": \"neol_seller71718579@assemblypayments.com\",\n    \"seller_country\": \"AUS\",\n    \"payment_credit_card_enabled\": true,\n    \"payment_direct_debit_enabled\": true,\n    \"tds_check_state\": null,\n    \"related\": {\n      \"buyers\": \"buyer-719013950014\",\n      \"sellers\": \"seller-71718579\"\n    },\n    \"links\": {\n      \"self\": \"/items/7190770-1-2908/make_payment?account_id=725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n      \"buyers\": \"/items/7190770-1-2908/buyers\",\n      \"sellers\": \"/items/7190770-1-2908/sellers\",\n      \"status\": \"/items/7190770-1-2908/status\",\n      \"fees\": \"/items/7190770-1-2908/fees\",\n      \"transactions\": \"/items/7190770-1-2908/transactions\",\n      \"batch_transactions\": \"/items/7190770-1-2908/batch_transactions\",\n      \"wire_details\": \"/items/7190770-1-2908/wire_details\",\n      \"bpay_details\": \"/items/7190770-1-2908/bpay_details\",\n      \"tds_checks\": \"/items/7190770-1-2908/tds_checks\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8f2b9af-fea2-43d9-9be0-1e55ef9a8ce3",
+              "name": "Request accepted: Response contains status information and query/callback link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_updated\": \"2020-07-15T15:04:05Z\",\n  \"submission_count\": 0,\n  \"message\": \"request awaiting submission\",\n  \"links\": {\n    \"status\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status\",\n    \"callbacks\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baef2bd0-8340-4f90-962f-97a43bb08fd6",
+              "name": "Missing or invalid item ID or account ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e485c1d1-7750-42b7-87b2-6f3bbb870e8d",
+              "name": "Invalid authentication header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de76e44e-88f7-4ac2-9cae-de6ce52f3852",
+              "name": "Duplicate request conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9711b44-ccc3-4f22-bca9-2f593cec0ab2",
+              "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":id",
+                    "make_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of item to apply payment to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n  \"device_id\": \"358277090995038\",\n  \"ip_address\": \"49.192.154.141\",\n  \"wait\": \"15\",\n  \"callback\": \"https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "76ba7cf2-4218-4582-bee5-1a4bd8ce822e",
+      "name": "Requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c529b641-c5ca-4d1a-bbc8-3be91454903a",
+          "name": "Get Request Status",
+          "request": {
+            "name": "Get Request Status",
+            "description": {
+              "content": "This API is applicable for asynchronous requests submitted to `make_payment` through `tnq.api.assemblypay.com`. It returns the item response if available or current status otherwise.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                ":request_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<UUID>",
+                  "key": "request_id",
+                  "description": "(Required) Assembly-generated unique ID for this request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66b8aa8a-1558-440c-9cab-c2762bf76c5c",
+              "name": "Item response received from internal systems. Note that the HTTP response code will reflect the internal system response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": {\n    \"id\": \"7190770-1-2908\",\n    \"name\": \"Item 7190770-1-2908\",\n    \"description\": \"Test Item 7190770-1-2908\",\n    \"custom_descriptor\": null,\n    \"payout_descriptor\": null,\n    \"created_at\": \"2020-05-11T10:26:49.660Z\",\n    \"updated_at\": \"2020-05-11T10:26:49.660Z\",\n    \"state\": \"pending\",\n    \"net_amount\": 102,\n    \"chargedback_amount\": 0,\n    \"refunded_amount\": 0,\n    \"released_amount\": 0,\n    \"seller_url\": \"\",\n    \"buyer_url\": \"\",\n    \"remaining_amount\": 102,\n    \"status\": 22000,\n    \"amount\": 102,\n    \"payment_type_id\": 2,\n    \"due_date\": null,\n    \"requested_release_amount\": 0,\n    \"pending_release_amount\": 0,\n    \"dynamic_descriptor\": null,\n    \"invoice_url\": null,\n    \"deposit_reference\": \"100014012533386\",\n    \"buyer_fees\": 0,\n    \"seller_fees\": 0,\n    \"credit_card_fee\": 0,\n    \"direct_debit_fee\": 0,\n    \"paypal_fee\": 0,\n    \"promisepay_fee\": 1,\n    \"batch_state\": null,\n    \"total_outstanding\": 102,\n    \"total_amount\": 102,\n    \"currency\": \"AUD\",\n    \"payment_method\": \"pending\",\n    \"buyer_name\": \"Neol Buyer\",\n    \"buyer_email\": \"neol_buyer719013950014@assemblypayments.com\",\n    \"buyer_country\": \"AUS\",\n    \"seller_name\": \"Assembly seller71718579\",\n    \"seller_email\": \"neol_seller71718579@assemblypayments.com\",\n    \"seller_country\": \"AUS\",\n    \"payment_credit_card_enabled\": true,\n    \"payment_direct_debit_enabled\": true,\n    \"tds_check_state\": null,\n    \"related\": {\n      \"buyers\": \"buyer-719013950014\",\n      \"sellers\": \"seller-71718579\"\n    },\n    \"links\": {\n      \"self\": \"/items/7190770-1-2908/make_payment?account_id=725cc8c0-759b-0138-5d6d-0a58a9feac05\",\n      \"buyers\": \"/items/7190770-1-2908/buyers\",\n      \"sellers\": \"/items/7190770-1-2908/sellers\",\n      \"status\": \"/items/7190770-1-2908/status\",\n      \"fees\": \"/items/7190770-1-2908/fees\",\n      \"transactions\": \"/items/7190770-1-2908/transactions\",\n      \"batch_transactions\": \"/items/7190770-1-2908/batch_transactions\",\n      \"wire_details\": \"/items/7190770-1-2908/wire_details\",\n      \"bpay_details\": \"/items/7190770-1-2908/bpay_details\",\n      \"tds_checks\": \"/items/7190770-1-2908/tds_checks\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9feaae8d-a2d6-40c6-970b-5d757b3254ea",
+              "name": "Still awaiting item response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_updated\": \"2020-07-15T15:04:37Z\",\n  \"submission_count\": 1,\n  \"message\": \"request awaiting response\",\n  \"links\": {\n    \"status\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status\",\n    \"callbacks\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "365be7aa-2864-4a11-9058-9b403d50a3b2",
+              "name": "Invalid authentication header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba60594a-5c2d-48a4-9ca6-b88f34b9913e",
+              "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46d40ead-9331-46eb-a157-acd229ebd8c4",
+          "name": "Get Request Callback Details",
+          "request": {
+            "name": "Get Request Callback Details",
+            "description": {
+              "content": "This API is applicable for asynchronous requests submitted to `make_payment`. It returns information about callbacks executed upon receipt of a response to the associated request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                ":request_id",
+                "callbacks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<UUID>",
+                  "key": "request_id",
+                  "description": "(Required) Assembly-generated unique ID for this request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12e5d36f-979f-4366-b28d-85bc0fb5c787",
+              "name": "Callback execution details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "callbacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callbacks\": [\n    {\n      \"executed_utc\": \"2020-10-05T05:22:11Z\",\n      \"http_response\": 200,\n      \"detail\": \"{\\\"message\\\": \\\"hey thanks for the callback\\\"}\"\n    }\n  ],\n  \"links\": {\n    \"status\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status\",\n    \"callbacks\": \"https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "904e308d-4342-4408-a978-ae4cff67af81",
+              "name": "Invalid authentication header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "callbacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "871e0edc-de5f-4fdd-8562-72d1ff38f89d",
+              "name": "The end point handling your request has received an interrupt or terminate signal. Please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    ":request_id",
+                    "callbacks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<UUID>",
+                      "key": "request_id",
+                      "description": "(Required) Assembly-generated unique ID for this request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-async-api/1.0.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b076a5f-4d72-4208-9fe5-6dae0564576a",
+    "name": "Asynchronous API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This section covers all the Assembly asynchronous APIs.\n\nContact Support:\n Email: support@assemblypayments.com",
+      "type": "text/plain"
+    }
+  }
+}

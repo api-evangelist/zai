@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Virtual Accounts and PayIDs",
+    "version": "0.12-external"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Virtual Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/wallet_accounts/:id/virtual_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "_Wallet Account_ ID."
+              }
+            ]
+          },
+          "docs": "List _Virtual Accounts_ for a given _Wallet Account_."
+        },
+        {
+          "info": {
+            "name": "Create Virtual Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/wallet_accounts/:id/virtual_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "_Wallet Account_ ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a _Virtual Account_ for a given _Wallet Account_."
+        },
+        {
+          "info": {
+            "name": "Show Virtual Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/virtual_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "_Virtual Account_ ID."
+              }
+            ]
+          },
+          "docs": "Show details of a specific _Virtual Account_ using the given `id`."
+        },
+        {
+          "info": {
+            "name": "Update AKA Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/virtual_accounts/:id/aka_names",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Identifies a _Virtual Account_."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the list of AKA Names for a _Virtual Account_."
+        },
+        {
+          "info": {
+            "name": "Update Account Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/virtual_accounts/:id/account_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Identifies a _Virtual Account_."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the name of a _Virtual Account_."
+        },
+        {
+          "info": {
+            "name": "Update Virtual Account Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/virtual_accounts/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Identifies a _Virtual Account_."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of a _Virtual Account_."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PayIDs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register PayID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/virtual_accounts/:id/pay_ids",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "_Virtual Account_ ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a _PayID_ for a given _Virtual Account_."
+        },
+        {
+          "info": {
+            "name": "Update PayID Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/pay_ids/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Id of the _PayID_ resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of the _PayID_."
+        },
+        {
+          "info": {
+            "name": "Retrieve a PayID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.au-0000.api.assemblypay.com/pay_ids/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Id of the _PayID_ resource."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific _PayID_ using the unique id parameter `id`. Only one _PayID_ record is returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

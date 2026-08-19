@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayTo",
+    "version": "1.4-external"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PayTo Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate PayTo Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/payment_requests/initiate",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint is to initiate a payment to collect funds from the debtor's account or to retry if the previous payment collection request was rejected due to valid business reasons.\nThis API should be invoked strictly as per the terms and conditions established in the agreement to avoid payment claims. Even the retries should be attempted as per the agreement terms and conditions.\n\n Payment initiation request statuses -\n- PENDING_PAYMENT_INITIATION - when the payment initiation request has been a"
+        },
+        {
+          "info": {
+            "name": "Get PayTo Payment Initiation Request Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": " https://au-0000.api.assemblypay.com/payto/payment_requests/:payment_request_uuid",
+            "params": [
+              {
+                "name": "payment_request_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This operation is to retrieve details of an initiated payment request. This API should be invoked to know the latest status of the payment initiation request if needed.\n\n Payment initiation request statuses which will be returned via this endpoint -\n- PENDING_PAYMENT_INITIATION - when the payment initiation request has been accepted for processing \n- PAYMENT_INITIATED - when the payment initiation request is being processed \n- PAYMENT_INITIATION_COMPLETED - when the payment initiation request is"
+        },
+        {
+          "info": {
+            "name": "Get All PayTo Payment Initiation Requests for an Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/payment_requests",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This operation is to retrieve all payment requests initiated for an agreement in the provided period (date range). Payment requests for a period of maximum one year or less than it can be retrieved at a time.\n\n By default, all payment initiation requests (along with details) irrespective of the status will be listed via this endpoint. However, the results can be filtered based on status(es) if needed.\n\nRequest parameter descriptions:\n\n - status - List of valid agreement statuses. Example - Retri"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PayTo Agreements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create PayTo Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/create",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This operation creates the agreement with NPPA and hence must be invoked only after validating the agreement via the “Validate PayTo Agreement” operation.\n\n It should be invoked immediately once the agreement has been validated successfully and resolved PayID details are confirmed with the user.\n\n Agreement Creation will be successful only if it is performed within 5 minutes post successful validation.\n\n Post successful creation, agreement id (generated by NPPA) which uniquely identifies the agr"
+        },
+        {
+          "info": {
+            "name": "Validate PayTo Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validate PayTo agreement details before creation. This operation must be invoked first, followed by the “Create PayTo Agreement” operation.\n\n This operation validates the details of the agreements along with ensuring the debtor and creditor are NPP and PayTo reachable before the actual agreement creation with NPPA.\n\n PayID details provided for the debtor are also resolved as part of this operation. Customers should share the resolved PayID details with their users for confirmation before the act"
+        },
+        {
+          "info": {
+            "name": "Amend PayTo Agreement Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/status",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Amend Status of a particular agreement via its UUID. Below status amends are possible via this API:\n- ACTIVE -> SUSPENDED\n- ACTIVE -> CANCELLED\n- SUSPENDED -> ACTIVE (only if suspended via Zai)\n- SUSPENDED -> CANCELLED\n\nOnly one status amendment is allowed at any given point of time. Example - If a request to suspend the agreement is already in progress, another status change request will not be accepted until the first completes.\n\nResuming a suspended agreement can only be performed by the part"
+        },
+        {
+          "info": {
+            "name": "Recall PayTo Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/recall",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This operation is to recall a pending agreement creation/bilateral amendment authorisation request before it is approved by debtor. By default, all debtor authorization requests expire after 5 days post creation. If a custom expiry duration (anything less than 5 days) has been specified in the request via “response_requested_by” field, then this Recall API should be invoke to expire the authorisation request post the custom duration has elapsed.\n\n Example - For a use-case, if the debtor should a"
+        },
+        {
+          "info": {
+            "name": "Amend PayTo Agreement Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid/amend",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Amend details of a particular agreement via its UUID. There are two types of amendments possible via this operation:\n- Unilateral amendments - which does not need debtor approval and will be effective immediately\n- Bilateral amendments - which does require debtor approval and will be effective post debtor authorisation\n\nOptional fields can also be cleared via an amend request if needed. Passing an hyphen(-) character for any optional field would indicate its value needs to be cleared.\n\nEither un"
+        },
+        {
+          "info": {
+            "name": "Get PayTo Agreement Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements/:agreement_uuid",
+            "params": [
+              {
+                "name": "agreement_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a PayTo agreement by UUID which uniquely identifies the agreement.\n This UUID is returned as part of the “Validate PayTo Agreement” operation.\n\n It provides complete details of a particular agreement irrespective of its current status "
+        },
+        {
+          "info": {
+            "name": "Get All PayTo Agreements for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": " https://au-0000.api.assemblypay.com/payto/agreements",
+            "params": [
+              {
+                "name": "user_external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "agreement_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": " This operation is to retrieve all PayTo agreements associated with a particular user in the provided period (date range). Agreements can be retrieved for a maximum period of one year or less at a time i.e. the period between start and end date cannot exceed more than one year.\n\n By default, all agreements will be returned irrespective of status and type (AUPM/MGCR).\n\n However, if required, results can be filtered for a particular status or agreement type. Example - Retrieve all suspended and ca"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

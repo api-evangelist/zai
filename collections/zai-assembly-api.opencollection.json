@@ -1,0 +1,2479 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Assembly API",
+    "version": "2.3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://au-0000.sandbox.auth.assemblypay.com/tokens",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange client application credentials for a bearer token. Please ensure to call the auth issuing server as described at https://developer.assemblypayments.com/reference#authentication"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/addresses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Address ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific Address using a given address `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bank Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/bank_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bank account ID"
+              },
+              {
+                "name": "include_decrypted_fields",
+                "value": "",
+                "type": "query",
+                "description": "If true, the API will decrypt and return sensitive bank account fields (for example, the full account number). Defaults to false"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Bank Account** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Redact Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://test.api.promisepay.com/bank_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Bank account ID"
+              }
+            ]
+          },
+          "docs": "Redact a **Bank Account** using a given `:id`. Redacted **Bank Accounts** can no longer be used as a funding source or a Disbursement destination.\n"
+        },
+        {
+          "info": {
+            "name": "Send Penny Amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/bank_accounts/:id/penny_send",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Bank account ID"
+              }
+            ]
+          },
+          "docs": "When penny verification is enabled, this API call sends two penny transactions to the specified bank account for verification. **Note**: This API call is not required when your platform has automatic penny verification enabled, as this is instead done by the system. Penny credit verification is only supported for US platforms.\n"
+        },
+        {
+          "info": {
+            "name": "Create Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/bank_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Bank Account** to be used as either a funding source or a Disbursement destination. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a `token` when involving **Bank Accounts**. \n"
+        },
+        {
+          "info": {
+            "name": "Verify Penny Amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/bank_accounts/:id/penny_verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Bank account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "When penny verification is enabled, this API call verifies the two penny transactions that were sent to a specified bank account using **Send Penny Amount**. **Note**: This API call requires you to provide a front-end interface to your end-users into which they can input the penny amounts required for a successful verification. Your front-end interface should then pass the information into this API call. Penny credit verification is only supported for US platforms.\n"
+        },
+        {
+          "info": {
+            "name": "Show Bank Account User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/bank_accounts/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "Bank account ID"
+              }
+            ]
+          },
+          "docs": "Show the **User** the **Bank Account** is associated with using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Validate Routing Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/tools/routing_number",
+            "params": [
+              {
+                "name": "routing_number",
+                "value": "122235821",
+                "type": "query",
+                "description": "Bank account routing number"
+              }
+            ]
+          },
+          "docs": "Validate a US bank routing number before creating an account. This can be used to provide on-demand verification, and further information of the bank information a User is providing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "BPay Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show BPay Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/bpay_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "BPay account ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **BPay Account** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Create BPay Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/bpay_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **BPay Account** to be used as a Disbursement destination.\n"
+        },
+        {
+          "info": {
+            "name": "Show BPay Account User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/bpay_accounts/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "BPay account ID"
+              }
+            ]
+          },
+          "docs": "Show the **User** the **BPay Account** is associated with using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wallet Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pay a Bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id/bill_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "8a31ebfa-421b-4cbb-9241-632f71b3778a",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pay a bill by withdrawing funds from a **Wallet Account** to a specified bpay account."
+        },
+        {
+          "info": {
+            "name": "Show Wallet Account User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ]
+          },
+          "docs": "Show the **User** the **Wallet Account** is associated with using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Withdraw Funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id/withdraw",
+            "params": [
+              {
+                "name": "id",
+                "value": "bd6e9c20-73f1-0138-fb91-0a58a9feac09",
+                "type": "path",
+                "description": "Wallet account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw funds from a **Wallet Account** to a specified disbursement account."
+        },
+        {
+          "info": {
+            "name": "Show Wallet Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "5c1c6b10-4c56-0137-8cd7-0242ac110002",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Wallet Account** using a given `:id.`"
+        },
+        {
+          "info": {
+            "name": "Show Wallet Account NPP Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id/npp_details",
+            "params": [
+              {
+                "name": "id",
+                "value": "5c1c6b10-4c56-0137-8cd7-0242ac110002",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ]
+          },
+          "docs": "Show NPP details of a specific **Wallet Account** using a given `:id.`"
+        },
+        {
+          "info": {
+            "name": "Show Wallet Account BPAY Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/wallet_accounts/:id/bpay_details",
+            "params": [
+              {
+                "name": "id",
+                "value": "5c1c6b10-4c56-0137-8cd7-0242ac110002",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ]
+          },
+          "docs": "Show BPAY details of a specific **Wallet Account** using a given `:id.`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sub-wallets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sub-wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/sub_wallets/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "Wallet Account Id"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              }
+            ]
+          },
+          "docs": "List all the sub-wallets that belong to a user's wallet account. These are specified by the wallet `account_id`."
+        },
+        {
+          "info": {
+            "name": "Create Sub-wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/sub_wallets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a sub-wallet for a user's wallet account.This is specified by the wallet `account_id`. Use sub-wallets as a part of building your own scheduling and workflow.  Create as many as you want to manage, with no limits to the amount."
+        },
+        {
+          "info": {
+            "name": "Show Sub-wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific sub-wallet using the given`:id`."
+        },
+        {
+          "info": {
+            "name": "Update Sub-wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing sub-wallet using the given `:id`. You can change the `name` of an enabled sub-wallet. You can change the  `active` status of a `redacted` sub-wallet."
+        },
+        {
+          "info": {
+            "name": "Redact Sub-wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ]
+          },
+          "docs": "Redact a sub-wallet using the given `:id`. Only sub-wallets with zero balance can be redacted. Once this is done, the sub-wallet can no longer be used as a funding source."
+        },
+        {
+          "info": {
+            "name": "Fund transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/sub_wallets/transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fund transfers between a wallet account and its sub-wallet as well as between any sub-wallets that belong to the same wallet account. The `source` and `destination` accounts must be `active` and use the same currency."
+        },
+        {
+          "info": {
+            "name": "List Sub-wallet transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id/transactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ]
+          },
+          "docs": "List all transactions of a sub-wallet using the given `:id`."
+        },
+        {
+          "info": {
+            "name": "Pay a Bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id/bill_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "8a31ebfa-421b-4cbb-9241-632f71b3778a",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pay a bill to a specified BPAY account that's associated with its `account_id` by withdrawing funds from a sub-wallet using the given `id`."
+        },
+        {
+          "info": {
+            "name": "Withdraw Funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id/withdraw",
+            "params": [
+              {
+                "name": "id",
+                "value": "bd6e9c20-73f1-0138-fb91-0a58a9feac09",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw funds from a sub-wallet using the given `id` and move the specified amount to a disbursement account associated with the `account_id`."
+        },
+        {
+          "info": {
+            "name": "Show Sub-wallet User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ]
+          },
+          "docs": "Show the user that a sub-wallet is associated with using the given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show the Wallet Account of a Sub-wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/sub_wallets/:id/wallet_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "sub-wallet ID"
+              }
+            ]
+          },
+          "docs": "Show the details of the wallet account that a sub-wallet is associated with using the given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User's BPay Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id/bpay_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "List the **BPay Accounts** the **User** is associated with using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show User Card Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id/card_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "buyer-71439598",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Show the user's active card account using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "buyer-1556506027",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific User using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "buyer-1556506027",
+                "type": "path",
+                "description": "Unique ID that can be generated by the platform. Cannot contain '.' character."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing **User's** attributes using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Verify User (Prelive Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/users/:id/identity_verified",
+            "params": [
+              {
+                "name": "id",
+                "value": "buyer-1556506027",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Sets a user's verification state to `approved` on pre-live given the **User** `:id`. Ensure that a **User** has the required user verification information before using this call, otherwise the call will fail. **Note**: This API call will only work in our pre-live environment. The user verification workflow holds for all users in production.\n"
+        },
+        {
+          "info": {
+            "name": "Show User Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id/bank_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "46deb476-c1a6-41eb-8eb7-26a695bbe5bc",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Shows the user's active bank account using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Set User Disbursement Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/users/:id/disbursement_account",
+            "params": [
+              {
+                "name": "id",
+                "value": "Seller_1234",
+                "type": "path",
+                "description": "User ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the **User's Disbursement Account** using a given **User** `:id` and a **Bank Account** `:account_id`."
+        },
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A text value to be used for searching users"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Users**."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **User** that can be associated with **Items** as either a buyer or a seller. **Users** can't be both the buyer and seller for the same **Item**. You can also use this endpoint to create a **company** for the user. To create a company for the user, you need to send company parameters in the same request. **Note**: Some parameters are required for user verification. See our guide on [Onboarding a Payout User/Seller](https://developer.hellozai.com/docs/onboarding-a-pay-out-user) for more "
+        },
+        {
+          "info": {
+            "name": "List User Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id/items",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "id",
+                "value": "test-user-1592459047-22",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Items** the **User** is associated with using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show User Wallet Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/users/:id/wallet_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "aed45af0-6f63-0138-901c-0a58a9feac03",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Show the **User's Wallet Account** using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Callbacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/callbacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Callback ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Callback** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Update Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/callbacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Callback ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing **Callback** using a given `:id`. You can change the `URL`, the `object_type` and whether the **Callback** is `enabled` or `disabled`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://test.api.promisepay.com/callbacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Callback ID"
+              }
+            ]
+          },
+          "docs": "Delete an existing Callback using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "List Callback Responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/callbacks/:id/responses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Callback ID"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of the responses garnered from a callback using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Callback Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/callbacks/:callback_id/responses/:id",
+            "params": [
+              {
+                "name": "callback_id",
+                "value": "088e4cf1-2508-4bd4-97ab-a78e4e869970",
+                "type": "path",
+                "description": "Callback ID"
+              },
+              {
+                "name": "id",
+                "value": "0c9cbb28-0b98-4560-9c81-7a4ea6cde95b",
+                "type": "path",
+                "description": "Callback response ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Callback** response using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "List Callbacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/callbacks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Narrow down records to relevant character string"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of all created **Callbacks**."
+        },
+        {
+          "info": {
+            "name": "Create Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/callbacks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Callback** to notify you at the `URL` when the `object_type` changes"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Card Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Card Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/card_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Credit **Card Account** to be used as a funding source. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a **token** when involving Credit Cards.\n"
+        },
+        {
+          "info": {
+            "name": "Show Card Account User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/card_accounts/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "Card account ID"
+              }
+            ]
+          },
+          "docs": "Show the **User** the Credit **Card Account** is associated with using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Verify Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/card_accounts/:id/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Card account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Where pre-authorization is enabled on a platform, verifies a **Card Account** when a **Card Account** is successfully verified, its verification status is `verified`."
+        },
+        {
+          "info": {
+            "name": "Show Card Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/card_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Card account ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific Credit **Card Account** using a given `:id`. You can toggle the card account number display to show the first 6 digits in addition to the last 4 digits. Contact Assembly if you want to toggle the card account display.\n"
+        },
+        {
+          "info": {
+            "name": "Redact Card Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://test.api.promisepay.com/card_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "ID of the card account to be deleted"
+              }
+            ]
+          },
+          "docs": "Redact a Credit **Card Account** using a given `:id`. Redacted Credit **Card Accounts** can no longer be used as a funding source.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/companies",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Companies**."
+        },
+        {
+          "info": {
+            "name": "Create Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Company** associated with the **User** using a given `user_id`. **Note**: Some parameters are required for user verification. See our guide on [Onboarding a Payout User/Seller](https://developer.assemblypayments.com/docs/onboarding-a-pay-out-user) for more information.\n"
+        },
+        {
+          "info": {
+            "name": "Show Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/companies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Company** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Update Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/companies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing **Company** attributes using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Direct Debit Authorities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Direct Debit Authorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/direct_debit_authorities",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "a2463ce3-229b-4da1-8a07-93366c1092c9",
+                "type": "query",
+                "description": "Bank account ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Direct Debit Authorities**."
+        },
+        {
+          "info": {
+            "name": "Create Direct Debit Authority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/direct_debit_authorities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Direct Debit Authority** associated with a **Bank Account**. The **Direct Debit Authority** is required to use a **Bank Account** as a funding source (Direct Debit/ACH).\n"
+        },
+        {
+          "info": {
+            "name": "Show Direct Debit Authority",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/direct_debit_authorities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "57abfd04-2ccb-4d55-8bd3-6f1a24a6ea47",
+                "type": "path",
+                "description": "Direct debit authority ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Direct Debit Authority** using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/fees",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Fees**."
+        },
+        {
+          "info": {
+            "name": "Create fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/fees",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Fee** to be associated with an **Item**. **Fees** will add or subtract from the **Item** amount based on the **User**, payment type or Disbursement account type. **Fees** can be `Fixed` or `Percentage` based. **Fees** can be capped, have a maximum amount and/or a minimum amount.\n"
+        },
+        {
+          "info": {
+            "name": "Show Fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/fees/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "1e5e372a-df3a-4f77-af2f-ec294b1715ce",
+                "type": "path",
+                "description": "Fee ID"
+              },
+              {
+                "name": "item_amount",
+                "value": "200",
+                "type": "query",
+                "description": "The cost of the item in cents on which the calculated Fee is based"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Fee** using a given `:id`. If the `item_amount` is specified, the response also shows the `calculated_fee` based on a percentage of the `item_amount`.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/charges",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of **Charges**."
+        },
+        {
+          "info": {
+            "name": "Create Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a **Charge**. **Charges** require a specified **Card Account** or **Bank Account**. You may pass through an existing **User**, or define the `user_id` of the new user that will be associated with the **Charge** and the provided Account. The `user_id` can be left blank if you wish for a new user to be created for the **Charge**, or specified if you wish for a new **User** to be created with the passed `user_id`.\n"
+        },
+        {
+          "info": {
+            "name": "Show Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/charges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "4d7d73f5-c7f0-477d-aff8-7570d2c7e7d9",
+                "type": "path",
+                "description": "Charge ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Charge** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Charge Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/charges/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "1e5e372a-df3a-4f77-af2f-ec294b1715ce",
+                "type": "path",
+                "description": "Charge ID"
+              }
+            ]
+          },
+          "docs": "Show status of a specific **Charge** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Charge Buyer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/charges/:id/buyers",
+            "params": [
+              {
+                "name": "id",
+                "value": "4d7d73f5-c7f0-477d-aff8-7570d2c7e7d9/buyers",
+                "type": "path",
+                "description": "Charge ID"
+              }
+            ]
+          },
+          "docs": "Show the buyer **User** associated with the **Charge** using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Marketplaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Marketplace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/marketplace"
+          },
+          "docs": "Show details of your **Platform**, providing access to your configuration and related **User** and **Company**."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Token Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/token_auths",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a token, either for a bank or a card account, that can be used with the **PromisePay.js** package to securely send Assembly credit card details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/tools/status"
+          },
+          "docs": "Displays a health check of the Assembly service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Bank, Card or Wallet Account ID."
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "query",
+                "description": "Item ID"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list"
+              },
+              {
+                "name": "transaction_type_method",
+                "value": "",
+                "type": "query",
+                "description": "The method the transaction was carried out with. Options for querying are: credit_card, npp, bpay, wire_transfer, wallet_account_transfer, misc. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the transaction."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "User ID."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created before (e.g. 2020-02-27T23:54:59Z)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created after (e.g. 2020-02-27T23:54:59Z)"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of **Transactions**. Note: `created_before` and `created_after` range can not be greater than 31 days"
+        },
+        {
+          "info": {
+            "name": "Show Transaction Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id/bank_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "aed53110-6f63-0138-ea83-0a58a9feac04",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show the **Bank Account** associated with the **Transaction** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "27b91b10-70eb-0138-ec44-0a58a9feac06",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Transaction** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Transaction Card Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id/card_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "ea36e48a-4638-4d1a-a345-e1a0a584df8b",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show the **Card Account** associated with the **Transaction** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Transaction Fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id/fees",
+            "params": [
+              {
+                "name": "id",
+                "value": "ea36e48a-4638-4d1a-a345-e1a0a584df8b",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show the **Fees** associated with the **Transaction** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Transaction Wallet Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id/wallet_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "ea36e48a-4638-4d1a-a345-e1a0a584df8b",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show the **Wallet Account** associated with the **Transaction** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Transaction User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/transactions/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "901d8cd0-6af3-0138-967d-0a58a9feac04",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Show the **User** associated with the **Transaction** using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Batch Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/batch_transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Bank, Card or Wallet Account ID."
+              },
+              {
+                "name": "batch_id",
+                "value": "",
+                "type": "query",
+                "description": "Batch ID. This appears on a bank reference."
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "query",
+                "description": "Item ID"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list"
+              },
+              {
+                "name": "transaction_type_method",
+                "value": "",
+                "type": "query",
+                "description": "The method the transaction was carried out with. Options for querying are: credit_card, npp, bpay, wire_transfer, wallet_account_transfer, misc. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the transaction. Options are debit, credit"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created before (e.g. 2020-02-27T23:54:59Z)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created after (e.g. 2020-02-27T23:54:59Z)"
+              },
+              {
+                "name": "disbursement_bank",
+                "value": "any",
+                "type": "query",
+                "description": "The bank used for disbursing the payment. Please use a default value of `any`"
+              },
+              {
+                "name": "processing_bank",
+                "value": "any",
+                "type": "query",
+                "description": "The bank used for processing the payment. Please use a default value of `any`"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Batch Transactions**. The list can be filtered by **Account**, **Batch ID**, **Item**, and **Transaction Type**.\n"
+        },
+        {
+          "info": {
+            "name": "Show Batch Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/batch_transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Get a batch transaction using its ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Disbursements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Disbursements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "batch_id",
+                "value": "",
+                "type": "query",
+                "description": "Batch ID."
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of existing **Disbursements**. The list can be filtered by **Batch ID**.\n"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get a disbursment using its ID"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get all the transactions relating to a disbursment ID"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement Wallet Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id/wallet_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get all the wallet accounts relating to a disbursment ID"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement Bank Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id/bank_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get all the bank accounts relating to disbursement ID"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get all the users relating to disbursement ID"
+        },
+        {
+          "info": {
+            "name": "Show Disbursement Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/disbursements/:id/items",
+            "params": [
+              {
+                "name": "id",
+                "value": "90c1418b-f4f4-413e-a4ba-f29c334e7f55",
+                "type": "path",
+                "description": "Disbursement ID"
+              }
+            ]
+          },
+          "docs": "Get all the items relating to a disbursement ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to offset. Required for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to retrieve. Up to 200."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A text value to be used for searching within the item description"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created before (e.g. 2020-02-27T23:54:59Z)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Date and time in ISO 8601 format the item(s) were created after (e.g. 2020-02-27T23:54:59Z)"
+              }
+            ]
+          },
+          "docs": "OK"
+        },
+        {
+          "info": {
+            "name": "Create Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://test.api.promisepay.com/items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an **Item**. Items require two **Users**, a buyer and a seller. The `buyer_id` and `seller_id` are your unique user identifiers.\n"
+        },
+        {
+          "info": {
+            "name": "Show Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show details of a specific **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Update Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing **Items** attributes using a given `:id`. Note: An item can only be updated if it's in `pending` state. Once an item has begun a payment process, you cannot update it.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://test.api.promisepay.com/items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Delete an existing **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Item Seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/sellers",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190973-1-3780",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show the seller **User** associated with the **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Item Buyer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/buyers",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190973-1-3780",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show the buyer **User** associated with the **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Item Fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/fees",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190973-1-3780",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show the **Fees** associated with the **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "Show Item Wire Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/wire_details",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190985-1-9382",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show the **Item** wire payment details using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "List Item Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/transactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190985-1-9382",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of **Transactions** associated with the **Item** using a given `:id`."
+        },
+        {
+          "info": {
+            "name": "List Item Batch Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/batch_transactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "7139651-1-2046",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Retrieve an ordered and paginated list of **Batch Transactions** associated with the `Item` using a given `:id`. This will include both direct debits coming in, and the disbursements going out."
+        },
+        {
+          "info": {
+            "name": "Show Item Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://test.api.promisepay.com/items/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "7139651-1-2046",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Show the status of an **Item** using a given `:id`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Item Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Make Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/make_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make a payment for an **Item**. Pass the `:account_id` of a **Bank Account** or a **Card Account** associated with the **Item's** buyer. The **Item** state will transition to one of `payment_held`, `payment_pending` or `completed` for an **Express** or **Approve** payment type.\n"
+        },
+        {
+          "info": {
+            "name": "Make an async Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/make_payment_async",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a card payment with 3D Secure 2.0 authentication support.\nThis endpoint initiates the payment process and returns a `payment_token`\nrequired for 3DS2 component initialisation.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Cancel an **Item**. This will transition the **Item** state to `cancelled`. **Items** can only be cancelled if they haven't been actioned in any other way."
+        },
+        {
+          "info": {
+            "name": "Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/refund",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID to be refunded"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refund an **Item**'s funds. A partial `amount` can be specified otherwise the full amount will be refunded. This will transition the **Item** state to 'refunded' if the full amount is refunded, or to the previously held state if a partial `amount` is specified."
+        },
+        {
+          "info": {
+            "name": "Authorize Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/authorize_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Where pre-authentication is enabled on a platform, initiates a credit card payment authorization for an item. When an authorization is successful, your platform holds the item amount for capture, but there is no transfer of funds happening. This call is used with the Capture Payment or Void Payment calls.\n"
+        },
+        {
+          "info": {
+            "name": "Capture Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/capture_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Where pre-authentication is enabled on a platform, completes a credit card payment for an item whose payment is authorized. This call is used with the Authorize Payment call.\n"
+        },
+        {
+          "info": {
+            "name": "Void Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/void_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ]
+          },
+          "docs": "Where pre-authentication is enabled on a platform, voids the `payment_authorized` status for an item. This call is used with the Authorize Payment call. **Note**: Not all payment gateways support the Void Payment API call. In this case, you can wait until a payment authorization expires. A payment authorisation expires after 3 to 6 days if not captured.\n"
+        },
+        {
+          "info": {
+            "name": "Release Payment (Deprecated - Do Not Use)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://test.api.promisepay.com/items/:id/release_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "Marketplace / Platform item ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Included for legacy purposes for existing customers that use Escrow payments which are no longer supported for new flows/customers. Release funds held in escrow from an **Item** with an **Escrow** or **Escrow Partial Release** payment type.  This will transition the **Item** state to `completed`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

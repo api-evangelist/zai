@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Asynchronous API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Item Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Make Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-async-api/1.0.0/items/:id/make_payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "7190770-1-2908",
+                "type": "path",
+                "description": "ID of item to apply payment to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint extends the original `make_payment` API endpoint to allow asynchronous processing. Clients may optionally supply a wait parameter to have the server wait up to 30 seconds for a response from internal business systems. If a response has been received in that time, it is returned immediately. Otherwise status information and links are returned. Calling the status link returns the item response if available, status information otherwise. Clients may also optionally supply a callback U"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Request Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-async-api/1.0.0/request/:request_id/status",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "100fd4a0-0538-11e6-b512-3e1d05defe78",
+                "type": "path",
+                "description": "Assembly-generated unique ID for this request."
+              }
+            ]
+          },
+          "docs": "This API is applicable for asynchronous requests submitted to `make_payment` through `tnq.api.assemblypay.com`. It returns the item response if available or current status otherwise."
+        },
+        {
+          "info": {
+            "name": "Get Request Callback Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-async-api/1.0.0/request/:request_id/callbacks",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "100fd4a0-0538-11e6-b512-3e1d05defe78",
+                "type": "path",
+                "description": "Assembly-generated unique ID for this request."
+              }
+            ]
+          },
+          "docs": "This API is applicable for asynchronous requests submitted to `make_payment`. It returns information about callbacks executed upon receipt of a response to the associated request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

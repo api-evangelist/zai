@@ -5,7 +5,7 @@ source: derived from openapi/ operations (no official hosted MCP server found as
 server:
   name: zai
   transport: http
-  note: "candidate \u2014 no first-party MCP server published; tools mapped 1:1 from OpenAPI operations"
+  note: candidate — no first-party MCP server published; tools mapped 1:1 from OpenAPI operations
 tools:
 - name: token
   description: Token
@@ -382,3 +382,9 @@ tools:
 - name: get_pay_id
   description: Retrieve a PayID
   source_operation: openapi/zai-virtual-accounts-payid.json#getPayID
+deployment:
+  mode: none
+  verified: derived
+  tools: 125
+  checked: '2026-08-12'
+  source: catalog MCP census
