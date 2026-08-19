@@ -32,7 +32,7 @@ tags:
 - Payouts
 created: '2026-07-24'
 modified: '2026-07-24'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: zai:zai-assembly-api
   name: Zai Assembly API
