@@ -28,6 +28,22 @@ tags:
 - PayID
 - NPP
 - Direct Debit
+- Digital Wallet
+- Payouts
+tags_raw:
+- Payments
+- Australia
+- Payment Gateway
+- Payment Processing
+- Marketplace Payments
+- Payments-as-a-Service
+- Real-Time Payments
+- Account-to-Account
+- Open Banking
+- PayTo
+- PayID
+- NPP
+- Direct Debit
 - Digital Wallets
 - Payouts
 created: '2026-07-24'
@@ -43,6 +59,12 @@ apis:
   humanURL: https://developer.hellozai.com/reference/overview
   baseURL: https://secure.api.promisepay.com
   tags:
+  - Payments
+  - Wallet Accounts
+  - Marketplace
+  - Payins
+  - Payouts
+  tags_raw:
   - Payments
   - Wallet Accounts
   - Marketplace
