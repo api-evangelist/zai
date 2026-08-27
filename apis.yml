@@ -50,101 +50,743 @@ created: '2026-07-24'
 modified: '2026-07-24'
 specificationVersion: '0.23'
 apis:
-- aid: zai:zai-assembly-api
-  name: Zai Assembly API
-  description: Zai's core payments platform API. Onboard users, create and manage wallet accounts, items
-    (transaction records), bank and card accounts, companies, fees, tokens, callbacks and batch transactions
-    to collect pay-ins and disburse multi-party pay-outs across a marketplace or platform. OpenAPI 3.0.0,
-    version 2.3, 89 documented paths, secured with OAuth2 client-credentials.
+- aid: zai:zai-addresses-api
+  name: Zai Addresses API
+  description: The Addresses API from Zai — 1 operation(s) for addresses.
   humanURL: https://developer.hellozai.com/reference/overview
   baseURL: https://secure.api.promisepay.com
   tags:
-  - Payments
-  - Wallet Accounts
-  - Marketplace
-  - Payins
-  - Payouts
-  tags_raw:
-  - Payments
-  - Wallet Accounts
-  - Marketplace
-  - Pay-ins
-  - Payouts
+  - Addresses
   properties:
   - type: OpenAPI
-    url: openapi/zai-assembly-api.json
+    url: openapi/zai-addresses-api-openapi.yml
   - type: Documentation
     url: https://developer.hellozai.com/docs
   - type: APIReference
     url: https://developer.hellozai.com/reference/overview
   - type: Authentication
     url: https://developer.hellozai.com/reference/token
-  - type: Overlay
-    url: overlays/zai-assembly-api-overlay.yaml
-- aid: zai:zai-virtual-accounts-payid-api
-  name: Zai Virtual Accounts and PayIDs API
-  description: Create and manage Virtual Accounts and PayIDs on the New Payments Platform (NPP), letting
-    platforms receive real-time account-to-account pay-ins to uniquely addressable virtual accounts. OpenAPI
-    3.0.0, version 0.12-external, 8 documented paths on the assemblypay.com host.
-  humanURL: https://developer.hellozai.com/reference/overview-va
-  baseURL: https://au-0000.api.assemblypay.com
-  tags:
-  - PayID
-  - Virtual Accounts
-  - NPP
-  - Real-Time Payments
-  properties:
-  - type: OpenAPI
-    url: openapi/zai-virtual-accounts-payid.json
   - type: Documentation
     url: https://developer.hellozai.com/reference/overview-va
   - type: APIReference
     url: https://developer.hellozai.com/reference/overview-va
-  - type: Overlay
-    url: overlays/zai-virtual-accounts-payid-overlay.yaml
-- aid: zai:zai-payto-api
-  name: Zai PayTo API
-  description: Create and manage PayTo agreements (mandated real-time debits) and initiate payments against
-    them over the New Payments Platform. OpenAPI 3.0.1, version 1.4-external, 10 documented paths, secured
-    with bearer-token authentication.
-  humanURL: https://developer.hellozai.com/reference/overview-1
-  baseURL: https://au-0000.api.assemblypay.com/payto/
-  tags:
-  - PayTo
-  - Mandates
-  - NPP
-  - Direct Debit
-  - Real-Time Payments
-  properties:
-  - type: OpenAPI
-    url: openapi/zai-payto.json
   - type: Documentation
     url: https://developer.hellozai.com/docs/payto
   - type: APIReference
     url: https://developer.hellozai.com/reference/overview-1
-  - type: Overlay
-    url: overlays/zai-payto-overlay.yaml
-- aid: zai:zai-async-api
-  name: Zai Asynchronous API
-  description: Asynchronous API for submitting long-running operations and retrieving their results without
-    blocking, complementing the synchronous Assembly API. OpenAPI 3.0.0, version 1.0.0, 3 documented paths,
-    supporting OAuth2 client-credentials and basic authentication.
-  humanURL: https://developer.hellozai.com/reference/async-overview
-  baseURL: https://tnq.api.assemblypay.com/
-  tags:
-  - Async
-  - Batch
-  - Payments
-  properties:
-  - type: OpenAPI
-    url: openapi/zai-async-api.json
   - type: Documentation
     url: https://developer.hellozai.com/reference/async-overview
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
-  - type: Overlay
-    url: overlays/zai-async-api-overlay.yaml
+- aid: zai:zai-authentication-api
+  name: Zai Authentication API
+  description: The Authentication API from Zai — 1 operation(s) for authentication.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-bank-accounts-api
+  name: Zai Bank Accounts API
+  description: The Bank Accounts API from Zai — 6 operation(s) for bank accounts.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-batch-transactions-api
+  name: Zai Batch Transactions API
+  description: The Batch Transactions API from Zai — 2 operation(s) for batch transactions.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Batch Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-batch-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-bpay-accounts-api
+  name: Zai BPay Accounts API
+  description: The BPay Accounts API from Zai — 3 operation(s) for bpay accounts.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - BPay Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-bpay-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-callbacks-api
+  name: Zai Callbacks API
+  description: The Callbacks API from Zai — 4 operation(s) for callbacks.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Callbacks
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-callbacks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-card-accounts-api
+  name: Zai Card Accounts API
+  description: The Card Accounts API from Zai — 4 operation(s) for card accounts.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Card Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-card-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-charges-api
+  name: Zai Charges API
+  description: The Charges API from Zai — 4 operation(s) for charges.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-charges-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-companies-api
+  name: Zai Companies API
+  description: The Companies API from Zai — 2 operation(s) for companies.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-companies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-direct-debit-authorities-api
+  name: Zai Direct Debit Authorities API
+  description: The Direct Debit Authorities API from Zai — 2 operation(s) for direct debit authorities.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Direct Debit Authorities
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-direct-debit-authorities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-disbursements-api
+  name: Zai Disbursements API
+  description: The Disbursements API from Zai — 7 operation(s) for disbursements.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Disbursements
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-disbursements-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-fees-api
+  name: Zai Fees API
+  description: The Fees API from Zai — 2 operation(s) for fees.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Fees
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-fees-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-item-actions-api
+  name: Zai Item Actions API
+  description: The Item Actions API from Zai — 8 operation(s) for item actions.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Item Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-item-actions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-items-api
+  name: Zai Items API
+  description: The Items API from Zai — 9 operation(s) for items.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-items-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-marketplaces-api
+  name: Zai Marketplaces API
+  description: The Marketplaces API from Zai — 1 operation(s) for marketplaces.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Marketplaces
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-marketplaces-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-payids-api
+  name: Zai Pay I Ds API
+  description: The PayIDs API from Zai — 3 operation(s) for payids.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - PayIDs
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-payids-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-payto-agreements-api
+  name: Zai PayTo Agreements API
+  description: Agreement Management APIs
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - PayTo Agreements
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-payto-agreements-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-payto-payments-api
+  name: Zai PayTo Payments API
+  description: Payment Initiation APIs
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - PayTo Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-payto-payments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-requests-api
+  name: Zai Requests API
+  description: The Requests API from Zai — 2 operation(s) for requests.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-requests-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-sub-wallets-api
+  name: Zai Sub Wallets API
+  description: The Sub-wallets API from Zai — 9 operation(s) for sub-wallets.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Sub-wallets
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-sub-wallets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-token-auth-api
+  name: Zai Token Auth API
+  description: The Token Auth API from Zai — 1 operation(s) for token auth.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Token Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-token-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-tools-api
+  name: Zai Tools API
+  description: The Tools API from Zai — 1 operation(s) for tools.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Tools
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-tools-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-transactions-api
+  name: Zai Transactions API
+  description: The Transactions API from Zai — 7 operation(s) for transactions.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-users-api
+  name: Zai Users API
+  description: The Users API from Zai — 9 operation(s) for users.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-virtual-accounts-api
+  name: Zai Virtual Accounts API
+  description: The Virtual Accounts API from Zai — 5 operation(s) for virtual accounts.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Virtual Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-virtual-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
+- aid: zai:zai-wallet-accounts-api
+  name: Zai Wallet Accounts API
+  description: The Wallet Accounts API from Zai — 6 operation(s) for wallet accounts.
+  humanURL: https://developer.hellozai.com/reference/overview
+  baseURL: https://secure.api.promisepay.com
+  tags:
+  - Wallet Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/zai-wallet-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hellozai.com/docs
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview
+  - type: Authentication
+    url: https://developer.hellozai.com/reference/token
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-va
+  - type: Documentation
+    url: https://developer.hellozai.com/docs/payto
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/overview-1
+  - type: Documentation
+    url: https://developer.hellozai.com/reference/async-overview
+  - type: APIReference
+    url: https://developer.hellozai.com/reference/async-overview
 common:
+- type: Overlay
+  url: overlays/zai-assembly-api-overlay.yaml
+- type: Overlay
+  url: overlays/zai-virtual-accounts-payid-overlay.yaml
+- type: Overlay
+  url: overlays/zai-payto-overlay.yaml
+- type: Overlay
+  url: overlays/zai-async-api-overlay.yaml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/zai/overview
 - type: AgenticAccess
