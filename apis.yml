@@ -790,6 +790,9 @@ apis:
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
 common:
+- type: CapabilityMap
+  url: capabilities/zai-capability-edges.yml
+  name: Zai Business Capability Map
 - type: Overlay
   url: overlays/zai-assembly-api-overlay.yaml
 - type: Overlay

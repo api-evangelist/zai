@@ -1,0 +1,55 @@
+slug: zai
+provider: Zai
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Item Actions
+  spec_file: zai-item-actions-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.78
+  evidence: PATCH /items/{id}/make_payment Make Payment; PATCH /items/{id}/authorize_payment Authorize
+    Payment; PATCH /items/{id}/capture_payment Capture Payment; PATCH /items/{id}/void_payment Void Payment
+  reason: Operations execute payment authorisation, capture, void and refund against a payment item —
+    payment instruction authorisation and execution, not a generic technical surface.
+- tag: PayTo Agreements
+  spec_file: zai-payto-agreements-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: allows NPP-enabled account holders to digitally pre-authorise one-off or recurring real-time
+    payments from their bank account; POST /agreements/validate Validate PayTo Agreement; PATCH /agreements/{agreement_uuid}/amend
+  reason: Creation, validation and amendment of PayTo mandates that pre-authorise debits — payment instruction
+    authorisation/mandate management within payments.
+- tag: Charges
+  spec_file: zai-charges-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.72
+  evidence: POST /charges  createCharge  Create Charge; GET /charges/{id}/status  showChargeStatus; schema
+    charge_requestBody, single_charge_status
+  reason: Creation and status tracking of charges against buyers — capture and authorisation of a payment
+    instruction in a payments engine, which is Payment Initiation Management.
+- tag: Items
+  spec_file: zai-items-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /items Create Item; GET /items/{id}/buyers Show Item Buyer; GET /items/{id}/transactions
+    List Item Transactions; GET /items/{id}/wire_details Show Item Wire Details
+  reason: '''Item'' is Zai''s payment instruction object linking buyer, seller, fees and resulting transactions;
+    CRUD on it is payment instruction capture. Some ambiguity between initiation and processing sub-capabilities.'
