@@ -13,6 +13,17 @@ description: 'Zai (hellozai.com, formerly Assembly Payments / Assembly) is an Au
   (sandbox) environment, webhooks with signature verification, and a developer dashboard. Positioned as
   the embedded-payments and marketplace-money-movement layer for the Australian market and platforms operating
   there.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Payments
