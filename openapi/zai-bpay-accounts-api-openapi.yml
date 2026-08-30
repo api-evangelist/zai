@@ -1,0 +1,360 @@
+openapi: 3.2.0
+info:
+  title: Assembly BPay Accounts API
+  description: Assembly (formely PromisePay) is a powerful payments engine custom-built for platforms and marketplaces.
+  version: '2.3'
+  contact:
+    email: support@assemblypayments.com
+    url: http://docs.assemblypayments.com/
+servers:
+- url: https://test.api.promisepay.com
+  description: Pre-live environment
+- url: https://secure.api.promisepay.com
+  description: Production environment
+- url: https://au-0000.sandbox.auth.assemblypay.com
+  description: Pre-Live (Sandbox) Auth issuing server and API
+- url: https://au-0000.auth.assemblypay.com
+  description: Production Auth issuing server and API
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
+security:
+- oAuth2ClientCredentials: []
+tags:
+- name: BPay Accounts
+paths:
+  /bpay_accounts/{id}:
+    get:
+      tags:
+      - BPay Accounts
+      summary: Show BPay Account
+      description: Show details of a specific **BPay Account** using a given `:id`.
+      operationId: showBPayAccount
+      parameters:
+      - name: id
+        in: path
+        description: BPay account ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+        example: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bpay_account'
+              examples:
+                response:
+                  value:
+                    bpay_accounts:
+                      id: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                      active: true
+                      created_at: '2020-04-03T07:59:00.379Z'
+                      updated_at: '2020-04-03T07:59:00.379Z'
+                      verification_status: not_verified
+                      currency: AUD
+                      bpay_details:
+                        account_name: My Water Bill Company
+                        biller_code: 123456
+                        biller_name: ABC Water
+                        crn: 987654321
+                      links:
+                        self: /bpay_accounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                        users: /bpay_accounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/users
+  /bpay_accounts:
+    post:
+      tags:
+      - BPay Accounts
+      summary: Create BPay Account
+      description: 'Create a **BPay Account** to be used as a Disbursement destination.
+
+        '
+      operationId: createBPayAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bpay_account_requestBody'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bpay_account'
+              examples:
+                response:
+                  value:
+                    bpay_accounts:
+                      id: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                      created_at: '2020-04-03T07:59:00.379Z'
+                      updated_at: '2020-04-03T07:59:00.379Z'
+                      active: true
+                      verification_status: not_verified
+                      currency: AUD
+                      bpay_details:
+                        account_name: My Water Bill Company
+                        biller_code: 123456
+                        biller_name: ABC Water
+                        crn: 987654321
+                      links:
+                        self: /bpay_accounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                        users: /bpay_accounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/users
+  /bpay_accounts/{id}/users:
+    get:
+      tags:
+      - BPay Accounts
+      summary: Show BPay Account User
+      description: Show the **User** the **BPay Account** is associated with using a given `:id`.
+      operationId: showBPayAccountUser
+      parameters:
+      - name: id
+        in: path
+        description: BPay account ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: 901d8cd0-6af3-0138-967d-0a58a9feac04
+        example: 901d8cd0-6af3-0138-967d-0a58a9feac04
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/single_user'
+              examples:
+                response:
+                  value:
+                    users:
+                      created_at: '2020-04-03T07:59:00.379Z'
+                      updated_at: '2020-04-03T07:59:00.379Z'
+                      id: Seller_1234
+                      full_name: Samuel Seller
+                      email: sam@example.com
+                      mobile: 69543131
+                      phone: null
+                      logo_url: null
+                      color_1: null
+                      color_2: null
+                      first_name: Samuel
+                      last_name: Seller
+                      custom_descriptor: Sam Garden Jobs
+                      location: AUS
+                      verification_state: pending
+                      held_state: false
+                      roles:
+                      - customer
+                      dob: encrypted
+                      government_number: encrypted
+                      drivers_license: null
+                      flags: {}
+                      related:
+                        addresses: 11111111-2222-3333-4444-55555555555,
+                      links:
+                        self: /bpay_accounts/901d8cd0-6af3-0138-967d-0a58a9feac04/users
+                        items: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/items
+                        card_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/card_accounts
+                        paypal_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/paypal_accounts
+                        payid_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/payid_accounts
+                        bpay_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/bpay_accounts
+                        wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
+components:
+  schemas:
+    bpay_account_requestBody:
+      type: object
+      required:
+      - user_id
+      - account_name
+      - biller_code
+      - bpay_crn
+      properties:
+        user_id:
+          description: User ID
+          type: string
+          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+        account_name:
+          description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+          type: string
+          example: My Water Bill Company
+          default: My Water Bill Company
+        biller_code:
+          description: The Biller Code for the biller that will receive the payment. The Biller Code must be a numeric value with 3 to 10 digits.
+          type: integer
+          example: '123456'
+          default: '123456'
+        bpay_crn:
+          description: Customer reference number (crn) to be used for this bpay account. The CRN must contain between 2 and 20 digits.
+          type: string
+          example: '987654321'
+          default: '987654321'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    bpay_account:
+      type: object
+      properties:
+        bpay_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            bpay_details:
+              type: object
+              properties:
+                account_name:
+                  type: string
+                  example: My biller 123
+                  description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+                biller_code:
+                  type: integer
+                  example: 123456
+                biller_name:
+                  type: string
+                  description: Name of the biller as registered in BPay
+                  example: ABC Water
+                crn:
+                  type: integer
+                  example: 987654321
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                users:
+                  type: string
+    user:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        full_name:
+          type: string
+          example: Samuel Seller
+        email:
+          type: string
+          format: email
+          example: samuel.seller@assemblypayments.com
+        mobile:
+          type: string
+          example: 61491570156
+        phone:
+          type: string
+        logo_url:
+          type: string
+        color_1:
+          type: string
+        color_2:
+          type: string
+        first_name:
+          type: string
+          example: Samuel
+        last_name:
+          type: string
+          example: Seller
+        id:
+          type: string
+          example: Seller_1234
+        custom_descriptor:
+          type: string
+        location:
+          type: string
+          example: AUS
+        verification_status:
+          type: string
+          example: pending
+        held_state:
+          type: boolean
+          example: false
+        roles:
+          type: array
+          items:
+            type: string
+            example: customer
+        dob:
+          type: string
+          example: encrypted
+        government_number:
+          type: string
+          example: encrypted
+        drivers_license:
+          type: string
+        flags:
+          type: object
+        related:
+          type: object
+          properties:
+            addresses:
+              type: string
+              example: fe602dcf-4175-4f88-b5be-3beb04092dcd
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+            items:
+              type: string
+            card_accounts:
+              type: string
+            paypal_accounts:
+              type: string
+            payid_accounts:
+              type: string
+            bpay_accounts:
+              type: string
+            bank_accounts:
+              type: string
+            wallet_accounts:
+              type: string
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+          scopes: {}
+x-explorer-enabled: false
+x-samples-languages:
+- curl
+- ruby
+- php
+- javascript
+- csharp
+- go
+x-proxy-enabled: true
+x-samples-enabled: true

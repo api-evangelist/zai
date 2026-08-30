@@ -1,0 +1,158 @@
+openapi: 3.2.0
+info:
+  title: Assembly Authentication API
+  description: Assembly (formely PromisePay) is a powerful payments engine custom-built for platforms and marketplaces.
+  version: '2.3'
+  contact:
+    email: support@assemblypayments.com
+    url: http://docs.assemblypayments.com/
+servers:
+- url: https://test.api.promisepay.com
+  description: Pre-live environment
+- url: https://secure.api.promisepay.com
+  description: Production environment
+- url: https://au-0000.sandbox.auth.assemblypay.com
+  description: Pre-Live (Sandbox) Auth issuing server and API
+- url: https://au-0000.auth.assemblypay.com
+  description: Production Auth issuing server and API
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
+security:
+- oAuth2ClientCredentials: []
+tags:
+- name: Authentication
+paths:
+  /tokens:
+    post:
+      tags:
+      - Authentication
+      summary: Token
+      description: Exchange client application credentials for a bearer token. Please ensure to call the auth issuing server as described at https://developer.assemblypayments.com/reference#authentication
+      operationId: token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokens_request_body'
+      responses:
+        '200':
+          description: Response body contains an access token with lifetime in seconds and usage information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tokens_response'
+              examples:
+                response:
+                  value:
+                    access_token: ey...J9.ey...n0.Iu...7g
+                    expires_in: 3600
+                    token_type: Bearer
+        '400':
+          description: Request not parseable, grant type invalid or properties missing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                response:
+                  value:
+                    error: bad request
+        '401':
+          description: We can't resolve the supplied credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                response:
+                  value:
+                    error: invalid credentials
+        '422':
+          description: One or more property values are unprocessable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                response:
+                  value:
+                    error: invalid client details
+        '500':
+          description: We have a problem, which we have logged. Please try again later and if it still doesn't work, contact us.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                response:
+                  value:
+                    error: something went wrong
+components:
+  schemas:
+    tokens_request_body:
+      type: object
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      - scope
+      properties:
+        grant_type:
+          type: string
+          description: This is a constant value of `client_credentials`
+          example: client_credentials
+          default: client_credentials
+        client_id:
+          type: string
+          description: This value is supplied to you by Assembly Payments.
+          example: 10ajtntet1ccghuo8mv9ojglma
+          default: 10ajtntet1ccghuo8mv9ojglma
+        client_secret:
+          type: string
+          description: This value is supplied to you by Assembly Payments.
+          example: hto00nsjk6osurndceon4rsn2irhi8s4lurau5f797d0smb94l6
+          default: hto00nsjk6osurndceon4rsn2irhi8s4lurau5f797d0smb94l6
+        scope:
+          type: string
+          description: This value is supplied to you by Assembly Payments.
+          example: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
+          default: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+    tokens_response:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JWT issued by AWS Cognito.
+          example: ey...J9.ey...n0.Iu...7g
+        expires_in:
+          type: number
+          description: Lifetime of access token in seconds.
+          example: 3600
+        token_type:
+          type: string
+          description: Authorization header value prefix. This is a constant.
+          example: Bearer
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+          scopes: {}
+x-explorer-enabled: false
+x-samples-languages:
+- curl
+- ruby
+- php
+- javascript
+- csharp
+- go
+x-proxy-enabled: true
+x-samples-enabled: true

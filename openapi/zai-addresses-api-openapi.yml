@@ -1,0 +1,107 @@
+openapi: 3.2.0
+info:
+  title: Assembly Addresses API
+  description: Assembly (formely PromisePay) is a powerful payments engine custom-built for platforms and marketplaces.
+  version: '2.3'
+  contact:
+    email: support@assemblypayments.com
+    url: http://docs.assemblypayments.com/
+servers:
+- url: https://test.api.promisepay.com
+  description: Pre-live environment
+- url: https://secure.api.promisepay.com
+  description: Production environment
+- url: https://au-0000.sandbox.auth.assemblypay.com
+  description: Pre-Live (Sandbox) Auth issuing server and API
+- url: https://au-0000.auth.assemblypay.com
+  description: Production Auth issuing server and API
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
+security:
+- oAuth2ClientCredentials: []
+tags:
+- name: Addresses
+paths:
+  /addresses/{id}:
+    get:
+      tags:
+      - Addresses
+      summary: Show Address
+      description: Show details of a specific Address using a given address `:id`.
+      operationId: showAddress
+      parameters:
+      - name: id
+        in: path
+        description: Address ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+        example: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/address'
+              examples:
+                response:
+                  value:
+                    addresses:
+                      addressline1: 100 Main Street
+                      addressline2: office building no 3
+                      postcode: 2000
+                      city: Sydney
+                      state: NSW
+                      id: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+                      country: Australia
+                      links:
+                        self: /addresses/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+components:
+  schemas:
+    address:
+      type: object
+      properties:
+        addresses:
+          type: object
+          properties:
+            addressline1:
+              type: string
+            addressline2:
+              type: string
+            postcode:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            id:
+              type: string
+            country:
+              type: string
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+          scopes: {}
+x-explorer-enabled: false
+x-samples-languages:
+- curl
+- ruby
+- php
+- javascript
+- csharp
+- go
+x-proxy-enabled: true
+x-samples-enabled: true

@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: Assembly Token Auth API
+  description: Assembly (formely PromisePay) is a powerful payments engine custom-built for platforms and marketplaces.
+  version: '2.3'
+  contact:
+    email: support@assemblypayments.com
+    url: http://docs.assemblypayments.com/
+servers:
+- url: https://test.api.promisepay.com
+  description: Pre-live environment
+- url: https://secure.api.promisepay.com
+  description: Production environment
+- url: https://au-0000.sandbox.auth.assemblypay.com
+  description: Pre-Live (Sandbox) Auth issuing server and API
+- url: https://au-0000.auth.assemblypay.com
+  description: Production Auth issuing server and API
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
+security:
+- oAuth2ClientCredentials: []
+tags:
+- name: Token Auth
+paths:
+  /token_auths:
+    post:
+      tags:
+      - Token Auth
+      summary: Generate Token
+      description: Create a token, either for a bank or a card account, that can be used with the **PromisePay.js** package to securely send Assembly credit card details.
+      operationId: generateToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/token_auth_requestBody'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  token_auth:
+                    type: object
+                    properties:
+                      token_type:
+                        type: string
+                      token:
+                        type: string
+                      user_id:
+                        type: string
+              examples:
+                response:
+                  value:
+                    token_auth:
+                      token_type: bank
+                      token: 40341ea80c0baaf43ff45e2473cf2782
+                      user_id: seller-68611249
+components:
+  schemas:
+    token_auth_requestBody:
+      type: object
+      required:
+      - token_type
+      - user_id
+      properties:
+        token_type:
+          description: Token type ID. use `bank` or `card`
+          type: string
+          enum:
+          - bank
+          - card
+          example: bank
+          default: bank
+        user_id:
+          description: Buyer or Seller ID (already created)
+          type: string
+          example: seller-68611249
+          default: seller-68611249
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Please refer to Authentication section within https://developer.assemblypayments.com/reference#authentication
+      flows:
+        clientCredentials:
+          tokenUrl: https://au-0000.sandbox.auth.assemblypay.com/tokens
+          scopes: {}
+x-explorer-enabled: false
+x-samples-languages:
+- curl
+- ruby
+- php
+- javascript
+- csharp
+- go
+x-proxy-enabled: true
+x-samples-enabled: true
