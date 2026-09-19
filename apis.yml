@@ -475,6 +475,8 @@ apis:
   humanURL: https://developer.hellozai.com/reference/overview
   baseURL: https://secure.api.promisepay.com
   tags:
+  - Marketplace
+  tags_raw:
   - Marketplaces
   properties:
   - type: OpenAPI
