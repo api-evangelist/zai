@@ -812,6 +812,8 @@ apis:
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
 common:
+- type: Plans
+  url: plans/zai-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/zai-capability-edges.yml
   name: Zai Business Capability Map
