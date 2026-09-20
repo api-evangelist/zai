@@ -1,0 +1,17 @@
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://developer.hellozai.com/reference/overview
+sources:
+- https://developer.hellozai.com/reference/overview
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: false
+note: Overview page describes environments, endpoints and OAuth2 token authentication (60-minute token
+  expiry). It mentions an 'auth provider rate limit' but states no numeric rate limit, headers, or status
+  code; the '60–100 requests per minute' figure is a hypothetical request rate in a customer question,
+  not a documented limit.
+limit_count: 0
+limits: []

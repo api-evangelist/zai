@@ -812,6 +812,8 @@ apis:
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
 common:
+- type: RateLimits
+  url: rate-limits/zai-rate-limits.yml
 - type: Plans
   url: plans/zai-plans-pricing.yml
 - type: CapabilityMap
