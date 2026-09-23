@@ -127,7 +127,7 @@ paths:
       tags:
       - Sub-wallets
       summary: Create Sub-wallet
-      description: Create a sub-wallet for a user's wallet account.This is specified by the wallet `account_id`. Use sub-wallets as a part of building your own scheduling and workflow.  Create as many as you want to manage, with no limits to the amount.
+      description: Create a sub-wallet for a user's wallet account.This is specified by the wallet `account_id`. Use sub-wallets as a part of building your own scheduling and workflow. Create as many as you want to manage, with no limits to the amount.
       operationId: createSubWallet
       requestBody:
         content:
@@ -348,7 +348,7 @@ paths:
       tags:
       - Sub-wallets
       summary: Update Sub-wallet
-      description: Update an existing sub-wallet using the given `:id`. You can change the `name` of an enabled sub-wallet. You can change the  `active` status of a `redacted` sub-wallet.
+      description: Update an existing sub-wallet using the given `:id`. You can change the `name` of an enabled sub-wallet. You can change the `active` status of a `redacted` sub-wallet.
       operationId: updateSubWallet
       parameters:
       - name: id
@@ -1101,248 +1101,42 @@ paths:
                       - must belong to the marketplace
 components:
   schemas:
-    sub_wallet_related:
-      type: object
-      properties:
-        transactions:
-          $ref: '#/components/schemas/sub_wallet_related_transactions'
-    sub_wallet_related_transactions:
-      type: array
-      items:
-        $ref: '#/components/schemas/sub_wallet_tr'
-    sub_wallet_create_requestBody:
-      required:
-      - account_id
-      type: object
-      properties:
-        account_id:
-          type: string
-          description: Wallet Account Id for which sub-wallet is to be created.
-          example: 86991380-90a5-013a-57cc-5e50adfe91ad
-          default: 86991380-90a5-013a-57cc-5e50adfe91ad
-        name:
-          type: string
-          description: sub-wallet name
-          example: Investment Fund
-          default: Investment Fund
-    sub_wallet_create_responseBody:
-      type: object
-      properties:
-        sub_wallets:
-          $ref: '#/components/schemas/sub_wallet_create_responseBody_sub_wallets'
-    sub_wallets_id_body:
-      oneOf:
-      - $ref: '#/components/schemas/sub_wallet_update_requestBody1'
-      - $ref: '#/components/schemas/sub_wallet_update_requestBody2'
-      - $ref: '#/components/schemas/sub_wallet_update_requestBody3'
-    meta:
-      type: object
-      properties:
-        limit:
-          type: integer
-          example: 10
-          default: 10
-        offset:
-          type: integer
-          example: 0
-          default: 0
-        total:
-          type: integer
-          example: 1
-    single_disbursement:
-      type: object
-      properties:
-        disbursements:
-          $ref: '#/components/schemas/disbursement'
-    sub_wallet_error_responseBody:
-      type: object
-      properties:
-        errors:
-          $ref: '#/components/schemas/sub_wallet_error_responseBody_errors'
-    sub_wallet_transfer_requestBody:
-      required:
-      - source
-      - destination
-      - amount
-      type: object
-      properties:
-        source:
-          type: string
-          description: Account ID or sub-wallet ID from which fund is to be debited
-          example: 31b9e5ec-06d3-41e7-bc3b-a2c18890add6
-          default: 31b9e5ec-06d3-41e7-bc3b-a2c18890add6
-        destination:
-          type: string
-          description: Account ID or sub-wallet ID that will receive the fund
-          example: 3eb78280-b8b6-013a-c1b7-5e50adfe91ad
-          default: 3eb78280-b8b6-013a-c1b7-5e50adfe91ad
-        amount:
-          type: integer
-          description: amount in cents that will be transfered
-          example: 1000
-          default: 1000
-    disbursement:
-      type: object
-      properties:
-        id:
-          type: string
-          example: ad688d54-6791-4f1d-add7-88fbd89b70d1
-        reference_id:
-          type: string
-          example: 7190770-1-2908
-        amount:
-          type: integer
-          example: 10000
-        currency:
-          type: string
-          example: AUD
-        batch_id:
-          type: string
-          example: null
-        cuscal_payment_transaction_id:
-          type: string
-          example: null
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        state:
-          type: string
-          example: pending
-        to:
-          type: string
-          example: Bank Account
-        bank_name:
-          type: string
-          example: Bank of Australia
-        bank_account_name:
-          type: string
-          example: Samuel Seller
-        bank_account_number:
-          type: string
-          example: XXX234
-        bank_routing_number:
-          type: string
-          example: XXXXX3
-        npp_payout_state:
-          type: string
-          example: trying
-        account_name:
-          type: string
-          example: My Water Company
-        biller_name:
-          type: string
-          example: ABC Water
-        biller_code:
-          type: string
-          example: 123456
-        crn:
-          type: string
-          example: 0987654321
-        links:
-          type: object
-          properties:
-            transactions:
-              type: string
-              example: /disbursements/8a31ebfa-421b-4cbb-9241-632f71b3778a/transactions
-            wallet_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/wallet_accounts
-            paypal_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/paypal_accounts
-            bank_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bank_accounts
-            bpay_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bpay_accounts
-            items:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/items
-            users:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/users
-    sub_wallet_update_requestBody1:
-      type: object
-      properties:
-        name:
-          type: string
-          description: sub-wallet name
-          example: Investment Fund
-          default: Investment Fund
-        active:
-          type: boolean
-          description: status of sub-wallet
-          example: true
-          default: true
-    sub_wallet_update_requestBody3:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: status of sub-wallet
-          example: true
-          default: true
-    sub_wallet_transactions_index:
-      type: object
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/sub_wallet_transactions'
-        meta:
-          $ref: '#/components/schemas/meta'
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              example: /sub_wallets/0546ef82-5e16-4e52-9978-c9e2fcc07641/transactions
-    sub_wallet_transfer_responseBody:
-      type: object
-      properties:
-        transactions:
-          $ref: '#/components/schemas/sub_wallet_transactions'
-    sub_wallet_transaction_links:
-      type: object
-      properties:
-        self:
-          type: string
-          example: /sub_wallets/transfer
     sub_wallet_error_responseBody_errors:
       type: object
       properties:
         field:
           type: object
       example: null
-    sub_wallet_withdraw_requestBody:
+    sub_wallet_create_responseBody_sub_wallets_links:
       type: object
-      required:
-      - account_id
-      - amount
       properties:
-        account_id:
-          description: Account to withdraw to.
+        self:
+          type: object
+          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee
+        users:
+          type: object
+          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee/users
+        wallet_accounts:
+          type: object
+          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee/wallet_accounts
+      example: null
+    sub_wallet_transactions_mp:
+      type: object
+      properties:
+        group_name:
           type: string
-          example: c1824ad0-73f1-0138-3700-0a58a9feac09
-          default: c1824ad0-73f1-0138-3700-0a58a9feac09
-        amount:
-          description: Amount (in cents) to withdraw.
-          type: integer
-          example: '173'
-          default: '173'
-        custom_descriptor:
-          description: A descriptor specified by the customer to be passed on the withdraw call. This requires that custom_descriptors are enabled. In the case of fast payments (AU / NPP) Assembly will append a value in the beginning of descriptor, the customer can use 200 characters (excluding URL, javascript/code, emojis). In the case of DE batch payments will allow 18 characters
+        name:
           type: string
-          example: ''
-        reference_id:
-          description: Unique reference information that can be specified for a for wallet withdrawal request. This is an optional field and cannot contain '.' character.
+        short_name:
           type: string
-          example: 7190770-1-2908
-          default: 7190770-1-2908
+        uuid:
+          type: string
+          example: 513677b8-be51-49e8-8603-d116b31a5ee9
+    sub_wallet_transfer_responseBody:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/sub_wallet_transactions'
     user:
       type: object
       properties:
@@ -1430,179 +1224,11 @@ components:
               type: string
             wallet_accounts:
               type: string
-    sub_wallet_create_responseBody_sub_wallets:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: c66a1bec-4ca5-418c-8b0a-5513819576ee
-        name:
-          type: string
-          example: Investment Fund
-        balance:
-          type: integer
-          example: 0
-        active:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        currency:
-          type: string
-          example: AUD
-        links:
-          $ref: '#/components/schemas/sub_wallet_create_responseBody_sub_wallets_links'
-      example: null
-    bill_payment_requestBody:
-      type: object
-      required:
-      - account_id
-      - amount
-      properties:
-        account_id:
-          description: BPay Account to withdraw to. This needs to be a bpay_account id
-          type: string
-          example: c1824ad0-73f1-0138-3700-0a58a9feac09
-          default: c1824ad0-73f1-0138-3700-0a58a9feac09
-        amount:
-          description: Amount (in cents) to withdraw.
-          type: integer
-          example: '173'
-          default: ''
-        reference_id:
-          description: Unique reference information that can be specified for Pay a Bill request. This is an optional field and cannot contain '.' character.
-          type: string
-          example: test100
-          default: ''
     sub_wallet:
       type: object
       properties:
         sub_wallets:
           $ref: '#/components/schemas/sub_wallet_sub_wallets'
-    sub_wallet_sub_wallets:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: c66a1bec-4ca5-418c-8b0a-5513819576ee
-        name:
-          type: string
-          example: investment
-        balance:
-          type: integer
-        active:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        currency:
-          type: string
-          example: AUD
-        links:
-          $ref: '#/components/schemas/sub_wallet_sub_wallets_links'
-      example: null
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
-    wallet_account:
-      type: object
-      properties:
-        wallet_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            balance:
-              type: integer
-            links:
-              type: object
-              properties:
-                self:
-                  type: object
-                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
-                users:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
-                batch_transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
-                transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
-                bpay_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
-                npp_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
-                virtual_accounts:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
-    sub_wallet_transactions_mp:
-      type: object
-      properties:
-        group_name:
-          type: string
-        name:
-          type: string
-        short_name:
-          type: string
-        uuid:
-          type: string
-          example: 513677b8-be51-49e8-8603-d116b31a5ee9
-    sub_wallet_update_requestBody2:
-      type: object
-      properties:
-        name:
-          type: string
-          description: sub-wallet name
-          example: Investment Fund
-          default: Investment Fund
-    sub_wallet_create_responseBody_sub_wallets_links:
-      type: object
-      properties:
-        self:
-          type: object
-          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee
-        users:
-          type: object
-          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee/users
-        wallet_accounts:
-          type: object
-          example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee/wallet_accounts
-      example: null
     sub_wallet_tr:
       properties:
         id:
@@ -1663,13 +1289,357 @@ components:
           $ref: '#/components/schemas/sub_wallet_related'
         links:
           $ref: '#/components/schemas/sub_wallet_transaction_links'
-    sub_wallets:
+    sub_wallet_create_responseBody_sub_wallets:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: c66a1bec-4ca5-418c-8b0a-5513819576ee
+        name:
+          type: string
+          example: Investment Fund
+        balance:
+          type: integer
+          example: 0
+        active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        currency:
+          type: string
+          example: AUD
+        links:
+          $ref: '#/components/schemas/sub_wallet_create_responseBody_sub_wallets_links'
+      example: null
+    wallet_account:
+      type: object
+      properties:
+        wallet_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            balance:
+              type: integer
+            links:
+              type: object
+              properties:
+                self:
+                  type: object
+                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
+                users:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
+                batch_transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
+                transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
+                bpay_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
+                npp_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
+                virtual_accounts:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
+    sub_wallet_transfer_requestBody:
+      required:
+      - source
+      - destination
+      - amount
+      type: object
+      properties:
+        source:
+          type: string
+          description: Account ID or sub-wallet ID from which fund is to be debited
+          example: 31b9e5ec-06d3-41e7-bc3b-a2c18890add6
+          default: 31b9e5ec-06d3-41e7-bc3b-a2c18890add6
+        destination:
+          type: string
+          description: Account ID or sub-wallet ID that will receive the fund
+          example: 3eb78280-b8b6-013a-c1b7-5e50adfe91ad
+          default: 3eb78280-b8b6-013a-c1b7-5e50adfe91ad
+        amount:
+          type: integer
+          description: amount in cents that will be transfered
+          example: 1000
+          default: 1000
+    meta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+          default: 10
+        offset:
+          type: integer
+          example: 0
+          default: 0
+        total:
+          type: integer
+          example: 1
+    sub_wallets_id_body:
+      oneOf:
+      - $ref: '#/components/schemas/sub_wallet_update_requestBody1'
+      - $ref: '#/components/schemas/sub_wallet_update_requestBody2'
+      - $ref: '#/components/schemas/sub_wallet_update_requestBody3'
+    sub_wallet_related_transactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/sub_wallet_tr'
+    sub_wallet_create_requestBody:
+      required:
+      - account_id
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Wallet Account Id for which sub-wallet is to be created.
+          example: 86991380-90a5-013a-57cc-5e50adfe91ad
+          default: 86991380-90a5-013a-57cc-5e50adfe91ad
+        name:
+          type: string
+          description: sub-wallet name
+          example: Investment Fund
+          default: Investment Fund
+    bill_payment_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      properties:
+        account_id:
+          description: BPay Account to withdraw to. This needs to be a bpay_account id
+          type: string
+          example: c1824ad0-73f1-0138-3700-0a58a9feac09
+          default: c1824ad0-73f1-0138-3700-0a58a9feac09
+        amount:
+          description: Amount (in cents) to withdraw.
+          type: integer
+          example: '173'
+          default: ''
+        reference_id:
+          description: Unique reference information that can be specified for Pay a Bill request. This is an optional field and cannot contain '.' character.
+          type: string
+          example: test100
+          default: ''
+    sub_wallet_withdraw_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      properties:
+        account_id:
+          description: Account to withdraw to.
+          type: string
+          example: c1824ad0-73f1-0138-3700-0a58a9feac09
+          default: c1824ad0-73f1-0138-3700-0a58a9feac09
+        amount:
+          description: Amount (in cents) to withdraw.
+          type: integer
+          example: '173'
+          default: '173'
+        custom_descriptor:
+          description: A descriptor specified by the customer to be passed on the withdraw call. This requires that custom_descriptors are enabled. In the case of fast payments (AU / NPP) Assembly will append a value in the beginning of descriptor, the customer can use 200 characters (excluding URL, javascript/code, emojis). In the case of DE batch payments will allow 18 characters
+          type: string
+          example: ''
+        reference_id:
+          description: Unique reference information that can be specified for a for wallet withdrawal request. This is an optional field and cannot contain '.' character.
+          type: string
+          example: 7190770-1-2908
+          default: 7190770-1-2908
+    sub_wallet_sub_wallets:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: c66a1bec-4ca5-418c-8b0a-5513819576ee
+        name:
+          type: string
+          example: investment
+        balance:
+          type: integer
+        active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        currency:
+          type: string
+          example: AUD
+        links:
+          $ref: '#/components/schemas/sub_wallet_sub_wallets_links'
+      example: null
+    sub_wallet_update_requestBody3:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: status of sub-wallet
+          example: true
+          default: true
+    sub_wallet_transaction_links:
+      type: object
+      properties:
+        self:
+          type: string
+          example: /sub_wallets/transfer
+    sub_wallet_transactions_index:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/sub_wallet_transactions'
+        meta:
+          $ref: '#/components/schemas/meta'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              example: /sub_wallets/0546ef82-5e16-4e52-9978-c9e2fcc07641/transactions
+    sub_wallet_error_responseBody:
+      type: object
+      properties:
+        errors:
+          $ref: '#/components/schemas/sub_wallet_error_responseBody_errors'
+    sub_wallet_create_responseBody:
       type: object
       properties:
         sub_wallets:
-          type: array
-          items:
-            $ref: '#/components/schemas/sub_wallet'
+          $ref: '#/components/schemas/sub_wallet_create_responseBody_sub_wallets'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    disbursement:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ad688d54-6791-4f1d-add7-88fbd89b70d1
+        reference_id:
+          type: string
+          example: 7190770-1-2908
+        amount:
+          type: integer
+          example: 10000
+        currency:
+          type: string
+          example: AUD
+        batch_id:
+          type: string
+          example: null
+        cuscal_payment_transaction_id:
+          type: string
+          example: null
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          example: pending
+        to:
+          type: string
+          example: Bank Account
+        bank_name:
+          type: string
+          example: Bank of Australia
+        bank_account_name:
+          type: string
+          example: Samuel Seller
+        bank_account_number:
+          type: string
+          example: XXX234
+        bank_routing_number:
+          type: string
+          example: XXXXX3
+        npp_payout_state:
+          type: string
+          example: trying
+        account_name:
+          type: string
+          example: My Water Company
+        biller_name:
+          type: string
+          example: ABC Water
+        biller_code:
+          type: string
+          example: 123456
+        crn:
+          type: string
+          example: 0987654321
+        links:
+          type: object
+          properties:
+            transactions:
+              type: string
+              example: /disbursements/8a31ebfa-421b-4cbb-9241-632f71b3778a/transactions
+            wallet_accounts:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/wallet_accounts
+            paypal_accounts:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/paypal_accounts
+            bank_accounts:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bank_accounts
+            bpay_accounts:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bpay_accounts
+            items:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/items
+            users:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/users
+    sub_wallet_update_requestBody2:
+      type: object
+      properties:
+        name:
+          type: string
+          description: sub-wallet name
+          example: Investment Fund
+          default: Investment Fund
     sub_wallet_sub_wallets_links:
       type: object
       properties:
@@ -1686,6 +1656,36 @@ components:
           type: object
           example: /sub_wallets/c66a1bec-4ca5-418c-8b0a-5513819576ee/wallet_accounts
       example: null
+    single_disbursement:
+      type: object
+      properties:
+        disbursements:
+          $ref: '#/components/schemas/disbursement'
+    sub_wallet_update_requestBody1:
+      type: object
+      properties:
+        name:
+          type: string
+          description: sub-wallet name
+          example: Investment Fund
+          default: Investment Fund
+        active:
+          type: boolean
+          description: status of sub-wallet
+          example: true
+          default: true
+    sub_wallets:
+      type: object
+      properties:
+        sub_wallets:
+          type: array
+          items:
+            $ref: '#/components/schemas/sub_wallet'
+    sub_wallet_related:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/sub_wallet_related_transactions'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

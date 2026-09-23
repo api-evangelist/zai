@@ -27,9 +27,7 @@ paths:
       tags:
       - Card Accounts
       summary: Create Card Account
-      description: 'Create a Credit **Card Account** to be used as a funding source. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a **token** when involving Credit Cards.
-
-        '
+      description: Create a Credit **Card Account** to be used as a funding source. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a **token** when involving Credit Cards.
       operationId: createCardAccount
       requestBody:
         required: true
@@ -173,9 +171,7 @@ paths:
       tags:
       - Card Accounts
       summary: Show Card Account
-      description: 'Show details of a specific Credit **Card Account** using a given `:id`. You can toggle the card account number display to show the first 6 digits in addition to the last 4 digits. Contact Assembly if you want to toggle the card account display.
-
-        '
+      description: Show details of a specific Credit **Card Account** using a given `:id`. You can toggle the card account number display to show the first 6 digits in addition to the last 4 digits. Contact Assembly if you want to toggle the card account display.
       operationId: showCardAccount
       parameters:
       - name: id
@@ -219,9 +215,7 @@ paths:
       tags:
       - Card Accounts
       summary: Redact Card Account
-      description: 'Redact a Credit **Card Account** using a given `:id`. Redacted Credit **Card Accounts** can no longer be used as a funding source.
-
-        '
+      description: Redact a Credit **Card Account** using a given `:id`. Redacted Credit **Card Accounts** can no longer be used as a funding source.
       operationId: redactCardAccount
       parameters:
       - name: id
@@ -247,6 +241,11 @@ paths:
                     card_account: Successfully redacted
 components:
   schemas:
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
     card_account_verify_requestBody:
       type: object
       properties:
@@ -254,6 +253,53 @@ components:
           description: CVV / CVC
           type: string
           example: '123'
+    card_account_requestBody:
+      type: object
+      required:
+      - full_name
+      - number
+      - expiry_month
+      - expiry_year
+      - cvv
+      - user_id
+      properties:
+        full_name:
+          description: User full name with at least a space
+          type: string
+          example: John Doe
+          default: John Doe
+        number:
+          description: Account number
+          type: string
+          example: '4444111122223333'
+          default: '4444111122223333'
+        expiry_month:
+          description: Expiry month (MM)
+          type: integer
+          maxLength: 2
+          example: '1'
+          default: '1'
+        expiry_year:
+          description: Expiry year (YYYY)
+          type: integer
+          maxLength: 4
+          example: '2025'
+          default: '2025'
+        cvv:
+          description: CVV / CVC
+          type: string
+          example: '123'
+          default: '123'
+        user_id:
+          description: User ID
+          type: string
+          example: 83f54680-9600-4bee-a6d1-84a5d0e10059
+          default: 83f54680-9600-4bee-a6d1-84a5d0e10059
+    card_account_deletion:
+      properties:
+        card_account:
+          type: string
+          example: Successfully redacted
     user:
       type: object
       properties:
@@ -400,58 +446,6 @@ components:
                 users:
                   type: string
                   example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
-    card_account_deletion:
-      properties:
-        card_account:
-          type: string
-          example: Successfully redacted
-    card_account_requestBody:
-      type: object
-      required:
-      - full_name
-      - number
-      - expiry_month
-      - expiry_year
-      - cvv
-      - user_id
-      properties:
-        full_name:
-          description: User full name with at least a space
-          type: string
-          example: John Doe
-          default: John Doe
-        number:
-          description: Account number
-          type: string
-          example: '4444111122223333'
-          default: '4444111122223333'
-        expiry_month:
-          description: Expiry month (MM)
-          type: integer
-          maxLength: 2
-          example: '1'
-          default: '1'
-        expiry_year:
-          description: Expiry year (YYYY)
-          type: integer
-          maxLength: 4
-          example: '2025'
-          default: '2025'
-        cvv:
-          description: CVV / CVC
-          type: string
-          example: '123'
-          default: '123'
-        user_id:
-          description: User ID
-          type: string
-          example: 83f54680-9600-4bee-a6d1-84a5d0e10059
-          default: 83f54680-9600-4bee-a6d1-84a5d0e10059
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

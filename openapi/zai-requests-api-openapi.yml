@@ -124,6 +124,8 @@ paths:
         '503':
           description: The end point handling your request has received an interrupt or terminate signal. Please try again.
           content: {}
+      operationId: getRequestByRequestIdStatus
+      x-operation-id-source: derived
   /request/{request_id}/callbacks:
     get:
       tags:
@@ -162,21 +164,15 @@ paths:
         '503':
           description: The end point handling your request has received an interrupt or terminate signal. Please try again.
           content: {}
+      operationId: getRequestByRequestIdCallbacks
+      x-operation-id-source: derived
 components:
   schemas:
-    links:
+    single_item:
       type: object
       properties:
-        status:
-          type: string
-          format: URL
-          description: Call this end point to retrieve the internal business response if received, or a status update otherwise.
-          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status
-        callbacks:
-          type: string
-          format: URL
-          description: Call this end point to retrieve callback tracking information. This property is only present if a callback was supplied with the original API invocation.
-          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks
+        items:
+          $ref: '#/components/schemas/item'
     status:
       type: object
       properties:
@@ -192,33 +188,6 @@ components:
           example: request awaiting submission
         links:
           $ref: '#/components/schemas/links'
-    callbacks:
-      type: object
-      properties:
-        callbacks:
-          type: array
-          items:
-            $ref: '#/components/schemas/callback'
-        links:
-          $ref: '#/components/schemas/links'
-    single_item:
-      type: object
-      properties:
-        items:
-          $ref: '#/components/schemas/item'
-    callback:
-      type: object
-      properties:
-        executed_utc:
-          type: string
-          format: date-time
-          example: '2020-10-05T05:22:11Z'
-        http_response:
-          type: integer
-          example: 200
-        detail:
-          type: string
-          example: '{"message": "hey thanks for the callback"}'
     item:
       type: object
       properties:
@@ -434,6 +403,41 @@ components:
               type: string
             tds_checks:
               type: string
+    callbacks:
+      type: object
+      properties:
+        callbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/callback'
+        links:
+          $ref: '#/components/schemas/links'
+    links:
+      type: object
+      properties:
+        status:
+          type: string
+          format: URL
+          description: Call this end point to retrieve the internal business response if received, or a status update otherwise.
+          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status
+        callbacks:
+          type: string
+          format: URL
+          description: Call this end point to retrieve callback tracking information. This property is only present if a callback was supplied with the original API invocation.
+          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks
+    callback:
+      type: object
+      properties:
+        executed_utc:
+          type: string
+          format: date-time
+          example: '2020-10-05T05:22:11Z'
+        http_response:
+          type: integer
+          example: 200
+        detail:
+          type: string
+          example: '{"message": "hey thanks for the callback"}'
   securitySchemes:
     basicAuth:
       type: http

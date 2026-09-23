@@ -69,9 +69,7 @@ paths:
       tags:
       - Companies
       summary: Create Company
-      description: 'Create a **Company** associated with the **User** using a given `user_id`. **Note**: Some parameters are required for user verification. See our guide on [Onboarding a Payout User/Seller](https://developer.assemblypayments.com/docs/onboarding-a-pay-out-user) for more information.
-
-        '
+      description: 'Create a **Company** associated with the **User** using a given `user_id`. **Note**: Some parameters are required for user verification. See our guide on Onboarding a Payout User/Seller for more information.'
       operationId: createCompany
       requestBody:
         required: true
@@ -183,10 +181,6 @@ paths:
                         self: /companies/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 components:
   schemas:
-    single_company:
-      properties:
-        companies:
-          $ref: '#/components/schemas/company'
     company:
       type: object
       properties:
@@ -228,6 +222,17 @@ components:
             self:
               type: string
               example: /companies
+    single_company:
+      properties:
+        companies:
+          $ref: '#/components/schemas/company'
+    simple_companies:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/simple_company'
     simple_company:
       type: object
       properties:
@@ -314,13 +319,6 @@ components:
           type: string
           example: buyer-70729325
           default: buyer-70729325
-    simple_companies:
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/simple_company'
   parameters:
     offsetParam:
       name: offset

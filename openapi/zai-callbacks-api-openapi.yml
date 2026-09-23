@@ -95,9 +95,7 @@ paths:
       tags:
       - Callbacks
       summary: Update Callback
-      description: 'Update an existing **Callback** using a given `:id`. You can change the `URL`, the `object_type` and whether the **Callback** is `enabled` or `disabled`.
-
-        '
+      description: Update an existing **Callback** using a given `:id`. You can change the `URL`, the `object_type` and whether the **Callback** is `enabled` or `disabled`.
       operationId: updateCallback
       parameters:
       - name: id
@@ -384,11 +382,33 @@ paths:
                         self: /callbacks?description=testy&url=https://httpbin.org&object_type=batch_transactions&enabled=true
                         responses: /callbacks/30403493-7249-433a-83ce-555388f75c01/responses
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
   schemas:
-    single_callback_response:
+    callbacks:
       properties:
-        call_responses:
-          $ref: '#/components/schemas/callback_response'
+        callbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/callback'
     list_callback_responses:
       properties:
         callback_responses:
@@ -411,40 +431,37 @@ components:
               type: string
             callbacks:
               type: string
-    callback_deletion:
+    single_callback:
       properties:
         callbacks:
-          type: string
-          example: Successfully redacted
-    callback_requestBody:
+          $ref: '#/components/schemas/callback'
+    callback_response:
       type: object
-      required:
-      - description
-      - url
-      - object_type
-      - enabled
       properties:
+        id:
+          type: string
+          example: 4476b384-fa48-4473-98ec-8fcdda4a1e84
         url:
-          description: URL to which the callbacks will notify
           type: string
-          default: https://httpbin.org
-          example: https://httpbin.org
-        object_type:
-          description: Object or entity to which the callbacks refer. Please refer to [Callbacks](https://developer.assemblypayments.com/docs/callbacks) for a list of object types.
+          example: https://httpbin.org/post
+        created_at:
           type: string
-          default: users
-          example: users
-        enabled:
-          description: Toggle whether callback is active or inactive.
-          type: string
-          default: 'true'
-          example: 'true'
-    callbacks:
-      properties:
-        callbacks:
-          type: array
-          items:
-            $ref: '#/components/schemas/callback'
+          format: date-time
+        payload:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Assembly callback test
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+              example: OK
+        response_code:
+          type: integer
+          example: 200
     callback:
       type: object
       properties:
@@ -488,57 +505,38 @@ components:
               type: string
             responses:
               type: string
-    callback_response:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 4476b384-fa48-4473-98ec-8fcdda4a1e84
-        url:
-          type: string
-          example: https://httpbin.org/post
-        created_at:
-          type: string
-          format: date-time
-        payload:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Assembly callback test
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-              example: OK
-        response_code:
-          type: integer
-          example: 200
-    single_callback:
+    callback_deletion:
       properties:
         callbacks:
-          $ref: '#/components/schemas/callback'
-  parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
+          type: string
+          example: Successfully redacted
+    callback_requestBody:
+      type: object
+      required:
+      - description
+      - url
+      - object_type
+      - enabled
+      properties:
+        url:
+          description: URL to which the callbacks will notify
+          type: string
+          default: https://httpbin.org
+          example: https://httpbin.org
+        object_type:
+          description: Object or entity to which the callbacks refer. Please refer to [Callbacks](https://developer.assemblypayments.com/docs/callbacks) for a list of object types.
+          type: string
+          default: users
+          example: users
+        enabled:
+          description: Toggle whether callback is active or inactive.
+          type: string
+          default: 'true'
+          example: 'true'
+    single_callback_response:
+      properties:
+        call_responses:
+          $ref: '#/components/schemas/callback_response'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

@@ -31,9 +31,7 @@ paths:
       tags:
       - Item Actions
       summary: Make Payment
-      description: 'Make a payment for an **Item**. Pass the `:account_id` of a **Bank Account** or a **Card Account** associated with the **Item''s** buyer. The **Item** state will transition to one of `payment_held`, `payment_pending` or `completed` for an **Express** or **Approve** payment type.
-
-        '
+      description: Make a payment for an **Item**. Pass the `:account_id` of a **Bank Account** or a **Card Account** associated with the **Item's** buyer. The **Item** state will transition to one of `payment_held`, `payment_pending` or `completed` for an **Express** or **Approve** payment type.
       operationId: makePayment
       parameters:
       - name: id
@@ -79,9 +77,7 @@ paths:
 
         This endpoint initiates the payment process and returns a `payment_token`
 
-        required for 3DS2 component initialisation.
-
-        '
+        required for 3DS2 component initialisation.'
       operationId: makePaymentAsync
       parameters:
       - name: id
@@ -327,9 +323,7 @@ paths:
       tags:
       - Item Actions
       summary: Authorize Payment
-      description: 'Where pre-authentication is enabled on a platform, initiates a credit card payment authorization for an item. When an authorization is successful, your platform holds the item amount for capture, but there is no transfer of funds happening. This call is used with the Capture Payment or Void Payment calls.
-
-        '
+      description: Where pre-authentication is enabled on a platform, initiates a credit card payment authorization for an item. When an authorization is successful, your platform holds the item amount for capture, but there is no transfer of funds happening. This call is used with the Capture Payment or Void Payment calls.
       operationId: authorizePayment
       parameters:
       - name: id
@@ -435,9 +429,7 @@ paths:
       tags:
       - Item Actions
       summary: Capture Payment
-      description: 'Where pre-authentication is enabled on a platform, completes a credit card payment for an item whose payment is authorized. This call is used with the Authorize Payment call.
-
-        '
+      description: Where pre-authentication is enabled on a platform, completes a credit card payment for an item whose payment is authorized. This call is used with the Authorize Payment call.
       operationId: capturePayment
       parameters:
       - name: id
@@ -542,9 +534,7 @@ paths:
       tags:
       - Item Actions
       summary: Void Payment
-      description: 'Where pre-authentication is enabled on a platform, voids the `payment_authorized` status for an item. This call is used with the Authorize Payment call. **Note**: Not all payment gateways support the Void Payment API call. In this case, you can wait until a payment authorization expires. A payment authorisation expires after 3 to 6 days if not captured.
-
-        '
+      description: 'Where pre-authentication is enabled on a platform, voids the `payment_authorized` status for an item. This call is used with the Authorize Payment call. **Note**: Not all payment gateways support the Void Payment API call. In this case, you can wait until a payment authorization expires. A payment authorisation expires after 3 to 6 days if not captured.'
       operationId: voidPayment
       parameters:
       - name: id
@@ -644,7 +634,7 @@ paths:
       tags:
       - Item Actions
       summary: Release Payment (Deprecated - Do Not Use)
-      description: Included for legacy purposes for existing customers that use Escrow payments which are no longer supported for new flows/customers. Release funds held in escrow from an **Item** with an **Escrow** or **Escrow Partial Release** payment type.  This will transition the **Item** state to `completed`.
+      description: Included for legacy purposes for existing customers that use Escrow payments which are no longer supported for new flows/customers. Release funds held in escrow from an **Item** with an **Escrow** or **Escrow Partial Release** payment type. This will transition the **Item** state to `completed`.
       operationId: releasePayment
       parameters:
       - name: id
@@ -747,71 +737,6 @@ paths:
       url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
 components:
   schemas:
-    card_account_id_requestBody:
-      type: object
-      required:
-      - account_id
-      properties:
-        account_id:
-          description: Card account ID
-          type: string
-          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-        cvv:
-          description: CVV / CVC
-          type: string
-          example: ''
-        merchant_phone:
-          description: Seller User Phone Number or Mobile number. International number format. Include '+' and no spaces.
-          type: string
-          example: ''
-    refund_requestBody:
-      type: object
-      properties:
-        refund_amount:
-          description: For partial refunds, if they are enabled for marketplace.
-          type: integer
-          example: ''
-        refund_message:
-          description: Reason for the request.
-          type: string
-          example: ''
-        account_id:
-          description: The account id to be used to get the refunds from. This will need to be an account that has already been set up within Assembly
-          type: string
-          example: ''
-    acknowledge_payment:
-      type: object
-      properties:
-        payment_id:
-          type: string
-          description: Generated payment ID
-          example: '1000014012533486'
-        account_id:
-          type: string
-          description: Card Account ID
-          example: 86991380-90a5-013a-57cc-5e50adfe91ad
-        payment_token:
-          type: string
-          description: Token passed to front-end component, for secure access of the payment status
-        items:
-          $ref: '#/components/schemas/item'
-    release_payment_requestBody:
-      type: object
-      properties:
-        release_amount:
-          description: Partial amount to be released in cents
-          type: integer
-          example: ''
-        flag_release:
-          description: to be used if release flagging enabled for your marketplace
-          type: boolean
-          example: ''
-    single_item:
-      type: object
-      properties:
-        items:
-          $ref: '#/components/schemas/item'
     account_id_asyncRequestBody:
       type: object
       required:
@@ -839,13 +764,6 @@ components:
           - automatic
           - challenge
           - any
-    partial_payment:
-      type: object
-      properties:
-        amount:
-          description: For partial payment, if they are enabled for marketplace.
-          type: integer
-          example: 100
     item:
       type: object
       required:
@@ -1072,6 +990,26 @@ components:
               type: string
             tds_checks:
               type: string
+    refund_requestBody:
+      type: object
+      properties:
+        refund_amount:
+          description: For partial refunds, if they are enabled for marketplace.
+          type: integer
+          example: ''
+        refund_message:
+          description: Reason for the request.
+          type: string
+          example: ''
+        account_id:
+          description: The account id to be used to get the refunds from. This will need to be an account that has already been set up within Assembly
+          type: string
+          example: ''
+    single_item:
+      type: object
+      properties:
+        items:
+          $ref: '#/components/schemas/item'
     account_id_requestBody:
       type: object
       required:
@@ -1098,19 +1036,58 @@ components:
           description: Seller User Phone Number or Mobile number. International number format. Include '+' and no spaces.
           type: string
           example: ''
-    links:
+    card_account_id_requestBody:
+      type: object
+      required:
+      - account_id
+      properties:
+        account_id:
+          description: Card account ID
+          type: string
+          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+        cvv:
+          description: CVV / CVC
+          type: string
+          example: ''
+        merchant_phone:
+          description: Seller User Phone Number or Mobile number. International number format. Include '+' and no spaces.
+          type: string
+          example: ''
+    acknowledge_payment:
       type: object
       properties:
-        status:
+        payment_id:
           type: string
-          format: URL
-          description: Call this end point to retrieve the internal business response if received, or a status update otherwise.
-          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status
-        callbacks:
+          description: Generated payment ID
+          example: '1000014012533486'
+        account_id:
           type: string
-          format: URL
-          description: Call this end point to retrieve callback tracking information. This property is only present if a callback was supplied with the original API invocation.
-          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks
+          description: Card Account ID
+          example: 86991380-90a5-013a-57cc-5e50adfe91ad
+        payment_token:
+          type: string
+          description: Token passed to front-end component, for secure access of the payment status
+        items:
+          $ref: '#/components/schemas/item'
+    release_payment_requestBody:
+      type: object
+      properties:
+        release_amount:
+          description: Partial amount to be released in cents
+          type: integer
+          example: ''
+        flag_release:
+          description: to be used if release flagging enabled for your marketplace
+          type: boolean
+          example: ''
+    partial_payment:
+      type: object
+      properties:
+        amount:
+          description: For partial payment, if they are enabled for marketplace.
+          type: integer
+          example: 100
     status:
       type: object
       properties:
@@ -1126,36 +1103,6 @@ components:
           example: request awaiting submission
         links:
           $ref: '#/components/schemas/links'
-    make_payment_requestBody:
-      type: object
-      required:
-      - account_id
-      properties:
-        account_id:
-          description: Account id of the bank account/credit card, etc making payment (not user id)
-          type: string
-          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-        device_id:
-          description: Device Information for the device initiating the payment. This must be provided for card payments.
-          type: string
-          example: '358277090995038'
-          default: '358277090995038'
-        ip_address:
-          description: IP Information for the device initiating the payment. This must be provided for card payments.
-          type: string
-          example: 49.192.154.141
-          default: 49.192.154.141
-        wait:
-          description: Time in seconds to wait for item response (up to 30). If this value is not provided, it will defaul to 0 and the call will go asynchronously.
-          type: integer
-          example: '15'
-          default: '15'
-        callback:
-          description: Address to callback when an internal business system response is received. Path parameters {account} {item} and {uuid} may be used. The value must be URL-encoded. The example value shown here represents the URL https://callback.example.com/assembly/{item}/{account}/{uuid}
-          type: string
-          example: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
-          default: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
     item_2:
       type: object
       properties:
@@ -1371,6 +1318,49 @@ components:
               type: string
             tds_checks:
               type: string
+    make_payment_requestBody:
+      type: object
+      required:
+      - account_id
+      properties:
+        account_id:
+          description: Account id of the bank account/credit card, etc making payment (not user id)
+          type: string
+          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+        device_id:
+          description: Device Information for the device initiating the payment. This must be provided for card payments.
+          type: string
+          example: '358277090995038'
+          default: '358277090995038'
+        ip_address:
+          description: IP Information for the device initiating the payment. This must be provided for card payments.
+          type: string
+          example: 49.192.154.141
+          default: 49.192.154.141
+        wait:
+          description: Time in seconds to wait for item response (up to 30). If this value is not provided, it will defaul to 0 and the call will go asynchronously.
+          type: integer
+          example: '15'
+          default: '15'
+        callback:
+          description: Address to callback when an internal business system response is received. Path parameters {account} {item} and {uuid} may be used. The value must be URL-encoded. The example value shown here represents the URL https://callback.example.com/assembly/{item}/{account}/{uuid}
+          type: string
+          example: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
+          default: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
+    links:
+      type: object
+      properties:
+        status:
+          type: string
+          format: URL
+          description: Call this end point to retrieve the internal business response if received, or a status update otherwise.
+          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/status
+        callbacks:
+          type: string
+          format: URL
+          description: Call this end point to retrieve callback tracking information. This property is only present if a callback was supplied with the original API invocation.
+          example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: PayTo Payments API
-  description: "“PayTo” is a new digital payments service that allows NPP-enabled account holders to digitally pre-authorise one-off or recurring real-time payments from their bank account. This swagger document lists APIs for PayTo agreement creation, management and payment initiation. \n\n<u>**Changes in 1.4 version**</u>\n\n\n\nEnriching timestamp fields to include microseconds information - ”created_at” and ”updated_at” fields returned via our API & web hook notifications (agreement and payto payments payloads) will include microseconds in the timestamp. \n\nRevised timestamp format example - 2023-08-10 09:03:16.045622 \n\nError code updates - \n\n **Validate PayTo Agreement API:** \n- Added new error codes - PAYT-ERR-2029, PAYT-ERR-2030, PAYT-ERR-2031 \n- Removed error codes - PAYT-ERR-2026, PAYT-ERR-2024 \n\n **Amend PayTo Agreement Details API:** \n- Added new error codes - PAYT-ERR-2321, PAYT-ERR-2322 \n- Removed error codes - PAYT-ERR-2310, PAYT-ERR-2312 \n\n **Initiate PayTo Payment API:** \n- Added new error code - PAYT-ERR-2526\n\n\n<u>**Changes in 1.3 version**</u>\n\n\n**Payment Amount Validations:** \n\nZai will perform additional payment request compliance checks. This is to help minimise non-compliant payment requests. It is essential to continue to ensure PayTo payment requests are made according to the specified amounts, day/time, frequency, and with all other terms specified in the PayTo Agreement. \n\nPayment amount-related verifications will be performed for: \n- Usage and Variable Agreements: the payment requested must be within the maximum amount field and the amount field (which acts as the minimum amount field) i.e., if the agreement amount is between $50 and $75, the payment instruction amount must be within this range. \n\n Note - Consider specifying a maximum and minimum value amount, as the payment amount can differ each time. These limits may provide clarity for the end-customer and may minimise the probability of them receiving a warning message from their bank. \n- Fixed Agreements: payments initiated must match the agreed amount; i.e., if the agreement amount is $50, the payment instruction amount must also be $50 \n- Balloon Agreements: the fixed and final payment amounts will be checked. The final amount must be equal to or greater than the fixed amount. If it’s not, the payment request will be rejected. i.e., the agreement amount is $1,200 over 10 payments (9 fixed and 1 final payments) the fixed amount could be $100, and the final amount $300. \n\nRelevant error messages have also been added as part of this release around rejecting payments that are not compliant as per amount specified in the agreement.\n\n\n<u>**Changes in 1.2 version**</u>\n\n\n **New APIs:** \n- Get all PayTo Agreements for a user - This API lists all PayTo agreements associated with a particular user. If needed, the results can be filtered to list agreements for a particular status or for a particular type (AUPM/MGCR). \n- Get all PayTo Payment Initiation Requests for an agreement - This API lists all payment requests initiated for an agreement. If needed, the results can be filtered to list requests for a particular status. \n- Recall PayTo Agreement - If a custom expiry duration (anything less than 5 days) has been specified for an agreement creation/amendment request and if the debtor has not responded within the specified timeframe, this API should be used to recall such pending authorisation requests. Post successful recall, the request is considered cancelled and hence cannot be actioned by the debtor. \n\n Note - Agreement creation or Bilateral agreement amendments trigger authorisation requests waiting approval from debtor, which can be recalled via this API, if needed.\n\n **Validate PayTo Agreement API:** \n- New Optional Field: response_requested_by -> This field should be used to specify a custom expiry duration i.e. if the debtor authorisation request needs to be limited to any short duration which is less than the default duration of 5 days. \n- Updated Field Description: agreement_info.debtor_info.debtor_details.debtor_reference -> If end to end Id is not provided in the payment initiation request, then the debtor reference (if provided) in the agreement will be used as end to end identifier for the payments initiated via the agreement.\n\n **Initiate PayTo Payment API:** \n- Updated Field Description: payment_info.end_to_end_id -> If end to end Id is not provided in the payment initiation request, then the debtor reference (if provided) in the agreement will be used as end to end identifier for the payments initiated via the agreement. If debtor reference is also not available, default value “NOTPROVIDED” will set as end to end id for the payment initiation request.\n\n\n<u>**Changes in 1.1 version**</u>\n\n\n **Validate PayTo Agreement API:** \n- Support open ended agreements - For Adhoc frequency, providing point_in_time or count_per_period info is optional. \n- Reformatting debtor account number - During the agreement validation step, Zai may reformat the debtor account number as per the format expected by the payer institutions. Reformatted debtor account number can be accessed either via GET PayTo Agreement Details API after the validation step or via WAPI notification sent by Zai after successful agreement creation step.\n\n **Amend PayTo Agreement Details API:** \n- Ability to clear optional fields if needed using hyphen (-) character.\n\n **Amend PayTo Agreement Status API:** \n- Allow agreement status amendments even if a bilateral amendment is in progress. Example - If agreement details amendment is in progress, it should be possible to pause/suspend the agreement if needed.\n\n **Get PayTo Agreement Details API:** \n- New fields - Status reason code and Status reason description have been added in response. These fields will provide more details for suspended or cancelled agreements.\n\n **Get PayTo Payment Details API:** \n- New fields - Status reason code and Status reason description have been added in response. These fields will provide more details for rejected payments.\n\n **Misc:** \n- Agreement purpose codes have been elaborated to clarify the usage for each type. \n- Status descriptions returned in the GET APIs have been improved to provide more details about the current agreement status. \n- PAYT-ERR-2201, PAYT-ERR-2301 - error descriptions have been updated. \n- PAYT-ERR-2318 - added new error code along with description.\n"
+  description: “PayTo” is a new digital payments service that allows NPP-enabled account holders to digitally pre-authorise one-off or recurring real-time payments from their bank account.
   contact:
     name: Zai
     url: https://developer.hellozai.com/reference/overview
@@ -23,7 +23,31 @@ paths:
       tags:
       - PayTo Payments
       summary: Initiate PayTo Payment
-      description: "This endpoint is to initiate a payment to collect funds from the debtor's account or to retry if the previous payment collection request was rejected due to valid business reasons.\nThis API should be invoked strictly as per the terms and conditions established in the agreement to avoid payment claims. Even the retries should be attempted as per the agreement terms and conditions.\n\n Payment initiation request statuses -\n- PENDING_PAYMENT_INITIATION - when the payment initiation request has been accepted for processing \n- PAYMENT_INITIATED - when the payment initiation request is being processed \n- PAYMENT_INITIATION_COMPLETED - when the payment initiation request is cleared and settled successfully. Funds can be expected in the user's wallet soon \n- PAYMENT_INITIATION_REJECTED - when the payment initiation request is rejected for processing due to validation, funds not available in the debtor's account or any other \nbusiness reason. A retry can be performed in such scenarios \n\nIf the payment collection request  has been rejected due to valid business reasons (example - insufficient funds), a retry can be attempted for the same.\n\nPayment_request_uuid generated will be the same for the payment collection request and all subsequent retry attempts, however, instruction_id differs for each.\n\nNote - If Payment initiated on the agreement validity end date fails, it will not be possible to retry or initiate again on the following date as the agreement will be marked as CANCELLED automatically after the agreement validity_end_date. Hence, it is recommended to initiate the last payment few days before the agreement validity end date to cater for retries needed if any."
+      description: 'This endpoint is to initiate a payment to collect funds from the debtor''s account or to retry if the previous payment collection request was rejected due to valid business reasons.
+
+        This API should be invoked strictly as per the terms and conditions established in the agreement to avoid payment claims. Even the retries should be attempted as per the agreement terms and conditions.
+
+
+        Payment initiation request statuses -
+
+        - PENDING_PAYMENT_INITIATION - when the payment initiation request has been accepted for processing
+
+        - PAYMENT_INITIATED - when the payment initiation request is being processed
+
+        - PAYMENT_INITIATION_COMPLETED - when the payment initiation request is cleared and settled successfully. Funds can be expected in the user''s wallet soon
+
+        - PAYMENT_INITIATION_REJECTED - when the payment initiation request is rejected for processing due to validation, funds not available in the debtor''s account or any other
+
+        business reason. A retry can be performed in such scenarios
+
+
+        If the payment collection request has been rejected due to valid business reasons (example - insufficient funds), a retry can be attempted for the same.
+
+
+        Payment_request_uuid generated will be the same for the payment collection request and all subsequent retry attempts, however, instruction_id differs for each.
+
+
+        Note - If Payment initiated on the agreement validity end date fails, it will not be possible to retry or initiate again on the following date as the agreement will be marked as CANCELLED automatically after the agreement validity_end_date. Hence, it is recommended to initiate the last payment few days before the agreement validity end date to cater for retries needed if any.'
       operationId: initiatePaymentRequest
       parameters:
       - name: agreement_uuid
@@ -114,7 +138,20 @@ paths:
       tags:
       - PayTo Payments
       summary: Get PayTo Payment Initiation Request Details
-      description: "This operation is to retrieve details of an initiated payment request. This API should be invoked to know the latest status of the payment initiation request if needed.\n\n Payment initiation request statuses which will be returned via this endpoint -\n- PENDING_PAYMENT_INITIATION - when the payment initiation request has been accepted for processing \n- PAYMENT_INITIATED - when the payment initiation request is being processed \n- PAYMENT_INITIATION_COMPLETED - when the payment initiation request is cleared and settled successfully. Funds can be expected in the user's wallet soon \n- PAYMENT_INITIATION_REJECTED - when the payment initiation request is rejected for processing due to validation, funds not available in the debtor's account or any other \nbusiness reason. A retry can be performed in such scenarios"
+      description: 'This operation is to retrieve details of an initiated payment request. This API should be invoked to know the latest status of the payment initiation request if needed.
+
+
+        Payment initiation request statuses which will be returned via this endpoint -
+
+        - PENDING_PAYMENT_INITIATION - when the payment initiation request has been accepted for processing
+
+        - PAYMENT_INITIATED - when the payment initiation request is being processed
+
+        - PAYMENT_INITIATION_COMPLETED - when the payment initiation request is cleared and settled successfully. Funds can be expected in the user''s wallet soon
+
+        - PAYMENT_INITIATION_REJECTED - when the payment initiation request is rejected for processing due to validation, funds not available in the debtor''s account or any other
+
+        business reason. A retry can be performed in such scenarios'
       operationId: getInitiatePaymentStatus
       parameters:
       - name: payment_request_uuid
@@ -177,7 +214,26 @@ paths:
       tags:
       - PayTo Payments
       summary: Get All PayTo Payment Initiation Requests for an Agreement
-      description: "This operation is to retrieve all payment requests initiated for an agreement in the provided period (date range). Payment requests for a period of maximum one year or less than it can be retrieved at a time.\n\n By default, all payment initiation requests (along with details) irrespective of the status will be listed via this endpoint. However, the results can be filtered based on status(es) if needed.\n\nRequest parameter descriptions:\n\n - status - List of valid agreement statuses. Example - Retrieve active and suspended payments only.\n   - Valid values - PENDING_PAYMENT_INITIATION, PAYMENT_INITIATED, PAYMENT_INITIATION_COMPLETED, PAYMENT_INITIATION_REJECTED\n - start_date - Date range start, example - fetch all payments created between June to December 2022.\n - end_date - Date range end, example - fetch all payments created between June to December 2022.\n - size - Number of payments per page. Default value is 20.\n - page - Page number. Default value is 0."
+      description: 'This operation is to retrieve all payment requests initiated for an agreement in the provided period (date range). Payment requests for a period of maximum one year or less than it can be retrieved at a time.
+
+
+        By default, all payment initiation requests (along with details) irrespective of the status will be listed via this endpoint. However, the results can be filtered based on status(es) if needed.
+
+
+        Request parameter descriptions:
+
+
+        - status - List of valid agreement statuses. Example - Retrieve active and suspended payments only.
+
+        - Valid values - PENDING_PAYMENT_INITIATION, PAYMENT_INITIATED, PAYMENT_INITIATION_COMPLETED, PAYMENT_INITIATION_REJECTED
+
+        - start_date - Date range start, example - fetch all payments created between June to December 2022.
+
+        - end_date - Date range end, example - fetch all payments created between June to December 2022.
+
+        - size - Number of payments per page. Default value is 20.
+
+        - page - Page number. Default value is 0.'
       operationId: getInitiatePaymentStatusList
       parameters:
       - name: agreement_uuid
@@ -290,45 +346,62 @@ paths:
       - bearerAuth: []
 components:
   schemas:
-    RetryInformation:
+    InitiatePaymentStatusResponse:
       type: object
       properties:
         payment_request_uuid:
-          maxLength: 36
-          minLength: 36
-          pattern: ^([a-zA-Z0-9_-]){36}$
           type: string
-          description: Unique identifier for the payment request (in UUID format) for which the retry is being attempted.
+          description: Unique identifier for the payment request in UUID format.
           example: d0c40d95-95b7-449b-9835-3c97c0386585
-      description: "Retry information should be provided only if the payment request was rejected previously due to business reasons and a retry for the same is being attempted.\n \n **Property descriptions**: \n \n- **payment_request_uuid** - Unique identifier for the payment request (in UUID format) for which the retry is being attempted."
-    RetryAttempts:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Retries count.
-          format: int32
-          example: 1
-        retry_info:
-          type: array
-          description: Retry info for initiate payment.
-          items:
-            $ref: '#/components/schemas/RetryInfo'
-      description: "List of retry attempts for the payment request. \n \n **Property descriptions**: \n\n- **count** - Payment retry count. \n\n- **retry_info** - Payment information for each retry attempt, listed in descending order of retry attempts."
-    InitiatePaymentListResponse:
-      type: object
-      properties:
-        total_count:
-          type: integer
-          description: Total number of initiate payments available
-          format: int64
-          example: 1
-        initiate_payment_status_responses:
-          type: array
-          description: List of Initiate Payment requests.
-          items:
-            $ref: '#/components/schemas/InitiatePaymentStatusResponse'
-      description: "List of Initiate Payment Status details. \n"
+        instruction_id:
+          type: string
+          description: Unique identifier for each payment and retry request generated as per NPPA guidelines.
+          example: BANKNTSTXXXI20180501000000000000010
+        agreement_uuid:
+          type: string
+          description: Unique agreement identifier.
+          example: d0c40d95-95b7-449b-9835-3c97c0386585
+        agreement_id:
+          type: string
+          description: Unique agreement identifier generated by NPPA.
+          example: 00000000000010008000000000000000
+        status:
+          title: Status
+          type: string
+          description: Possible statuses for payment or retry requests:<table><tr><td>Code</td><td>Description</td></tr><tr><td>PENDING_PAYMENT_INITIATION</td><td>Payment request is pending for initiation.</td></tr><tr><td>PAYMENT_INITIATED</td><td>Payment request is initiated.</td></tr><tr><td>PAYMENT_INITIATION_COMPLETED</td><td>Payment request is completed.</td></tr><tr><td>PAYMENT_INITIATION_REJECTED</td><td>Payment request is rejected.</td></tr></table>
+          enum:
+          - PENDING_PAYMENT_INITIATION
+          - PAYMENT_INITIATED
+          - PAYMENT_INITIATION_COMPLETED
+          - PAYMENT_INITIATION_REJECTED
+        status_description:
+          type: string
+          description: Free text field to provide description status
+          example: status description
+        status_reason_code:
+          type: string
+          description: Free text field to provide reason code:<table><tr><td>Reason Code</td><td>Description</td><td>Retry eligible</td></tr><tr><td>ClearingAndSettlementError </td><td>An error occurred during clearing and settlement of the payment. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayeeBankOffline </td><td>Payee institution is offline. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountNumberInvalid </td><td>Payer account details or PayID provided is invalid or does not exist within NPP. Please update the agreement with correct account details and try again.</td><td>No</td></tr><tr><td>PayeeAccountNumberInvalid </td><td>Payee account details provided is invalid or does not exist within NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountClosed </td><td>Payer account provided is closed. Please update the agreement with correct account details and try again.</td><td>No</td></tr><tr><td>InsufficientFunds </td><td>Payer account has insufficient funds at the moment. Please contact the payer and retry the same payment again after funds availability.</td><td>Yes</td></tr><tr><td>BlockedAccount </td><td>Account provided is temporarily blocked. Please retry the same payment again after some time or contact the payer.</td><td>Yes</td></tr><tr><td>PayeeAccountClosed </td><td>Payee account provided is closed. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountTypeInvalid </td><td>Payer account type is invalid - unable to debit funds within NPP. Please update the agreement with correct account details and try again or contact the payer.</td><td>No</td></tr><tr><td>PayeeAccountTypeInvalid </td><td>Payee account type is invalid - unable to credit funds within NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnexpectedError </td><td>Unexpected error occurred while processing the payment initiation request. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>TransactionForbiddenOnPayerAccount</td><td>Either the Payer account does not allow debits within NPP or agreement to debit the account is not active. Please update the agreement with correct account details and try again or contact the Payer.</td><td>No</td></tr><tr><td>NPPTransactionNotSupported </td><td>Payee institution has rejected the NPP payment from Payer institution. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnspecifiedReason </td><td>Payment initiation request has been rejected by the Payer institution without any specified reason.</td><td>Yes</td></tr><tr><td>RequestedByPayer </td><td>Payment rejection has been requested by the Payer. Please contact the Payer or retry the same payment again.</td><td>Yes</td></tr><tr><td>UndisclosedReason </td><td>Payment has been rejected due to undisclosed reasons.</td><td>No</td></tr><tr><td>RequestedByPayer-UnspecifiedReason </td><td>Payment has been rejected by the Payer without any specified reason. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>Prohibited </td><td>Payment has been rejected as it is considered prohibited.</td><td>No</td></tr><tr><td>RequestedByPayerBank-UnspecifiedReason</td><td>Payment has been rejected by the Payer institution without any specified reason. Please try again or contact the Payer institution.</td><td>No</td></tr><tr><td>PayeeNotOnAllowlistOfPayer </td><td>Payee not on the allowlist/trusted list of the Payer. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>PayeeOnBlocklistOfPayer </td><td>Payee is blocked/blacklisted by the Payer. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>ExceedsMaxAllowedDirectDebitTransactions </td><td>The payment request exceeds the maximum number of direct debit transactions allowed on the Payer account. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>ExceedsMaxAllowedDirectDebitTransactionAmount</td><td>The payment amount requested exceeds the maximum amount that can be debited from the Payer account via direct debit. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>UnexpectedError-RetrySamePayment </td><td>Unexpected error occurred while processing the payment initiation request. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayerUnavailable </td><td>Payer institution is unavailable. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>InvalidPayerPayID </td><td>PayID details of the Payer are no longer valid. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>PayerBSBNotNPPReachable </td><td>Payer BSB is not NPP reachable. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>PayerNotNPPReachable </td><td>Payer is no longer reachable on NPP. Please try again or cancel the agreement.</td><td>No</td></tr><tr><td>PayeeNotNPPReachable </td><td>Payee is no longer reachable on NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>IncorrectPayerPayID </td><td>PayID details of the Payer are no longer valid as the PayID has been ported incorrectly. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>NotRetryEligible </td><td>Retries are allowed only if the payment has been rejected with retry eligible rejection reasons.</td><td>No</td></tr><tr><td>EndToEndIDInvalidOrMissing </td><td>EndToEndID is either invalid or missing. Please correct the end to end id and retry the same payment again.</td><td>Yes</td></tr><tr><td>Non-CompliantPayment </td><td>Payment amount is not as per the agreed payment terms and conditions. Please correct the amount and retry the same payment again.</td><td>Yes</td></tr><tr><td>NPPLimitExceeded </td><td>Payment amount requested exceeds the agreed limits for the Payer account. Please correct the amount and retry the same payment again.</td><td>Yes</td></tr><tr><td>UnrecognisedInitiatingParty </td><td>The Payer has requested the payment rejection as the Initiating party is not recognised by them. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>UnknownPayer </td><td>The payment has been rejected by the Payer institution as the Payer is not known as per records. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>PayeeBSBNotNPPReachable </td><td>Payee BSB is not NPP reachable. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerNameOrAddressDetailsMissing </td><td>Payer name or address details are missing. Please update the agreement with complete Payer details and try again.</td><td>No</td></tr><tr><td>PayeeNameOrAddressDetailsMissing </td><td>Payee name or address details are missing. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnknownReason </td><td>Payment has been rejected due to unknown reason.</td><td>No</td></tr><tr><td>PayeeUnavailable </td><td>Payee institution is unavailable. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayerNameMissing </td><td>Payer name is missing. Please update the agreement with complete Payer details and try again.</td><td>No</td></tr><tr><td>PayeeNameMissing </td><td>Payee name is missing in the agreement. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnsupportedCurrency </td><td>Unable to debit funds in AUD from the provided Payer account.</td><td>No</td></tr><tr><td>AmountExceedsMaxNPPLimit </td><td>Payment amount either exceeds the maximum allowed NPP limit of $99,999,999,999 or maximum allowed NPP limit for the Payer account.</td><td>No</td></tr></table>
+        status_reason_description:
+          type: string
+          description: Free text field to provide reason description.
+          example: reason description
+        payment_reconciled:
+          type: boolean
+          description: Indicator to say whether the payment has been reconciled successfully on user's wallet or not.
+          example: true
+        created_at:
+          type: string
+          description: Payment request creation date.
+          example: '2022-03-21 16:25:00.312368'
+        updated_at:
+          type: string
+          description: Payment request modification date.
+          example: '2022-03-22 16:25:00.312368'
+        payment_info:
+          $ref: '#/components/schemas/PaymentInfo'
+        retry_attempts:
+          $ref: '#/components/schemas/RetryAttempts'
+      description: "Definition of PayTo Payment Details. \n\n **Property descriptions**: \n\n- **payment_request_uuid** - Unique identifier for the payment request in UUID format.\n- **instruction_id** - Unique identifier for the payment request generated as per NPPA guidelines. This identifier is used to identify the payment uniquely with NPPA and payer as well.\n- **agreement_uuid** - Unique agreement identifier.\n- **agreement_id** - Unique agreement identifier generated by NPPA.\n- **status** - Current status of the payment or retry request.\n- **status_description** - Details/description for the status.\n- **status_reason_code** - Reason code for the current payment initiation request status.\n- **status_reason_description** - Detailed description of the status reason code.\n- **payment_reconciled** - Indicator to say whether the payment has been reconciled successfully on user's wallet or not.\n - **created_at** - Date representation of the payment request creation.\n - **updated_at** - Date representation of the last update of the payment request.\n- **payment_info** - Payment information for the payment request.\n- **retry_attempts** - Payment information for all retry attempts."
     InitiatePaymentResponse:
       type: object
       properties:
@@ -370,6 +443,43 @@ components:
           type: string
           description: Unique agreement identifier generated by NPPA.
           example: ef0fcd9799431ef783204966f010603c
+    PayToErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+    RetryInformation:
+      type: object
+      properties:
+        payment_request_uuid:
+          maxLength: 36
+          minLength: 36
+          pattern: ^([a-zA-Z0-9_-]){36}$
+          type: string
+          description: Unique identifier for the payment request (in UUID format) for which the retry is being attempted.
+          example: d0c40d95-95b7-449b-9835-3c97c0386585
+      description: "Retry information should be provided only if the payment request was rejected previously due to business reasons and a retry for the same is being attempted.\n \n **Property descriptions**: \n \n- **payment_request_uuid** - Unique identifier for the payment request (in UUID format) for which the retry is being attempted."
+    InitiatePaymentRequest:
+      required:
+      - payment_info
+      - priority
+      type: object
+      properties:
+        priority:
+          title: Priority
+          type: string
+          description: "<p>Indicates payment processing priority. Supported values</p> \n<table><tr><td>Code</td><td>Description</td></tr><tr><td>ATTENDED</td><td>Payment marked as attended will be processed immediately and will be rejected if the responding participant is not available</td></tr><tr><td>UNATTENDED</td><td>Payments marked as unattended may not be processed immediately. In cases where the responding participant is not available, the payment will be stored for later processing and hence won’t be rejected</td></tr></table>"
+          example: ATTENDED
+          enum:
+          - ATTENDED
+          - UNATTENDED
+        payment_info:
+          $ref: '#/components/schemas/PaymentInformation'
+        retry_info:
+          $ref: '#/components/schemas/RetryInformation'
+      description: "Definition of the Initiate Payment request data.\n \n **Property descriptions**: \n \n- **priority** - Indicates payment processing priority.\n Supported values: \n\n   - Attended: Payment marked as attended will be processed immediately and will be rejected if the responding participant is not available\n   - Unattended: Payments marked as unattended may not be processed immediately. In cases where the responding participant is not available, the payment will be stored for later processing and hence won’t be rejected\n- **payment_info** - Payment info for payment request.\n- **retry_info** - Retry information should be provided only if the payment request was rejected previously due to business reasons and a retry for the same is being attempted."
     PaymentInformation:
       required:
       - instructed_amount
@@ -462,6 +572,20 @@ components:
           description: Specifies a character string with a maximum length of 35 ASCII printable characters.
           example: uniqueSuperannuation code
       description: "Payment Request details.\n \n **Property descriptions**: \n \n- **instruction_id** - Unique identifier for the payment request generated as per NPPA guidelines. This identifier is used to identify the payment uniquely with NPPA and payer as well.\n- **instructed_amount** - Specifies the amount to be debited the from debtor's bank account before deduction of charges.\n- **last_payment** - Indicates that it is the last payment associated with the agreement. Post this, the agreement will be marked as CANCELLED automatically and no further payments can be requested on this agreement.\n- **end_to_end_id** - Unique identification to unambiguously identify the payment. This identification is passed on, unchanged, throughout the entire end-to-end chain. It is recommended to provide this identifier which can be passed between entities to identify the payment during queries/investigations if any. If not provided, debtor reference (if available) from the agreement will be populated. If none available, default value \"NOTPROVIDED\" will be populated in the payment initiation request.\n- **remittance_info** - Free text field to provide any narrative for the payment.\n- **unique_superannuation_code** - For agreements created with PURPOSE_CODE = PENS (pension payments), this should be the USI number for the superannuation fund.\n- **unique_superannuation_id** - For agreements created with PURPOSE_CODE = PENS (pension payments), this should be the USI - code indicating the identifier to whom the superannuation fund will be provided."
+    InitiatePaymentListResponse:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: Total number of initiate payments available
+          format: int64
+          example: 1
+        initiate_payment_status_responses:
+          type: array
+          description: List of Initiate Payment requests.
+          items:
+            $ref: '#/components/schemas/InitiatePaymentStatusResponse'
+      description: "List of Initiate Payment Status details. \n"
     ErrorDetails:
       type: object
       properties:
@@ -469,6 +593,20 @@ components:
           type: string
         error_message:
           type: string
+    RetryAttempts:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Retries count.
+          format: int32
+          example: 1
+        retry_info:
+          type: array
+          description: Retry info for initiate payment.
+          items:
+            $ref: '#/components/schemas/RetryInfo'
+      description: "List of retry attempts for the payment request. \n \n **Property descriptions**: \n\n- **count** - Payment retry count. \n\n- **retry_info** - Payment information for each retry attempt, listed in descending order of retry attempts."
     RetryInfo:
       type: object
       properties:
@@ -504,88 +642,6 @@ components:
         payment_info:
           $ref: '#/components/schemas/PaymentInfo'
       description: "Payment information for each retry attempt. \n \n **Property descriptions**: \n \n- **instruction_id** - Unique identifier for the payment request generated as per NPPA guidelines. This identifier is used to identify the payment uniquely with NPPA and payer as well.\n- **status** - Current status of Initiate Payment Request.\n- **status_description** - Details/description for the status.\n - **created_at** - Date representation of the payment request creation.\n - **updated_at** - Date representation of the last update of the payment request.\n- **payment_info** - Payment info for payment request."
-    InitiatePaymentStatusResponse:
-      type: object
-      properties:
-        payment_request_uuid:
-          type: string
-          description: Unique identifier for the payment request in UUID format.
-          example: d0c40d95-95b7-449b-9835-3c97c0386585
-        instruction_id:
-          type: string
-          description: Unique identifier for each payment and retry request generated as per NPPA guidelines.
-          example: BANKNTSTXXXI20180501000000000000010
-        agreement_uuid:
-          type: string
-          description: Unique agreement identifier.
-          example: d0c40d95-95b7-449b-9835-3c97c0386585
-        agreement_id:
-          type: string
-          description: Unique agreement identifier generated by NPPA.
-          example: 00000000000010008000000000000000
-        status:
-          title: Status
-          type: string
-          description: Possible statuses for payment or retry requests:<table><tr><td>Code</td><td>Description</td></tr><tr><td>PENDING_PAYMENT_INITIATION</td><td>Payment request is pending for initiation.</td></tr><tr><td>PAYMENT_INITIATED</td><td>Payment request is initiated.</td></tr><tr><td>PAYMENT_INITIATION_COMPLETED</td><td>Payment request is completed.</td></tr><tr><td>PAYMENT_INITIATION_REJECTED</td><td>Payment request is rejected.</td></tr></table>
-          enum:
-          - PENDING_PAYMENT_INITIATION
-          - PAYMENT_INITIATED
-          - PAYMENT_INITIATION_COMPLETED
-          - PAYMENT_INITIATION_REJECTED
-        status_description:
-          type: string
-          description: Free text field to provide description status
-          example: status description
-        status_reason_code:
-          type: string
-          description: Free text field to provide reason code:<table><tr><td>Reason Code</td><td>Description</td><td>Retry eligible</td></tr><tr><td>ClearingAndSettlementError </td><td>An error occurred during clearing and settlement of the payment. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayeeBankOffline </td><td>Payee institution is offline. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountNumberInvalid </td><td>Payer account details or PayID provided is invalid or does not exist within NPP. Please update the agreement with correct account details and try again.</td><td>No</td></tr><tr><td>PayeeAccountNumberInvalid </td><td>Payee account details provided is invalid or does not exist within NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountClosed </td><td>Payer account provided is closed. Please update the agreement with correct account details and try again.</td><td>No</td></tr><tr><td>InsufficientFunds </td><td>Payer account has insufficient funds at the moment. Please contact the payer and retry the same payment again after funds availability.</td><td>Yes</td></tr><tr><td>BlockedAccount </td><td>Account provided is temporarily blocked. Please retry the same payment again after some time or contact the payer.</td><td>Yes</td></tr><tr><td>PayeeAccountClosed </td><td>Payee account provided is closed. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerAccountTypeInvalid </td><td>Payer account type is invalid - unable to debit funds within NPP. Please update the agreement with correct account details and try again or contact the payer.</td><td>No</td></tr><tr><td>PayeeAccountTypeInvalid </td><td>Payee account type is invalid - unable to credit funds within NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnexpectedError </td><td>Unexpected error occurred while processing the payment initiation request. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>TransactionForbiddenOnPayerAccount</td><td>Either the Payer account does not allow debits within NPP or agreement to debit the account is not active. Please update the agreement with correct account details and try again or contact the Payer.</td><td>No</td></tr><tr><td>NPPTransactionNotSupported </td><td>Payee institution has rejected the NPP payment from Payer institution. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnspecifiedReason </td><td>Payment initiation request has been rejected by the Payer institution without any specified reason.</td><td>Yes</td></tr><tr><td>RequestedByPayer </td><td>Payment rejection has been requested by the Payer. Please contact the Payer or retry the same payment again.</td><td>Yes</td></tr><tr><td>UndisclosedReason </td><td>Payment has been rejected due to undisclosed reasons.</td><td>No</td></tr><tr><td>RequestedByPayer-UnspecifiedReason </td><td>Payment has been rejected by the Payer without any specified reason. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>Prohibited </td><td>Payment has been rejected as it is considered prohibited.</td><td>No</td></tr><tr><td>RequestedByPayerBank-UnspecifiedReason</td><td>Payment has been rejected by the Payer institution without any specified reason. Please try again or contact the Payer institution.</td><td>No</td></tr><tr><td>PayeeNotOnAllowlistOfPayer </td><td>Payee not on the allowlist/trusted list of the Payer. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>PayeeOnBlocklistOfPayer </td><td>Payee is blocked/blacklisted by the Payer. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>ExceedsMaxAllowedDirectDebitTransactions </td><td>The payment request exceeds the maximum number of direct debit transactions allowed on the Payer account. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>ExceedsMaxAllowedDirectDebitTransactionAmount</td><td>The payment amount requested exceeds the maximum amount that can be debited from the Payer account via direct debit. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>UnexpectedError-RetrySamePayment </td><td>Unexpected error occurred while processing the payment initiation request. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayerUnavailable </td><td>Payer institution is unavailable. Please retry the same payment again or contact the Payer.</td><td>Yes</td></tr><tr><td>InvalidPayerPayID </td><td>PayID details of the Payer are no longer valid. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>PayerBSBNotNPPReachable </td><td>Payer BSB is not NPP reachable. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>PayerNotNPPReachable </td><td>Payer is no longer reachable on NPP. Please try again or cancel the agreement.</td><td>No</td></tr><tr><td>PayeeNotNPPReachable </td><td>Payee is no longer reachable on NPP. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>IncorrectPayerPayID </td><td>PayID details of the Payer are no longer valid as the PayID has been ported incorrectly. Please update the agreement with correct details and try again or contact the Payer.</td><td>No</td></tr><tr><td>NotRetryEligible </td><td>Retries are allowed only if the payment has been rejected with retry eligible rejection reasons.</td><td>No</td></tr><tr><td>EndToEndIDInvalidOrMissing </td><td>EndToEndID is either invalid or missing. Please correct the end to end id and retry the same payment again.</td><td>Yes</td></tr><tr><td>Non-CompliantPayment </td><td>Payment amount is not as per the agreed payment terms and conditions. Please correct the amount and retry the same payment again.</td><td>Yes</td></tr><tr><td>NPPLimitExceeded </td><td>Payment amount requested exceeds the agreed limits for the Payer account. Please correct the amount and retry the same payment again.</td><td>Yes</td></tr><tr><td>UnrecognisedInitiatingParty </td><td>The Payer has requested the payment rejection as the Initiating party is not recognised by them. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>UnknownPayer </td><td>The payment has been rejected by the Payer institution as the Payer is not known as per records. Please try again or contact the Payer.</td><td>No</td></tr><tr><td>PayeeBSBNotNPPReachable </td><td>Payee BSB is not NPP reachable. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>PayerNameOrAddressDetailsMissing </td><td>Payer name or address details are missing. Please update the agreement with complete Payer details and try again.</td><td>No</td></tr><tr><td>PayeeNameOrAddressDetailsMissing </td><td>Payee name or address details are missing. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnknownReason </td><td>Payment has been rejected due to unknown reason.</td><td>No</td></tr><tr><td>PayeeUnavailable </td><td>Payee institution is unavailable. Please retry the same payment again or contact Zai support.</td><td>Yes</td></tr><tr><td>PayerNameMissing </td><td>Payer name is missing. Please update the agreement with complete Payer details and try again.</td><td>No</td></tr><tr><td>PayeeNameMissing </td><td>Payee name is missing in the agreement. Please try again or contact Zai support.</td><td>No</td></tr><tr><td>UnsupportedCurrency </td><td>Unable to debit funds in AUD from the provided Payer account.</td><td>No</td></tr><tr><td>AmountExceedsMaxNPPLimit </td><td>Payment amount either exceeds the maximum allowed NPP limit of $99,999,999,999 or maximum allowed NPP limit for the Payer account.</td><td>No</td></tr></table>
-        status_reason_description:
-          type: string
-          description: Free text field to provide reason description.
-          example: reason description
-        payment_reconciled:
-          type: boolean
-          description: Indicator to say whether the payment has been reconciled successfully on user's wallet or not.
-          example: true
-        created_at:
-          type: string
-          description: Payment request creation date.
-          example: '2022-03-21 16:25:00.312368'
-        updated_at:
-          type: string
-          description: Payment request modification date.
-          example: '2022-03-22 16:25:00.312368'
-        payment_info:
-          $ref: '#/components/schemas/PaymentInfo'
-        retry_attempts:
-          $ref: '#/components/schemas/RetryAttempts'
-      description: "Definition of PayTo Payment Details. \n\n **Property descriptions**: \n\n- **payment_request_uuid** - Unique identifier for the payment request in UUID format.\n- **instruction_id** - Unique identifier for the payment request generated as per NPPA guidelines. This identifier is used to identify the payment uniquely with NPPA and payer as well.\n- **agreement_uuid** - Unique agreement identifier.\n- **agreement_id** - Unique agreement identifier generated by NPPA.\n- **status** - Current status of the payment or retry request.\n- **status_description** - Details/description for the status.\n- **status_reason_code** - Reason code for the current payment initiation request status.\n- **status_reason_description** - Detailed description of the status reason code.\n- **payment_reconciled** - Indicator to say whether the payment has been reconciled successfully on user's wallet or not.\n - **created_at** - Date representation of the payment request creation.\n - **updated_at** - Date representation of the last update of the payment request.\n- **payment_info** - Payment information for the payment request.\n- **retry_attempts** - Payment information for all retry attempts."
-    InitiatePaymentRequest:
-      required:
-      - payment_info
-      - priority
-      type: object
-      properties:
-        priority:
-          title: Priority
-          type: string
-          description: "<p>Indicates payment processing priority. Supported values</p> \n<table><tr><td>Code</td><td>Description</td></tr><tr><td>ATTENDED</td><td>Payment marked as attended will be processed immediately and will be rejected if the responding participant is not available</td></tr><tr><td>UNATTENDED</td><td>Payments marked as unattended may not be processed immediately. In cases where the responding participant is not available, the payment will be stored for later processing and hence won’t be rejected</td></tr></table>"
-          example: ATTENDED
-          enum:
-          - ATTENDED
-          - UNATTENDED
-        payment_info:
-          $ref: '#/components/schemas/PaymentInformation'
-        retry_info:
-          $ref: '#/components/schemas/RetryInformation'
-      description: "Definition of the Initiate Payment request data.\n \n **Property descriptions**: \n \n- **priority** - Indicates payment processing priority.\n Supported values: \n\n   - Attended: Payment marked as attended will be processed immediately and will be rejected if the responding participant is not available\n   - Unattended: Payments marked as unattended may not be processed immediately. In cases where the responding participant is not available, the payment will be stored for later processing and hence won’t be rejected\n- **payment_info** - Payment info for payment request.\n- **retry_info** - Retry information should be provided only if the payment request was rejected previously due to business reasons and a retry for the same is being attempted."
-    PayToErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
   securitySchemes:
     bearerAuth:
       type: http

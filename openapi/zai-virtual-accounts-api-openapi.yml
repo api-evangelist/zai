@@ -7,9 +7,7 @@ info:
     Enhance the payments experience on your platform by registering a user friendly identifier, i.e. a _PayID_, for each user''s _Virtual Account_. Your users should then be able to address payins using _PayIDs_ which are easier to remember and use than a BSB and account number.
 
 
-    This swagger document lists APIs for _Virtual Account_ and _PayID_ creation and management.
-
-    '
+    This swagger document lists APIs for _Virtual Account_ and _PayID_ creation and management.'
   contact:
     url: https://developer.hellozai.com/reference/overview
     email: support@hellozai.com
@@ -477,6 +475,82 @@ paths:
                 $ref: '#/components/schemas/inline_response_500'
 components:
   schemas:
+    inline_response_409_object:
+      properties:
+        errors:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Cannot close a Virtual Account with active PayIDs registered.
+            code:
+              type: string
+              example: has_active_payids
+            pay_ids:
+              type: array
+              items:
+                type: string
+                example: f7aa99c9-4556-48da-aab1-39470fd933ab
+          required:
+          - error
+          - code
+    virtual_account_account_name:
+      type: string
+      maxLength: 140
+      description: A name given for a _Virtual Account_. This is used in CoP lookups.
+      example: Real Estate Agency X
+    create_virtual_account_request:
+      type: object
+      properties:
+        account_name:
+          $ref: '#/components/schemas/virtual_account_account_name'
+        aka_names:
+          $ref: '#/components/schemas/aka_names'
+    inline_response_403_inactive:
+      properties:
+        errors:
+          type: string
+          example: Cannot update a Virtual Account that isn't active.
+    inline_response_409_patch:
+      properties:
+        errors:
+          type: string
+          example: An update for this Virtual Account is already in progress. Please try again later.
+    virtual_account_not_found:
+      properties:
+        errors:
+          type: string
+          example: Virtual Account does not exist.
+    merchant_id:
+      type: string
+      maxLength: 35
+      description: An identifier that links a _Virtual Account_ to a merchant. This is used in CoP lookups.
+      example: 46deb476c1a641eb8eb726a695bbe5bc
+    inline_response_500:
+      properties:
+        errors:
+          type: string
+          example: An error occurred processing your request. Please try again.
+    update_virtual_account_account_name_request:
+      type: object
+      required:
+      - account_name
+      properties:
+        account_name:
+          $ref: '#/components/schemas/virtual_account_account_name'
+    virtual_accounts_list:
+      type: object
+      properties:
+        virtual_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/virtual_account'
+        meta:
+          type: object
+          properties:
+            total:
+              type: number
+              example: 2
     update_va_status_resp:
       type: object
       properties:
@@ -494,63 +568,6 @@ components:
             self:
               type: string
               example: /virtual_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-    update_virtual_account_account_name_request:
-      type: object
-      required:
-      - account_name
-      properties:
-        account_name:
-          $ref: '#/components/schemas/virtual_account_account_name'
-    inline_response_409:
-      properties:
-        wallet_account_id:
-          type: string
-          example: Provided wallet_account_id is already associated with an active or pending activation virtual account
-    virtual_account_not_found:
-      properties:
-        errors:
-          type: string
-          example: Virtual Account does not exist.
-    aka_names:
-      type: array
-      items:
-        $ref: '#/components/schemas/aka_name'
-      maximum: 3
-      minimum: 0
-      description: A list of AKA Names.
-      example:
-      - Realestate Agency X
-      - Realestate Agency X of PropTech Marketplace
-    inline_response_403_inactive:
-      properties:
-        errors:
-          type: string
-          example: Cannot update a Virtual Account that isn't active.
-    virtual_accounts_list:
-      type: object
-      properties:
-        virtual_accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/virtual_account'
-        meta:
-          type: object
-          properties:
-            total:
-              type: number
-              example: 2
-    update_virtual_account_aka_names_request:
-      type: object
-      required:
-      - aka_names
-      properties:
-        aka_names:
-          $ref: '#/components/schemas/aka_names'
-    inline_response_500:
-      properties:
-        errors:
-          type: string
-          example: An error occurred processing your request. Please try again.
     virtual_account:
       type: object
       properties:
@@ -615,71 +632,47 @@ components:
           $ref: '#/components/schemas/aka_names'
         merchant_id:
           $ref: '#/components/schemas/merchant_id'
-    create_virtual_account_request:
-      type: object
-      properties:
-        account_name:
-          $ref: '#/components/schemas/virtual_account_account_name'
-        aka_names:
-          $ref: '#/components/schemas/aka_names'
-    inline_response_409_object:
+    inline_response_400_1:
       properties:
         errors:
           type: object
-          properties:
-            error:
-              type: string
-              example: Cannot close a Virtual Account with active PayIDs registered.
-            code:
-              type: string
-              example: has_active_payids
-            pay_ids:
-              type: array
-              items:
-                type: string
-                example: f7aa99c9-4556-48da-aab1-39470fd933ab
-          required:
-          - error
-          - code
     inline_response_400_deprecated:
       properties:
         errors:
           type: string
           example: 'invalid format for url param: id'
-    merchant_id:
-      type: string
-      maxLength: 35
-      description: An identifier that links a _Virtual Account_ to a merchant. This is used in CoP lookups.
-      example: 46deb476c1a641eb8eb726a695bbe5bc
-    virtual_account_account_name:
-      type: string
-      maxLength: 140
-      description: A name given for a _Virtual Account_. This is used in CoP lookups.
-      example: Real Estate Agency X
-    inline_response_401:
+    update_virtual_account_aka_names_request:
+      type: object
+      required:
+      - aka_names
       properties:
-        errors:
-          type: string
-          example: Invalid or missing authorisation token
-    aka_name:
-      type: string
-      maxLength: 140
-      description: An alias for a _Virtual Account_. This is used in CoP lookups.
-      example: Realestate Agency X
-    inline_response_409_patch:
-      properties:
-        errors:
-          type: string
-          example: An update for this Virtual Account is already in progress. Please try again later.
+        aka_names:
+          $ref: '#/components/schemas/aka_names'
     wallet_account_not_found:
       properties:
         errors:
           type: string
           example: Wallet Account does not exist.
-    inline_response_400_1:
+    inline_response_401:
       properties:
         errors:
-          type: object
+          type: string
+          example: Invalid or missing authorisation token
+    aka_names:
+      type: array
+      items:
+        $ref: '#/components/schemas/aka_name'
+      maximum: 3
+      minimum: 0
+      description: A list of AKA Names.
+      example:
+      - Realestate Agency X
+      - Realestate Agency X of PropTech Marketplace
+    aka_name:
+      type: string
+      maxLength: 140
+      description: An alias for a _Virtual Account_. This is used in CoP lookups.
+      example: Realestate Agency X
     inline_response_403_va:
       properties:
         errors:
@@ -690,6 +683,11 @@ components:
               items:
                 type: string
                 example: Feature not available
+    inline_response_409:
+      properties:
+        wallet_account_id:
+          type: string
+          example: Provided wallet_account_id is already associated with an active or pending activation virtual account
 x-explorer-enabled: false
 x-samples-languages:
 - curl

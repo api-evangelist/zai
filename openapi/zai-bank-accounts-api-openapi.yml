@@ -88,9 +88,7 @@ paths:
       tags:
       - Bank Accounts
       summary: Redact Bank Account
-      description: 'Redact a **Bank Account** using a given `:id`. Redacted **Bank Accounts** can no longer be used as a funding source or a Disbursement destination.
-
-        '
+      description: Redact a **Bank Account** using a given `:id`. Redacted **Bank Accounts** can no longer be used as a funding source or a Disbursement destination.
       operationId: redactBankAccount
       parameters:
       - name: id
@@ -119,9 +117,7 @@ paths:
       tags:
       - Bank Accounts
       summary: Send Penny Amount
-      description: 'When penny verification is enabled, this API call sends two penny transactions to the specified bank account for verification. **Note**: This API call is not required when your platform has automatic penny verification enabled, as this is instead done by the system. Penny credit verification is only supported for US platforms.
-
-        '
+      description: 'When penny verification is enabled, this API call sends two penny transactions to the specified bank account for verification. **Note**: This API call is not required when your platform has automatic penny verification enabled, as this is instead done by the system. Penny credit verification is only supported for US platforms.'
       operationId: sendPennyAmount
       parameters:
       - name: id
@@ -169,7 +165,7 @@ paths:
       tags:
       - Bank Accounts
       summary: Create Bank Account
-      description: "Create a **Bank Account** to be used as either a funding source or a Disbursement destination. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a `token` when involving **Bank Accounts**. \n"
+      description: Create a **Bank Account** to be used as either a funding source or a Disbursement destination. Store the returned `:id` and use it for a `make_payment` **Item Action** call. The `:id` is also referred to as a `token` when involving **Bank Accounts**.
       operationId: createBankAccount
       requestBody:
         required: true
@@ -226,9 +222,7 @@ paths:
       tags:
       - Bank Accounts
       summary: Verify Penny Amount
-      description: 'When penny verification is enabled, this API call verifies the two penny transactions that were sent to a specified bank account using **Send Penny Amount**. **Note**: This API call requires you to provide a front-end interface to your end-users into which they can input the penny amounts required for a successful verification. Your front-end interface should then pass the information into this API call. Penny credit verification is only supported for US platforms.
-
-        '
+      description: 'When penny verification is enabled, this API call verifies the two penny transactions that were sent to a specified bank account using **Send Penny Amount**. **Note**: This API call requires you to provide a front-end interface to your end-users into which they can input the penny amounts required for a successful verification. Your front-end interface should then pass the information into this API call. Penny credit verification is only supported for US platforms.'
       operationId: verifyPennyAmount
       parameters:
       - name: id
@@ -378,6 +372,66 @@ paths:
                       phone_suffix: '631'
 components:
   schemas:
+    single_routing_number:
+      type: object
+      properties:
+        routing_number:
+          type: object
+          properties:
+            routing_number:
+              type: string
+              example: 122235821
+            customer_name:
+              type: string
+              example: US BANK NA
+            address:
+              type: string
+              example: EP-MN-WN1A
+            city:
+              type: string
+              example: ST. PAUL
+            state_code:
+              type: string
+              example: MN
+            zip:
+              type: string
+              example: 55107
+            zip_extension:
+              type: string
+              example: 1419
+            phone_area_code:
+              type: string
+              example: 800
+            phone_prefix:
+              type: string
+              example: 937
+            phone_suffix:
+              type: string
+              example: 6310
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    penny_verify_requestBody:
+      type: object
+      required:
+      - amount_1
+      - amount_2
+      properties:
+        amount_1:
+          description: First penny amount in cents. Can range from 1 to 30 cents.
+          type: integer
+          default: 10
+        amount_2:
+          description: Second penny amount in cents. Can range from 1 to 30 cents.
+          type: integer
+          default: 20
+    bank_account_deletion:
+      properties:
+        bank_account:
+          type: string
+          example: Successfully redacted
     bank_account_requestBody_au:
       type: object
       required:
@@ -549,47 +603,6 @@ components:
                   type: string
                 direct_debit_authorities:
                   type: string
-    single_routing_number:
-      type: object
-      properties:
-        routing_number:
-          type: object
-          properties:
-            routing_number:
-              type: string
-              example: 122235821
-            customer_name:
-              type: string
-              example: US BANK NA
-            address:
-              type: string
-              example: EP-MN-WN1A
-            city:
-              type: string
-              example: ST. PAUL
-            state_code:
-              type: string
-              example: MN
-            zip:
-              type: string
-              example: 55107
-            zip_extension:
-              type: string
-              example: 1419
-            phone_area_code:
-              type: string
-              example: 800
-            phone_prefix:
-              type: string
-              example: 937
-            phone_suffix:
-              type: string
-              example: 6310
-    bank_account_deletion:
-      properties:
-        bank_account:
-          type: string
-          example: Successfully redacted
     user:
       type: object
       properties:
@@ -677,25 +690,6 @@ components:
               type: string
             wallet_accounts:
               type: string
-    penny_verify_requestBody:
-      type: object
-      required:
-      - amount_1
-      - amount_2
-      properties:
-        amount_1:
-          description: First penny amount in cents. Can range from 1 to 30 cents.
-          type: integer
-          default: 10
-        amount_2:
-          description: Second penny amount in cents. Can range from 1 to 30 cents.
-          type: integer
-          default: 20
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

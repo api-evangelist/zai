@@ -246,9 +246,7 @@ paths:
       tags:
       - Users
       summary: Verify User (Prelive Only)
-      description: 'Sets a user''s verification state to `approved` on pre-live given the **User** `:id`. Ensure that a **User** has the required user verification information before using this call, otherwise the call will fail. **Note**: This API call will only work in our pre-live environment. The user verification workflow holds for all users in production.
-
-        '
+      description: 'Sets a user''s verification state to `approved` on pre-live given the **User** `:id`. Ensure that a **User** has the required user verification information before using this call, otherwise the call will fail. **Note**: This API call will only work in our pre-live environment. The user verification workflow holds for all users in production.'
       operationId: verifyUser
       parameters:
       - name: id
@@ -491,9 +489,7 @@ paths:
       tags:
       - Users
       summary: Create User
-      description: 'Create a **User** that can be associated with **Items** as either a buyer or a seller. **Users** can''t be both the buyer and seller for the same **Item**. You can also use this endpoint to create a **company** for the user. To create a company for the user, you need to send company parameters in the same request. **Note**: Some parameters are required for user verification. See our guide on [Onboarding a Payout User/Seller](https://developer.hellozai.com/docs/onboarding-a-pay-out-user) for more information.
-
-        '
+      description: 'Create a **User** that can be associated with **Items** as either a buyer or a seller. **Users** can''t be both the buyer and seller for the same **Item**. You can also use this endpoint to create a **company** for the user. To create a company for the user, you need to send company parameters in the same request. **Note**: Some parameters are required for user verification. See our guide on Onboarding a Payout User/Seller for more information.'
       operationId: createUser
       requestBody:
         required: true
@@ -654,121 +650,6 @@ paths:
                         virtual_accounts: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
 components:
   schemas:
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
-    bank_account_id_requestBody:
-      type: object
-      required:
-      - account_id
-      properties:
-        account_id:
-          description: Account ID (Bank account)
-          type: string
-          example: 901d8cd0-6af3-0138-967d-0a58a9feac04
-          default: 901d8cd0-6af3-0138-967d-0a58a9feac04
-    bank_account_au:
-      type: object
-      properties:
-        bank_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - not_verified
-              - in_progress
-              - processed
-              example: not_verified
-            verification:
-              type: object
-              properties:
-                verified_at:
-                  type: string
-                  format: date-time
-                verification_method:
-                  type: string
-                  enum:
-                  - COP
-                result:
-                  type: object
-                  properties:
-                    match_result:
-                      type: string
-                      enum:
-                      - MTCH
-                      - MTCO
-                      - CMTC
-                      - WMTC
-                      - NMTC
-                      - NMTO
-                      - NINF
-                      - NFND
-                      - CLSD
-            bank:
-              type: object
-              properties:
-                bank_name:
-                  type: string
-                  example: Bank of Australia
-                country:
-                  type: string
-                  example: AUS
-                account_name:
-                  type: string
-                  example: Samuel Seller
-                routing_number:
-                  type: string
-                  example: XXXXX3
-                account_number:
-                  type: string
-                  example: XXX234
-                holder_type:
-                  type: string
-                  enum:
-                  - personal
-                  - business
-                  example: personal
-                account_type:
-                  type: string
-                  enum:
-                  - savings
-                  - checking
-                  example: checking
-                direct_debit_authority_status:
-                  type: string
-                  readOnly: true
-                  enum:
-                  - 'null'
-                  - approved
-                  example: approved
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                users:
-                  type: string
-                direct_debit_authorities:
-                  type: string
     item:
       type: object
       required:
@@ -995,6 +876,16 @@ components:
               type: string
             tds_checks:
               type: string
+    bank_account_id_requestBody:
+      type: object
+      required:
+      - account_id
+      properties:
+        account_id:
+          description: Account ID (Bank account)
+          type: string
+          example: 901d8cd0-6af3-0138-967d-0a58a9feac04
+          default: 901d8cd0-6af3-0138-967d-0a58a9feac04
     user_requestBody:
       type: object
       required:
@@ -1165,6 +1056,338 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/user'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    update_user_requestBody:
+      type: object
+      required:
+      - first_name
+      properties:
+        first_name:
+          description: First name of the user
+          type: string
+          example: Neol1556506027
+          default: Neol1556506027
+        last_name:
+          description: Last name of the user
+          type: string
+          example: Calangi
+        email:
+          description: Email of the user. Unique to platform.
+          type: string
+          example: neol.calangi+buyer1556506027@promisepay.com
+        mobile:
+          description: International number format. Include '+' and no spaces.
+          type: string
+          example: '+21556506027'
+        address_line1:
+          description: First line of the user address
+          type: string
+          example: ''
+        address_line2:
+          description: Second line of the user address
+          type: string
+          example: ''
+        state:
+          description: State section of the user address
+          type: string
+          example: ''
+        city:
+          description: City section of the user address
+          type: string
+          example: ''
+        zip:
+          description: Postcode
+          type: string
+          example: ''
+        country:
+          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code (3 char)'
+          type: string
+          example: AUS
+        dob:
+          description: Date of Birth (DD/MM/YYYY).
+          type: string
+          example: null
+        government_number:
+          description: Generic parameter to capture important user verification data. eg. SSN for US users, TFN for AU users.
+          type: string
+          example: ''
+        drivers_license_number:
+          description: Driving license number of the user
+          type: string
+          example: ''
+        drivers_license_state:
+          description: State section of the user's driving license
+          type: string
+          example: ''
+        ip_address:
+          description: IP address
+          type: string
+          example: ''
+        logo_url:
+          description: URL link to the logo
+          type: string
+          example: ''
+        color_1:
+          description: Color code number 1
+          type: string
+          example: ''
+        color_2:
+          description: Color code number 2
+          type: string
+          example: ''
+        custom_descriptor:
+          description: When custom_descriptors are enabled, this is the information to appear on bundle direct debit statements (which show the buyer's custom_descriptor) as well as international wire payout, direct credit and PayPal payout statements (which show the seller's custom_descriptor)
+          type: string
+          example: ''
+        authorized_signer_title:
+          description: '‘Authorised Signer Title’, which refers to the role / job title (e.g. Director or General Manager) for the individual User, who is authorised to sign contracts on behalf of the business entity / Merchant User. (Note: information required for AMEX Merchants)'
+          type: string
+          example: Director
+    wallet_account:
+      type: object
+      properties:
+        wallet_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            balance:
+              type: integer
+            links:
+              type: object
+              properties:
+                self:
+                  type: object
+                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
+                users:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
+                batch_transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
+                transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
+                bpay_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
+                npp_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
+                virtual_accounts:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
+    items:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/item'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+    list_bpay_accounts:
+      properties:
+        bpay_accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              active:
+                type: boolean
+                example: true
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
+              id:
+                type: string
+                format: uuid
+                example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+              currency:
+                type: string
+                example: AUD
+              verification_status:
+                type: string
+                enum:
+                - verified
+                - not_verified
+                example: not_verified
+              bpay_details:
+                type: object
+                properties:
+                  account_name:
+                    type: string
+                    example: My biller 123
+                    description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+                  biller_code:
+                    type: integer
+                    example: 123456
+                  biller_name:
+                    type: string
+                    description: Name of the biller as registered in BPay
+                    example: ABC Water
+                  crn:
+                    type: integer
+                    example: 987654321
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                  users:
+                    type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+    bank_account_au:
+      type: object
+      properties:
+        bank_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - not_verified
+              - in_progress
+              - processed
+              example: not_verified
+            verification:
+              type: object
+              properties:
+                verified_at:
+                  type: string
+                  format: date-time
+                verification_method:
+                  type: string
+                  enum:
+                  - COP
+                result:
+                  type: object
+                  properties:
+                    match_result:
+                      type: string
+                      enum:
+                      - MTCH
+                      - MTCO
+                      - CMTC
+                      - WMTC
+                      - NMTC
+                      - NMTO
+                      - NINF
+                      - NFND
+                      - CLSD
+            bank:
+              type: object
+              properties:
+                bank_name:
+                  type: string
+                  example: Bank of Australia
+                country:
+                  type: string
+                  example: AUS
+                account_name:
+                  type: string
+                  example: Samuel Seller
+                routing_number:
+                  type: string
+                  example: XXXXX3
+                account_number:
+                  type: string
+                  example: XXX234
+                holder_type:
+                  type: string
+                  enum:
+                  - personal
+                  - business
+                  example: personal
+                account_type:
+                  type: string
+                  enum:
+                  - savings
+                  - checking
+                  example: checking
+                direct_debit_authority_status:
+                  type: string
+                  readOnly: true
+                  enum:
+                  - 'null'
+                  - approved
+                  example: approved
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                users:
+                  type: string
+                direct_debit_authorities:
+                  type: string
     user:
       type: object
       properties:
@@ -1252,93 +1475,6 @@ components:
               type: string
             wallet_accounts:
               type: string
-    list_bpay_accounts:
-      properties:
-        bpay_accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              active:
-                type: boolean
-                example: true
-              created_at:
-                type: string
-                format: date-time
-              updated_at:
-                type: string
-                format: date-time
-              id:
-                type: string
-                format: uuid
-                example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-              currency:
-                type: string
-                example: AUD
-              verification_status:
-                type: string
-                enum:
-                - verified
-                - not_verified
-                example: not_verified
-              bpay_details:
-                type: object
-                properties:
-                  account_name:
-                    type: string
-                    example: My biller 123
-                    description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
-                  biller_code:
-                    type: integer
-                    example: 123456
-                  biller_name:
-                    type: string
-                    description: Name of the biller as registered in BPay
-                    example: ABC Water
-                  crn:
-                    type: integer
-                    example: 987654321
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                  users:
-                    type: string
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-    items:
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/item'
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
     card_account:
       type: object
       properties:
@@ -1398,146 +1534,6 @@ components:
                 users:
                   type: string
                   example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
-    wallet_account:
-      type: object
-      properties:
-        wallet_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            balance:
-              type: integer
-            links:
-              type: object
-              properties:
-                self:
-                  type: object
-                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
-                users:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
-                batch_transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
-                transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
-                bpay_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
-                npp_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
-                virtual_accounts:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
-    update_user_requestBody:
-      type: object
-      required:
-      - first_name
-      properties:
-        first_name:
-          description: First name of the user
-          type: string
-          example: Neol1556506027
-          default: Neol1556506027
-        last_name:
-          description: Last name of the user
-          type: string
-          example: Calangi
-        email:
-          description: Email of the user. Unique to platform.
-          type: string
-          example: neol.calangi+buyer1556506027@promisepay.com
-        mobile:
-          description: International number format. Include '+' and no spaces.
-          type: string
-          example: '+21556506027'
-        address_line1:
-          description: First line of the user address
-          type: string
-          example: ''
-        address_line2:
-          description: Second line of the user address
-          type: string
-          example: ''
-        state:
-          description: State section of the user address
-          type: string
-          example: ''
-        city:
-          description: City section of the user address
-          type: string
-          example: ''
-        zip:
-          description: Postcode
-          type: string
-          example: ''
-        country:
-          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code (3 char)'
-          type: string
-          example: AUS
-        dob:
-          description: Date of Birth (DD/MM/YYYY).
-          type: string
-          example: null
-        government_number:
-          description: Generic parameter to capture important user verification data. eg. SSN for US users, TFN for AU users.
-          type: string
-          example: ''
-        drivers_license_number:
-          description: Driving license number of the user
-          type: string
-          example: ''
-        drivers_license_state:
-          description: State section of the user's driving license
-          type: string
-          example: ''
-        ip_address:
-          description: IP address
-          type: string
-          example: ''
-        logo_url:
-          description: URL link to the logo
-          type: string
-          example: ''
-        color_1:
-          description: Color code number 1
-          type: string
-          example: ''
-        color_2:
-          description: Color code number 2
-          type: string
-          example: ''
-        custom_descriptor:
-          description: When custom_descriptors are enabled, this is the information to appear on bundle direct debit statements (which show the buyer's custom_descriptor) as well as international wire payout, direct credit and PayPal payout statements (which show the seller's custom_descriptor)
-          type: string
-          example: ''
-        authorized_signer_title:
-          description: '‘Authorised Signer Title’, which refers to the role / job title (e.g. Director or General Manager) for the individual User, who is authorised to sign contracts on behalf of the business entity / Merchant User. (Note: information required for AMEX Merchants)'
-          type: string
-          example: Director
   parameters:
     offsetParam:
       name: offset

@@ -118,11 +118,6 @@ components:
           description: This value is supplied to you by Assembly Payments.
           example: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
           default: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
-    error:
-      type: object
-      properties:
-        error:
-          type: string
     tokens_response:
       type: object
       properties:
@@ -138,6 +133,11 @@ components:
           type: string
           description: Authorization header value prefix. This is a constant.
           example: Bearer
+    error:
+      type: object
+      properties:
+        error:
+          type: string
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

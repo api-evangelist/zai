@@ -70,9 +70,7 @@ paths:
       tags:
       - BPay Accounts
       summary: Create BPay Account
-      description: 'Create a **BPay Account** to be used as a Disbursement destination.
-
-        '
+      description: Create a **BPay Account** to be used as a Disbursement destination.
       operationId: createBPayAccount
       requestBody:
         required: true
@@ -168,39 +166,6 @@ paths:
                         wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
 components:
   schemas:
-    bpay_account_requestBody:
-      type: object
-      required:
-      - user_id
-      - account_name
-      - biller_code
-      - bpay_crn
-      properties:
-        user_id:
-          description: User ID
-          type: string
-          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-        account_name:
-          description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
-          type: string
-          example: My Water Bill Company
-          default: My Water Bill Company
-        biller_code:
-          description: The Biller Code for the biller that will receive the payment. The Biller Code must be a numeric value with 3 to 10 digits.
-          type: integer
-          example: '123456'
-          default: '123456'
-        bpay_crn:
-          description: Customer reference number (crn) to be used for this bpay account. The CRN must contain between 2 and 20 digits.
-          type: string
-          example: '987654321'
-          default: '987654321'
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
     bpay_account:
       type: object
       properties:
@@ -253,6 +218,39 @@ components:
                   type: string
                 users:
                   type: string
+    bpay_account_requestBody:
+      type: object
+      required:
+      - user_id
+      - account_name
+      - biller_code
+      - bpay_crn
+      properties:
+        user_id:
+          description: User ID
+          type: string
+          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+        account_name:
+          description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+          type: string
+          example: My Water Bill Company
+          default: My Water Bill Company
+        biller_code:
+          description: The Biller Code for the biller that will receive the payment. The Biller Code must be a numeric value with 3 to 10 digits.
+          type: integer
+          example: '123456'
+          default: '123456'
+        bpay_crn:
+          description: Customer reference number (crn) to be used for this bpay account. The CRN must contain between 2 and 20 digits.
+          type: string
+          example: '987654321'
+          default: '987654321'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
     user:
       type: object
       properties:

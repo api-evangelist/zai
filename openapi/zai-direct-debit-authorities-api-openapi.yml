@@ -68,9 +68,7 @@ paths:
       tags:
       - Direct Debit Authorities
       summary: Create Direct Debit Authority
-      description: 'Create a **Direct Debit Authority** associated with a **Bank Account**. The **Direct Debit Authority** is required to use a **Bank Account** as a funding source (Direct Debit/ACH).
-
-        '
+      description: Create a **Direct Debit Authority** associated with a **Bank Account**. The **Direct Debit Authority** is required to use a **Bank Account** as a funding source (Direct Debit/ACH).
       operationId: createDirectDebitAuthority
       requestBody:
         required: true
@@ -141,13 +139,47 @@ paths:
                       links:
                         self: /direct_debit_authorities/57abfd04-2ccb-4d55-8bd3-6f1a24a6ea47
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
   schemas:
-    list_direct_debit_authorities:
+    direct_debit_authority_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      properties:
+        account_id:
+          description: Bank account ID
+          type: string
+          example: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
+          default: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
+        amount:
+          description: Amount for direct debit in cents
+          type: integer
+          example: 100
+          default: 100
+    single_direct_debit_authority:
       properties:
         direct_debit_authorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/direct_debit_authority'
+          $ref: '#/components/schemas/direct_debit_authority'
     direct_debit_authority:
       type: object
       properties:
@@ -184,46 +216,12 @@ components:
             self:
               type: string
               example: /direct_debit_authorities/9fda18e7-b1d3-4a83-830d-0cef0f62cd25
-    direct_debit_authority_requestBody:
-      type: object
-      required:
-      - account_id
-      - amount
-      properties:
-        account_id:
-          description: Bank account ID
-          type: string
-          example: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
-          default: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
-        amount:
-          description: Amount for direct debit in cents
-          type: integer
-          example: 100
-          default: 100
-    single_direct_debit_authority:
+    list_direct_debit_authorities:
       properties:
         direct_debit_authorities:
-          $ref: '#/components/schemas/direct_debit_authority'
-  parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
+          type: array
+          items:
+            $ref: '#/components/schemas/direct_debit_authority'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

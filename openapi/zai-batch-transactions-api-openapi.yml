@@ -27,9 +27,7 @@ paths:
       tags:
       - Batch Transactions
       summary: List Batch Transactions
-      description: 'Retrieve an ordered and paginated list of existing **Batch Transactions**. The list can be filtered by **Account**, **Batch ID**, **Item**, and **Transaction Type**.
-
-        '
+      description: Retrieve an ordered and paginated list of existing **Batch Transactions**. The list can be filtered by **Account**, **Batch ID**, **Item**, and **Transaction Type**.
       operationId: listBatchTransactions
       parameters:
       - $ref: '#/components/parameters/limitParam'
@@ -406,6 +404,57 @@ paths:
                         items: /batch_transactions/90c1418b-f4f4-413e-a4ba-f29c334e7f55/items
                         marketplace: /batch_transactions/90c1418b-f4f4-413e-a4ba-f29c334e7f55/marketplaces
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    transactionTypeMethod:
+      name: transaction_type_method
+      in: query
+      description: 'The method the transaction was carried out with. Options for querying are: credit_card, npp, bpay, wire_transfer, wallet_account_transfer, misc. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        enum:
+        - credit_card
+        - npp
+        - bpay
+        - wallet_account_transfer
+        - wire_transfer
+        - misc
+      example: ''
+    transactionType:
+      name: transaction_type
+      in: query
+      description: 'The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
+      required: false
+      schema:
+        type: string
+        enum:
+        - payment
+        - refund
+        - disbursement
+        - fee
+        - deposit
+        - withdrawal
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
   schemas:
     list_batch_transactions:
       properties:
@@ -651,57 +700,6 @@ components:
               type: string
             marketplace:
               type: string
-  parameters:
-    transactionTypeMethod:
-      name: transaction_type_method
-      in: query
-      description: 'The method the transaction was carried out with. Options for querying are: credit_card, npp, bpay, wire_transfer, wallet_account_transfer, misc. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: string
-        enum:
-        - credit_card
-        - npp
-        - bpay
-        - wallet_account_transfer
-        - wire_transfer
-        - misc
-      example: ''
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    transactionType:
-      name: transaction_type
-      in: query
-      description: 'The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
-      required: false
-      schema:
-        type: string
-        enum:
-        - payment
-        - refund
-        - disbursement
-        - fee
-        - deposit
-        - withdrawal
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
