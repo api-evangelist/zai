@@ -852,12 +852,267 @@ paths:
                       state: pending
 components:
   schemas:
-    fees:
+    single_status:
       properties:
-        fees:
+        items:
+          $ref: '#/components/schemas/status'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    wire_details_with_id:
+      properties:
+        id:
+          type: string
+          example: 100fd4a0-0538-11e6-b512-3e1d05defe78
+        wire_details:
+          $ref: '#/components/schemas/wire_details'
+    update_item_requestBody:
+      type: object
+      properties:
+        amount:
+          description: The cost in cents
+          type: integer
+          example: '102'
+        name:
+          description: A name for the item
+          type: string
+          example: Item 7190770-1-2908
+        buyer_id:
+          description: Marketplace / Pltform buyer ID
+          type: string
+          example: buyer-719013950014
+        seller_id:
+          description: Marketplace / Platform Seller ID
+          type: string
+          example: seller-71718579
+        description:
+          description: A description of the item
+          type: string
+          example: Test Item 7190770-1-2908
+        custom_descriptor:
+          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
+          type: string
+          example: ''
+    fee:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 36020976-f345-4d0f-b860-9c025ccce668
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Seller Success Fee
+        fee_type_id:
+          type: string
+          example: 2
+        amount:
+          type: string
+          example: 200
+        cap:
+          type: string
+          example: null
+        min:
+          type: string
+          example: null
+        max:
+          type: string
+          example: null
+        to:
+          type: string
+          example: seller
+        calculated_fee:
+          type: integer
+          description: This field is only shown in case an item amount is passed
+          readOnly: true
+          example: 400
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    single_wire_details_with_id:
+      properties:
+        items:
+          $ref: '#/components/schemas/wire_details_with_id'
+    user:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        full_name:
+          type: string
+          example: Samuel Seller
+        email:
+          type: string
+          format: email
+          example: samuel.seller@assemblypayments.com
+        mobile:
+          type: string
+          example: 61491570156
+        phone:
+          type: string
+        logo_url:
+          type: string
+        color_1:
+          type: string
+        color_2:
+          type: string
+        first_name:
+          type: string
+          example: Samuel
+        last_name:
+          type: string
+          example: Seller
+        id:
+          type: string
+          example: Seller_1234
+        custom_descriptor:
+          type: string
+        location:
+          type: string
+          example: AUS
+        verification_status:
+          type: string
+          example: pending
+        held_state:
+          type: boolean
+          example: false
+        roles:
           type: array
           items:
-            $ref: '#/components/schemas/fee'
+            type: string
+            example: customer
+        dob:
+          type: string
+          example: encrypted
+        government_number:
+          type: string
+          example: encrypted
+        drivers_license:
+          type: string
+        flags:
+          type: object
+        related:
+          type: object
+          properties:
+            addresses:
+              type: string
+              example: fe602dcf-4175-4f88-b5be-3beb04092dcd
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+            items:
+              type: string
+            card_accounts:
+              type: string
+            paypal_accounts:
+              type: string
+            payid_accounts:
+              type: string
+            bpay_accounts:
+              type: string
+            bank_accounts:
+              type: string
+            wallet_accounts:
+              type: string
+    single_item:
+      type: object
+      properties:
+        items:
+          $ref: '#/components/schemas/item'
+    item_requestBody:
+      type: object
+      required:
+      - id
+      - name
+      - amount
+      - payment_type
+      - buyer_id
+      - seller_id
+      properties:
+        id:
+          description: Unique ID that can be generated by the platform. Cannot contain '.' or '/' characters. Contact Assembly support if you want item IDs to be generated automatically.
+          type: string
+          example: 7190770-1-2908
+          default: 7190770-1-2908
+        name:
+          description: A name for the item
+          type: string
+          example: Item 7190770-1-2908
+          default: Item 7190770-1-2908
+        amount:
+          description: The cost in cents
+          type: integer
+          example: '102'
+          default: '102'
+        currency:
+          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
+          type: string
+          example: AUD
+        payment_type:
+          description: 'Payment type: 2. Express'
+          type: integer
+          example: '2'
+          default: '2'
+        buyer_id:
+          description: Marketplace / Pltform buyer ID
+          type: string
+          example: buyer-719013950014
+          default: buyer-719013950014
+        seller_id:
+          description: Marketplace / Platform Seller ID
+          type: string
+          example: seller-71718579
+          default: seller-71718579
+        fee_ids:
+          description: A comma separated list of fee IDs to apply
+          type: string
+          example: ''
+        description:
+          description: A description of the item
+          type: string
+          example: Test Item 7190770-1-2908
+        buyer_url:
+          description: Link for the buyer CTA (Call To Action)
+          type: string
+          example: ''
+        seller_url:
+          description: Link for the seller CTA (Call To Action)
+          type: string
+          example: ''
+        tax_invoice:
+          description: Toggle to generate tax invoice once Item is complete
+          type: boolean
+          example: ''
+        custom_descriptor:
+          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
+          type: string
+          example: ''
+    items:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/item'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
         meta:
           type: object
           properties:
@@ -867,11 +1122,6 @@ components:
               type: integer
             total:
               type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
     item:
       type: object
       required:
@@ -1098,142 +1348,45 @@ components:
               type: string
             tds_checks:
               type: string
-    fee:
-      type: object
+    transactions:
       properties:
-        id:
-          type: string
-          example: 36020976-f345-4d0f-b860-9c025ccce668
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          example: Seller Success Fee
-        fee_type_id:
-          type: string
-          example: 2
-        amount:
-          type: string
-          example: 200
-        cap:
-          type: string
-          example: null
-        min:
-          type: string
-          example: null
-        max:
-          type: string
-          example: null
-        to:
-          type: string
-          example: seller
-        calculated_fee:
-          type: integer
-          description: This field is only shown in case an item amount is passed
-          readOnly: true
-          example: 400
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-    wire_details_with_id:
-      properties:
-        id:
-          type: string
-          example: 100fd4a0-0538-11e6-b512-3e1d05defe78
-        wire_details:
-          $ref: '#/components/schemas/wire_details'
-    user:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        full_name:
-          type: string
-          example: Samuel Seller
-        email:
-          type: string
-          format: email
-          example: samuel.seller@assemblypayments.com
-        mobile:
-          type: string
-          example: 61491570156
-        phone:
-          type: string
-        logo_url:
-          type: string
-        color_1:
-          type: string
-        color_2:
-          type: string
-        first_name:
-          type: string
-          example: Samuel
-        last_name:
-          type: string
-          example: Seller
-        id:
-          type: string
-          example: Seller_1234
-        custom_descriptor:
-          type: string
-        location:
-          type: string
-          example: AUS
-        verification_status:
-          type: string
-          example: pending
-        held_state:
-          type: boolean
-          example: false
-        roles:
+        transactions:
           type: array
           items:
-            type: string
-            example: customer
-        dob:
-          type: string
-          example: encrypted
-        government_number:
-          type: string
-          example: encrypted
-        drivers_license:
-          type: string
-        flags:
-          type: object
-        related:
+            $ref: '#/components/schemas/transaction'
+        meta:
           type: object
           properties:
-            addresses:
-              type: string
-              example: fe602dcf-4175-4f88-b5be-3beb04092dcd
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
         links:
           type: object
           properties:
             self:
               type: string
-            items:
-              type: string
-            card_accounts:
-              type: string
-            paypal_accounts:
-              type: string
-            payid_accounts:
-              type: string
-            bpay_accounts:
-              type: string
-            bank_accounts:
-              type: string
-            wallet_accounts:
+    list_batch_transactions:
+      properties:
+        batch_transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/batch_transaction'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
               type: string
     transaction:
       type: object
@@ -1398,14 +1551,6 @@ components:
             supplementary_data:
               type: string
               example: /transactions/ea36e48a-4638-4d1a-a345-e1a0a584df8b/supplementary_data
-    single_status:
-      properties:
-        items:
-          $ref: '#/components/schemas/status'
-    single_wire_details_with_id:
-      properties:
-        items:
-          $ref: '#/components/schemas/wire_details_with_id'
     wire_details:
       properties:
         beneficiary:
@@ -1447,6 +1592,37 @@ components:
         country:
           type: string
           example: Australia
+    status:
+      properties:
+        id:
+          type: string
+          example: 100fd4a0-0538-11e6-b512-3e1d05defe78
+        status:
+          type: string
+          example: 22000
+        state:
+          type: string
+          example: pending
+    fees:
+      properties:
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/fee'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
     batch_transaction:
       type: object
       required:
@@ -1666,182 +1842,6 @@ components:
             items:
               type: string
             marketplace:
-              type: string
-    status:
-      properties:
-        id:
-          type: string
-          example: 100fd4a0-0538-11e6-b512-3e1d05defe78
-        status:
-          type: string
-          example: 22000
-        state:
-          type: string
-          example: pending
-    list_batch_transactions:
-      properties:
-        batch_transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/batch_transaction'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-    items:
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/item'
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-    update_item_requestBody:
-      type: object
-      properties:
-        amount:
-          description: The cost in cents
-          type: integer
-          example: '102'
-        name:
-          description: A name for the item
-          type: string
-          example: Item 7190770-1-2908
-        buyer_id:
-          description: Marketplace / Pltform buyer ID
-          type: string
-          example: buyer-719013950014
-        seller_id:
-          description: Marketplace / Platform Seller ID
-          type: string
-          example: seller-71718579
-        description:
-          description: A description of the item
-          type: string
-          example: Test Item 7190770-1-2908
-        custom_descriptor:
-          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
-          type: string
-          example: ''
-    item_requestBody:
-      type: object
-      required:
-      - id
-      - name
-      - amount
-      - payment_type
-      - buyer_id
-      - seller_id
-      properties:
-        id:
-          description: Unique ID that can be generated by the platform. Cannot contain '.' or '/' characters. Contact Assembly support if you want item IDs to be generated automatically.
-          type: string
-          example: 7190770-1-2908
-          default: 7190770-1-2908
-        name:
-          description: A name for the item
-          type: string
-          example: Item 7190770-1-2908
-          default: Item 7190770-1-2908
-        amount:
-          description: The cost in cents
-          type: integer
-          example: '102'
-          default: '102'
-        currency:
-          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
-          type: string
-          example: AUD
-        payment_type:
-          description: 'Payment type: 2. Express'
-          type: integer
-          example: '2'
-          default: '2'
-        buyer_id:
-          description: Marketplace / Pltform buyer ID
-          type: string
-          example: buyer-719013950014
-          default: buyer-719013950014
-        seller_id:
-          description: Marketplace / Platform Seller ID
-          type: string
-          example: seller-71718579
-          default: seller-71718579
-        fee_ids:
-          description: A comma separated list of fee IDs to apply
-          type: string
-          example: ''
-        description:
-          description: A description of the item
-          type: string
-          example: Test Item 7190770-1-2908
-        buyer_url:
-          description: Link for the buyer CTA (Call To Action)
-          type: string
-          example: ''
-        seller_url:
-          description: Link for the seller CTA (Call To Action)
-          type: string
-          example: ''
-        tax_invoice:
-          description: Toggle to generate tax invoice once Item is complete
-          type: boolean
-          example: ''
-        custom_descriptor:
-          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
-          type: string
-          example: ''
-    single_item:
-      type: object
-      properties:
-        items:
-          $ref: '#/components/schemas/item'
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
-    transactions:
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/transaction'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
               type: string
   parameters:
     limitParam:

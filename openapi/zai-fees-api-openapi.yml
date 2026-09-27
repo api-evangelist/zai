@@ -150,6 +150,49 @@ paths:
                         self: /fees/1e5e372a-df3a-4f77-af2f-ec294b1715ce
 components:
   schemas:
+    fee:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 36020976-f345-4d0f-b860-9c025ccce668
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Seller Success Fee
+        fee_type_id:
+          type: string
+          example: 2
+        amount:
+          type: string
+          example: 200
+        cap:
+          type: string
+          example: null
+        min:
+          type: string
+          example: null
+        max:
+          type: string
+          example: null
+        to:
+          type: string
+          example: seller
+        calculated_fee:
+          type: integer
+          description: This field is only shown in case an item amount is passed
+          readOnly: true
+          example: 400
+        links:
+          type: object
+          properties:
+            self:
+              type: string
     fee_requestBody:
       type: object
       required:
@@ -198,6 +241,10 @@ components:
           - cc
           - int_wire
           example: seller
+    single_fee:
+      properties:
+        fees:
+          $ref: '#/components/schemas/fee'
     fees:
       properties:
         fees:
@@ -218,63 +265,7 @@ components:
           properties:
             self:
               type: string
-    single_fee:
-      properties:
-        fees:
-          $ref: '#/components/schemas/fee'
-    fee:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 36020976-f345-4d0f-b860-9c025ccce668
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          example: Seller Success Fee
-        fee_type_id:
-          type: string
-          example: 2
-        amount:
-          type: string
-          example: 200
-        cap:
-          type: string
-          example: null
-        min:
-          type: string
-          example: null
-        max:
-          type: string
-          example: null
-        to:
-          type: string
-          example: seller
-        calculated_fee:
-          type: integer
-          description: This field is only shown in case an item amount is passed
-          readOnly: true
-          example: 400
-        links:
-          type: object
-          properties:
-            self:
-              type: string
   parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
     limitParam:
       name: limit
       in: query
@@ -285,6 +276,15 @@ components:
         minimum: 1
         maximum: 200
         default: 10
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

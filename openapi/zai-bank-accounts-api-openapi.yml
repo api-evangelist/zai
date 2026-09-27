@@ -372,137 +372,11 @@ paths:
                       phone_suffix: '631'
 components:
   schemas:
-    single_routing_number:
-      type: object
-      properties:
-        routing_number:
-          type: object
-          properties:
-            routing_number:
-              type: string
-              example: 122235821
-            customer_name:
-              type: string
-              example: US BANK NA
-            address:
-              type: string
-              example: EP-MN-WN1A
-            city:
-              type: string
-              example: ST. PAUL
-            state_code:
-              type: string
-              example: MN
-            zip:
-              type: string
-              example: 55107
-            zip_extension:
-              type: string
-              example: 1419
-            phone_area_code:
-              type: string
-              example: 800
-            phone_prefix:
-              type: string
-              example: 937
-            phone_suffix:
-              type: string
-              example: 6310
     single_user:
       type: object
       properties:
         users:
           $ref: '#/components/schemas/user'
-    penny_verify_requestBody:
-      type: object
-      required:
-      - amount_1
-      - amount_2
-      properties:
-        amount_1:
-          description: First penny amount in cents. Can range from 1 to 30 cents.
-          type: integer
-          default: 10
-        amount_2:
-          description: Second penny amount in cents. Can range from 1 to 30 cents.
-          type: integer
-          default: 20
-    bank_account_deletion:
-      properties:
-        bank_account:
-          type: string
-          example: Successfully redacted
-    bank_account_requestBody_au:
-      type: object
-      required:
-      - user_id
-      - bank_name
-      - account_name
-      - routing_number
-      - account_number
-      - account_type
-      - holder_type
-      - country
-      properties:
-        user_id:
-          description: User ID
-          type: string
-          default: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-          example: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-        bank_name:
-          description: Bank name
-          type: string
-          default: Bank of Australia
-          example: Bank of Australia
-        account_name:
-          description: Account name
-          type: string
-          default: Samuel Seller
-          example: Samuel Seller
-        routing_number:
-          description: '*Required conditionally* - Routing number / BSB number. See [Bank account formats by country](https://developer.assemblypayments.com/docs/input-formats).
-
-            '
-          type: string
-          default: '111123'
-          example: '111123'
-        account_number:
-          description: 'Account number. See [Bank account formats by country](https://developer.assemblypayments.com/docs/input-formats).
-
-            '
-          type: string
-          default: '111234'
-          example: '111234'
-        account_type:
-          description: Bank account type (savings or checking)
-          type: string
-          enum:
-          - savings
-          - checking
-          default: checking
-          example: checking
-        holder_type:
-          description: Holder type (personal or business)
-          type: string
-          enum:
-          - personal
-          - business
-          default: personal
-          example: personal
-        country:
-          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code (3 char)'
-          type: string
-          maxLength: 3
-          default: AUS
-          example: AUS
-        payout_currency:
-          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This parameter determines the currency with which funds are paid out.'
-          type: string
-          example: AUD
-        currency:
-          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
-          type: string
-          example: AUD
     bank_account_au:
       type: object
       properties:
@@ -690,6 +564,132 @@ components:
               type: string
             wallet_accounts:
               type: string
+    single_routing_number:
+      type: object
+      properties:
+        routing_number:
+          type: object
+          properties:
+            routing_number:
+              type: string
+              example: 122235821
+            customer_name:
+              type: string
+              example: US BANK NA
+            address:
+              type: string
+              example: EP-MN-WN1A
+            city:
+              type: string
+              example: ST. PAUL
+            state_code:
+              type: string
+              example: MN
+            zip:
+              type: string
+              example: 55107
+            zip_extension:
+              type: string
+              example: 1419
+            phone_area_code:
+              type: string
+              example: 800
+            phone_prefix:
+              type: string
+              example: 937
+            phone_suffix:
+              type: string
+              example: 6310
+    bank_account_deletion:
+      properties:
+        bank_account:
+          type: string
+          example: Successfully redacted
+    penny_verify_requestBody:
+      type: object
+      required:
+      - amount_1
+      - amount_2
+      properties:
+        amount_1:
+          description: First penny amount in cents. Can range from 1 to 30 cents.
+          type: integer
+          default: 10
+        amount_2:
+          description: Second penny amount in cents. Can range from 1 to 30 cents.
+          type: integer
+          default: 20
+    bank_account_requestBody_au:
+      type: object
+      required:
+      - user_id
+      - bank_name
+      - account_name
+      - routing_number
+      - account_number
+      - account_type
+      - holder_type
+      - country
+      properties:
+        user_id:
+          description: User ID
+          type: string
+          default: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+          example: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+        bank_name:
+          description: Bank name
+          type: string
+          default: Bank of Australia
+          example: Bank of Australia
+        account_name:
+          description: Account name
+          type: string
+          default: Samuel Seller
+          example: Samuel Seller
+        routing_number:
+          description: '*Required conditionally* - Routing number / BSB number. See [Bank account formats by country](https://developer.assemblypayments.com/docs/input-formats).
+
+            '
+          type: string
+          default: '111123'
+          example: '111123'
+        account_number:
+          description: 'Account number. See [Bank account formats by country](https://developer.assemblypayments.com/docs/input-formats).
+
+            '
+          type: string
+          default: '111234'
+          example: '111234'
+        account_type:
+          description: Bank account type (savings or checking)
+          type: string
+          enum:
+          - savings
+          - checking
+          default: checking
+          example: checking
+        holder_type:
+          description: Holder type (personal or business)
+          type: string
+          enum:
+          - personal
+          - business
+          default: personal
+          example: personal
+        country:
+          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code (3 char)'
+          type: string
+          maxLength: 3
+          default: AUS
+          example: AUS
+        payout_currency:
+          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This parameter determines the currency with which funds are paid out.'
+          type: string
+          example: AUD
+        currency:
+          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
+          type: string
+          example: AUD
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

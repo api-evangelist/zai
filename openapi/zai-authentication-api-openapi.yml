@@ -90,6 +90,26 @@ paths:
                     error: something went wrong
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+    tokens_response:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JWT issued by AWS Cognito.
+          example: ey...J9.ey...n0.Iu...7g
+        expires_in:
+          type: number
+          description: Lifetime of access token in seconds.
+          example: 3600
+        token_type:
+          type: string
+          description: Authorization header value prefix. This is a constant.
+          example: Bearer
     tokens_request_body:
       type: object
       required:
@@ -118,26 +138,6 @@ components:
           description: This value is supplied to you by Assembly Payments.
           example: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
           default: im-au-04/cdbf9590-1db6-0139-ac4d-0a58a9feac03
-    tokens_response:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: JWT issued by AWS Cognito.
-          example: ey...J9.ey...n0.Iu...7g
-        expires_in:
-          type: number
-          description: Lifetime of access token in seconds.
-          example: 3600
-        token_type:
-          type: string
-          description: Authorization header value prefix. This is a constant.
-          example: Bearer
-    error:
-      type: object
-      properties:
-        error:
-          type: string
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

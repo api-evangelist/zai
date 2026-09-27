@@ -500,7 +500,7 @@ apis:
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
 - aid: zai:zai-payids-api
-  name: Zai Pay I Ds API
+  name: Zai PayIDs API
   description: The PayIDs API from Zai — 3 operation(s) for payids.
   humanURL: https://developer.hellozai.com/reference/overview
   baseURL: https://secure.api.promisepay.com
