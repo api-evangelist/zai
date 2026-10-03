@@ -383,16 +383,54 @@ paths:
                         responses: /callbacks/30403493-7249-433a-83ce-555388f75c01/responses
 components:
   schemas:
-    single_callback:
+    callback:
+      type: object
+      properties:
+        id:
+          type: string
+          example: f92d4ca1-4ee5-43f3-9e34-ca5f759c5e76
+        description:
+          type: string
+          example: Users Callback
+        url:
+          type: string
+          example: https://httpbin.org/post
+        object_type:
+          type: string
+          enum:
+          - Transactions
+          - Items
+          - Users
+          - Batch Transactions
+          - Disbursements
+          - Accounts
+          example: users
+        enabled:
+          type: boolean
+          example: true
+        authorization_token:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        marketplace_id:
+          type: string
+          format: uuid
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+            responses:
+              type: string
+    callback_deletion:
       properties:
         callbacks:
-          $ref: '#/components/schemas/callback'
-    callbacks:
-      properties:
-        callbacks:
-          type: array
-          items:
-            $ref: '#/components/schemas/callback'
+          type: string
+          example: Successfully redacted
     list_callback_responses:
       properties:
         callback_responses:
@@ -438,54 +476,20 @@ components:
           type: string
           default: 'true'
           example: 'true'
-    callback_deletion:
+    single_callback_response:
+      properties:
+        call_responses:
+          $ref: '#/components/schemas/callback_response'
+    callbacks:
       properties:
         callbacks:
-          type: string
-          example: Successfully redacted
-    callback:
-      type: object
+          type: array
+          items:
+            $ref: '#/components/schemas/callback'
+    single_callback:
       properties:
-        id:
-          type: string
-          example: f92d4ca1-4ee5-43f3-9e34-ca5f759c5e76
-        description:
-          type: string
-          example: Users Callback
-        url:
-          type: string
-          example: https://httpbin.org/post
-        object_type:
-          type: string
-          enum:
-          - Transactions
-          - Items
-          - Users
-          - Batch Transactions
-          - Disbursements
-          - Accounts
-          example: users
-        enabled:
-          type: boolean
-          example: true
-        authorization_token:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        marketplace_id:
-          type: string
-          format: uuid
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-            responses:
-              type: string
+        callbacks:
+          $ref: '#/components/schemas/callback'
     callback_response:
       type: object
       properties:
@@ -513,11 +517,16 @@ components:
         response_code:
           type: integer
           example: 200
-    single_callback_response:
-      properties:
-        call_responses:
-          $ref: '#/components/schemas/callback_response'
   parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     limitParam:
       name: limit
       in: query
@@ -528,15 +537,6 @@ components:
         minimum: 1
         maximum: 200
         default: 10
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

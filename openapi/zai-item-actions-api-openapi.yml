@@ -737,6 +737,17 @@ paths:
       url: https://virtserver.swaggerhub.com/AssemblyPlatforms/assembly-api/2.3
 components:
   schemas:
+    release_payment_requestBody:
+      type: object
+      properties:
+        release_amount:
+          description: Partial amount to be released in cents
+          type: integer
+          example: ''
+        flag_release:
+          description: to be used if release flagging enabled for your marketplace
+          type: boolean
+          example: ''
     card_account_id_requestBody:
       type: object
       required:
@@ -755,21 +766,6 @@ components:
           description: Seller User Phone Number or Mobile number. International number format. Include '+' and no spaces.
           type: string
           example: ''
-    refund_requestBody:
-      type: object
-      properties:
-        refund_amount:
-          description: For partial refunds, if they are enabled for marketplace.
-          type: integer
-          example: ''
-        refund_message:
-          description: Reason for the request.
-          type: string
-          example: ''
-        account_id:
-          description: The account id to be used to get the refunds from. This will need to be an account that has already been set up within Assembly
-          type: string
-          example: ''
     acknowledge_payment:
       type: object
       properties:
@@ -786,44 +782,6 @@ components:
           description: Token passed to front-end component, for secure access of the payment status
         items:
           $ref: '#/components/schemas/item'
-    account_id_asyncRequestBody:
-      type: object
-      required:
-      - account_id
-      properties:
-        account_id:
-          description: Account id of the bank account/credit card, etc making payment (not user id)
-          type: string
-        request_three_d_secure:
-          description: 'Customise the 3DS (3D Secure) preference for this payment.
-
-            If `automatic`, 3DS preference is determined automatically by the system.
-
-            If `challenge`, Request a 3DS challenge is presented to the user.
-
-            If `any`, request a 3DS frictionless or challenge flow.
-
-            **Important:** Use the returned `payment_token` to initialise the 3DS2 web component.
-
-            '
-          type: string
-          example: challenge
-          default: automatic
-          enum:
-          - automatic
-          - challenge
-          - any
-    release_payment_requestBody:
-      type: object
-      properties:
-        release_amount:
-          description: Partial amount to be released in cents
-          type: integer
-          example: ''
-        flag_release:
-          description: to be used if release flagging enabled for your marketplace
-          type: boolean
-          example: ''
     item:
       type: object
       required:
@@ -1076,11 +1034,6 @@ components:
           description: Seller User Phone Number or Mobile number. International number format. Include '+' and no spaces.
           type: string
           example: ''
-    single_item:
-      type: object
-      properties:
-        items:
-          $ref: '#/components/schemas/item'
     partial_payment:
       type: object
       properties:
@@ -1088,6 +1041,53 @@ components:
           description: For partial payment, if they are enabled for marketplace.
           type: integer
           example: 100
+    refund_requestBody:
+      type: object
+      properties:
+        refund_amount:
+          description: For partial refunds, if they are enabled for marketplace.
+          type: integer
+          example: ''
+        refund_message:
+          description: Reason for the request.
+          type: string
+          example: ''
+        account_id:
+          description: The account id to be used to get the refunds from. This will need to be an account that has already been set up within Assembly
+          type: string
+          example: ''
+    single_item:
+      type: object
+      properties:
+        items:
+          $ref: '#/components/schemas/item'
+    account_id_asyncRequestBody:
+      type: object
+      required:
+      - account_id
+      properties:
+        account_id:
+          description: Account id of the bank account/credit card, etc making payment (not user id)
+          type: string
+        request_three_d_secure:
+          description: 'Customise the 3DS (3D Secure) preference for this payment.
+
+            If `automatic`, 3DS preference is determined automatically by the system.
+
+            If `challenge`, Request a 3DS challenge is presented to the user.
+
+            If `any`, request a 3DS frictionless or challenge flow.
+
+            **Important:** Use the returned `payment_token` to initialise the 3DS2 web component.
+
+            '
+          type: string
+          example: challenge
+          default: automatic
+          enum:
+          - automatic
+          - challenge
+          - any
     item_2:
       type: object
       properties:
@@ -1303,21 +1303,6 @@ components:
               type: string
             tds_checks:
               type: string
-    status:
-      type: object
-      properties:
-        last_updated:
-          type: string
-          format: DateTime RFC3339
-          example: 2020-07-15T15:04:05Z07:00
-        submission_count:
-          type: integer
-          example: 0
-        message:
-          type: string
-          example: request awaiting submission
-        links:
-          $ref: '#/components/schemas/links'
     links:
       type: object
       properties:
@@ -1361,6 +1346,21 @@ components:
           type: string
           example: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
           default: https%3A%2F%2Fcallback.example.com%2Fassembly%2F%7Bitem%7D%2F%7Baccount%7D%2F%7Buuid%7D
+    status:
+      type: object
+      properties:
+        last_updated:
+          type: string
+          format: DateTime RFC3339
+          example: 2020-07-15T15:04:05Z07:00
+        submission_count:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: request awaiting submission
+        links:
+          $ref: '#/components/schemas/links'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

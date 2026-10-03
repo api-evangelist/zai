@@ -295,16 +295,43 @@ paths:
                 $ref: '#/components/schemas/inline_response_500'
 components:
   schemas:
-    inline_response_403_pay_id:
+    inline_response_400:
       properties:
         errors:
+          type: string
+          example: 'Invalid format for url parameter: id.'
+    deregister_pay_id:
+      type: object
+      properties:
+        id:
+          description: Identifies the _PayID_.
+          type: string
+          format: uuid
+          example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+        message:
+          type: string
+          example: PayID deregistration has been accepted for processing
+        links:
           type: object
           properties:
-            payid_per_user:
-              type: array
-              items:
-                type: string
-                example: Feature not available
+            self:
+              type: string
+              example: /pay_ids/46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+    virtual_account_not_found:
+      properties:
+        errors:
+          type: string
+          example: Virtual Account does not exist.
+    inline_response_404_pay_id:
+      properties:
+        errors:
+          type: string
+          example: PayID does not exist.
+    inline_response_500:
+      properties:
+        errors:
+          type: string
+          example: An error occurred processing your request. Please try again.
     pay_id_request:
       required:
       - pay_id
@@ -338,47 +365,43 @@ components:
               example: Mr John Smith
               minLength: 1
               maxLength: 140
-    inline_response_400:
+    inline_response_409_1:
       properties:
         errors:
-          type: string
-          example: 'Invalid format for url parameter: id.'
-    inline_response_404_pay_id:
+          type: object
+          properties:
+            pay_id:
+              type: string
+              example: Provided PayID is either pending activation or active already and associated with a virtual account
+    inline_response_400_1:
       properties:
         errors:
-          type: string
-          example: PayID does not exist.
+          type: object
     inline_response_401:
       properties:
         errors:
           type: string
           example: Invalid or missing authorisation token
-    inline_response_400_1:
+    inline_response_403_pay_id:
       properties:
         errors:
-          type: object
-    deregister_pay_id:
-      type: object
-      properties:
-        id:
-          description: Identifies the _PayID_.
-          type: string
-          format: uuid
-          example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-        message:
-          type: string
-          example: PayID deregistration has been accepted for processing
-        links:
           type: object
           properties:
-            self:
-              type: string
-              example: /pay_ids/46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-    virtual_account_not_found:
+            payid_per_user:
+              type: array
+              items:
+                type: string
+                example: Feature not available
+    inline_response_403_va:
       properties:
         errors:
-          type: string
-          example: Virtual Account does not exist.
+          type: object
+          properties:
+            virtual_accounts:
+              type: array
+              items:
+                type: string
+                example: Feature not available
     pay_id:
       type: object
       properties:
@@ -429,29 +452,6 @@ components:
             virtual_accounts:
               type: string
               example: /virtual_accounts/46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-    inline_response_500:
-      properties:
-        errors:
-          type: string
-          example: An error occurred processing your request. Please try again.
-    inline_response_403_va:
-      properties:
-        errors:
-          type: object
-          properties:
-            virtual_accounts:
-              type: array
-              items:
-                type: string
-                example: Feature not available
-    inline_response_409_1:
-      properties:
-        errors:
-          type: object
-          properties:
-            pay_id:
-              type: string
-              example: Provided PayID is either pending activation or active already and associated with a virtual account
 x-explorer-enabled: false
 x-samples-languages:
 - curl

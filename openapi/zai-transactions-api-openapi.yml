@@ -479,179 +479,11 @@ paths:
                         wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
 components:
   schemas:
-    fee:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 36020976-f345-4d0f-b860-9c025ccce668
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          example: Seller Success Fee
-        fee_type_id:
-          type: string
-          example: 2
-        amount:
-          type: string
-          example: 200
-        cap:
-          type: string
-          example: null
-        min:
-          type: string
-          example: null
-        max:
-          type: string
-          example: null
-        to:
-          type: string
-          example: seller
-        calculated_fee:
-          type: integer
-          description: This field is only shown in case an item amount is passed
-          readOnly: true
-          example: 400
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-    single_transaction:
-      type: object
-      properties:
-        transactions:
-          $ref: '#/components/schemas/transaction'
     single_user:
       type: object
       properties:
         users:
           $ref: '#/components/schemas/user'
-    bank_account_au:
-      type: object
-      properties:
-        bank_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - not_verified
-              - in_progress
-              - processed
-              example: not_verified
-            verification:
-              type: object
-              properties:
-                verified_at:
-                  type: string
-                  format: date-time
-                verification_method:
-                  type: string
-                  enum:
-                  - COP
-                result:
-                  type: object
-                  properties:
-                    match_result:
-                      type: string
-                      enum:
-                      - MTCH
-                      - MTCO
-                      - CMTC
-                      - WMTC
-                      - NMTC
-                      - NMTO
-                      - NINF
-                      - NFND
-                      - CLSD
-            bank:
-              type: object
-              properties:
-                bank_name:
-                  type: string
-                  example: Bank of Australia
-                country:
-                  type: string
-                  example: AUS
-                account_name:
-                  type: string
-                  example: Samuel Seller
-                routing_number:
-                  type: string
-                  example: XXXXX3
-                account_number:
-                  type: string
-                  example: XXX234
-                holder_type:
-                  type: string
-                  enum:
-                  - personal
-                  - business
-                  example: personal
-                account_type:
-                  type: string
-                  enum:
-                  - savings
-                  - checking
-                  example: checking
-                direct_debit_authority_status:
-                  type: string
-                  readOnly: true
-                  enum:
-                  - 'null'
-                  - approved
-                  example: approved
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                users:
-                  type: string
-                direct_debit_authorities:
-                  type: string
-    transactions:
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/transaction'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
     transaction:
       type: object
       properties:
@@ -815,6 +647,70 @@ components:
             supplementary_data:
               type: string
               example: /transactions/ea36e48a-4638-4d1a-a345-e1a0a584df8b/supplementary_data
+    single_transaction:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/transaction'
+    card_account:
+      type: object
+      properties:
+        card_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            cvv_verified:
+              type: boolean
+              example: true
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            card:
+              type: object
+              readOnly: true
+              properties:
+                type:
+                  type: string
+                  example: visa
+                full_name:
+                  type: string
+                  example: Bella Buyer
+                number:
+                  type: string
+                  example: XXXX-XXXX-XXXX-1111
+                expiry_month:
+                  type: string
+                  example: 10
+                expiry_year:
+                  type: string
+                  example: 2020
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  example: /users/buyer-71439598/card_accounts
+                users:
+                  type: string
+                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
     user:
       type: object
       properties:
@@ -902,10 +798,50 @@ components:
               type: string
             wallet_accounts:
               type: string
-    card_account:
+    fees:
+      properties:
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/fee'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    transactions:
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    bank_account_au:
       type: object
       properties:
-        card_accounts:
+        bank_accounts:
           type: object
           properties:
             active:
@@ -924,58 +860,122 @@ components:
             currency:
               type: string
               example: AUD
-            cvv_verified:
-              type: boolean
-              example: true
             verification_status:
               type: string
               enum:
-              - verified
               - not_verified
+              - in_progress
+              - processed
               example: not_verified
-            card:
+            verification:
               type: object
-              readOnly: true
               properties:
-                type:
+                verified_at:
                   type: string
-                  example: visa
-                full_name:
+                  format: date-time
+                verification_method:
                   type: string
-                  example: Bella Buyer
-                number:
+                  enum:
+                  - COP
+                result:
+                  type: object
+                  properties:
+                    match_result:
+                      type: string
+                      enum:
+                      - MTCH
+                      - MTCO
+                      - CMTC
+                      - WMTC
+                      - NMTC
+                      - NMTO
+                      - NINF
+                      - NFND
+                      - CLSD
+            bank:
+              type: object
+              properties:
+                bank_name:
                   type: string
-                  example: XXXX-XXXX-XXXX-1111
-                expiry_month:
+                  example: Bank of Australia
+                country:
                   type: string
-                  example: 10
-                expiry_year:
+                  example: AUS
+                account_name:
                   type: string
-                  example: 2020
+                  example: Samuel Seller
+                routing_number:
+                  type: string
+                  example: XXXXX3
+                account_number:
+                  type: string
+                  example: XXX234
+                holder_type:
+                  type: string
+                  enum:
+                  - personal
+                  - business
+                  example: personal
+                account_type:
+                  type: string
+                  enum:
+                  - savings
+                  - checking
+                  example: checking
+                direct_debit_authority_status:
+                  type: string
+                  readOnly: true
+                  enum:
+                  - 'null'
+                  - approved
+                  example: approved
             links:
               type: object
               properties:
                 self:
                   type: string
-                  example: /users/buyer-71439598/card_accounts
                 users:
                   type: string
-                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
-    fees:
+                direct_debit_authorities:
+                  type: string
+    fee:
+      type: object
       properties:
-        fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/fee'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
+        id:
+          type: string
+          example: 36020976-f345-4d0f-b860-9c025ccce668
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Seller Success Fee
+        fee_type_id:
+          type: string
+          example: 2
+        amount:
+          type: string
+          example: 200
+        cap:
+          type: string
+          example: null
+        min:
+          type: string
+          example: null
+        max:
+          type: string
+          example: null
+        to:
+          type: string
+          example: seller
+        calculated_fee:
+          type: integer
+          description: This field is only shown in case an item amount is passed
+          readOnly: true
+          example: 400
         links:
           type: object
           properties:
@@ -1036,6 +1036,29 @@ components:
                   type: object
                   example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
   parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    transactionType:
+      name: transaction_type
+      in: query
+      description: 'The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
+      required: false
+      schema:
+        type: string
+        enum:
+        - payment
+        - refund
+        - disbursement
+        - fee
+        - deposit
+        - withdrawal
     transactionTypeMethod:
       name: transaction_type_method
       in: query
@@ -1063,29 +1086,6 @@ components:
         minimum: 1
         maximum: 200
         default: 10
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    transactionType:
-      name: transaction_type
-      in: query
-      description: 'The type of transaction. Options for querying are: payment, refund, disbursement, fee, deposit, withdrawal. For returned values please refer here: [Enumeration Values](https://developer.assemblypayments.com/docs/enumeration-values) for the full list'
-      required: false
-      schema:
-        type: string
-        enum:
-        - payment
-        - refund
-        - disbursement
-        - fee
-        - deposit
-        - withdrawal
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

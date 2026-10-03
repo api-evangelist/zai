@@ -166,63 +166,34 @@ paths:
                         wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
 components:
   schemas:
-    single_user:
+    bpay_account_requestBody:
       type: object
+      required:
+      - user_id
+      - account_name
+      - biller_code
+      - bpay_crn
       properties:
-        users:
-          $ref: '#/components/schemas/user'
-    bpay_account:
-      type: object
-      properties:
-        bpay_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            bpay_details:
-              type: object
-              properties:
-                account_name:
-                  type: string
-                  example: My biller 123
-                  description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
-                biller_code:
-                  type: integer
-                  example: 123456
-                biller_name:
-                  type: string
-                  description: Name of the biller as registered in BPay
-                  example: ABC Water
-                crn:
-                  type: integer
-                  example: 987654321
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                users:
-                  type: string
+        user_id:
+          description: User ID
+          type: string
+          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
+        account_name:
+          description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+          type: string
+          example: My Water Bill Company
+          default: My Water Bill Company
+        biller_code:
+          description: The Biller Code for the biller that will receive the payment. The Biller Code must be a numeric value with 3 to 10 digits.
+          type: integer
+          example: '123456'
+          default: '123456'
+        bpay_crn:
+          description: Customer reference number (crn) to be used for this bpay account. The CRN must contain between 2 and 20 digits.
+          type: string
+          example: '987654321'
+          default: '987654321'
     user:
       type: object
       properties:
@@ -310,34 +281,63 @@ components:
               type: string
             wallet_accounts:
               type: string
-    bpay_account_requestBody:
+    bpay_account:
       type: object
-      required:
-      - user_id
-      - account_name
-      - biller_code
-      - bpay_crn
       properties:
-        user_id:
-          description: User ID
-          type: string
-          example: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-          default: 725cc8c0-759b-0138-5d6d-0a58a9feac05
-        account_name:
-          description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
-          type: string
-          example: My Water Bill Company
-          default: My Water Bill Company
-        biller_code:
-          description: The Biller Code for the biller that will receive the payment. The Biller Code must be a numeric value with 3 to 10 digits.
-          type: integer
-          example: '123456'
-          default: '123456'
-        bpay_crn:
-          description: Customer reference number (crn) to be used for this bpay account. The CRN must contain between 2 and 20 digits.
-          type: string
-          example: '987654321'
-          default: '987654321'
+        bpay_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            bpay_details:
+              type: object
+              properties:
+                account_name:
+                  type: string
+                  example: My biller 123
+                  description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+                biller_code:
+                  type: integer
+                  example: 123456
+                biller_name:
+                  type: string
+                  description: Name of the biller as registered in BPay
+                  example: ABC Water
+                crn:
+                  type: integer
+                  example: 987654321
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                users:
+                  type: string
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

@@ -241,6 +241,11 @@ paths:
                     card_account: Successfully redacted
 components:
   schemas:
+    card_account_deletion:
+      properties:
+        card_account:
+          type: string
+          example: Successfully redacted
     card_account_verify_requestBody:
       type: object
       properties:
@@ -253,6 +258,65 @@ components:
       properties:
         users:
           $ref: '#/components/schemas/user'
+    card_account:
+      type: object
+      properties:
+        card_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            cvv_verified:
+              type: boolean
+              example: true
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            card:
+              type: object
+              readOnly: true
+              properties:
+                type:
+                  type: string
+                  example: visa
+                full_name:
+                  type: string
+                  example: Bella Buyer
+                number:
+                  type: string
+                  example: XXXX-XXXX-XXXX-1111
+                expiry_month:
+                  type: string
+                  example: 10
+                expiry_year:
+                  type: string
+                  example: 2020
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  example: /users/buyer-71439598/card_accounts
+                users:
+                  type: string
+                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
     user:
       type: object
       properties:
@@ -382,70 +446,6 @@ components:
           type: string
           example: 83f54680-9600-4bee-a6d1-84a5d0e10059
           default: 83f54680-9600-4bee-a6d1-84a5d0e10059
-    card_account:
-      type: object
-      properties:
-        card_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            cvv_verified:
-              type: boolean
-              example: true
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            card:
-              type: object
-              readOnly: true
-              properties:
-                type:
-                  type: string
-                  example: visa
-                full_name:
-                  type: string
-                  example: Bella Buyer
-                number:
-                  type: string
-                  example: XXXX-XXXX-XXXX-1111
-                expiry_month:
-                  type: string
-                  example: 10
-                expiry_year:
-                  type: string
-                  example: 2020
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                  example: /users/buyer-71439598/card_accounts
-                users:
-                  type: string
-                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
-    card_account_deletion:
-      properties:
-        card_account:
-          type: string
-          example: Successfully redacted
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

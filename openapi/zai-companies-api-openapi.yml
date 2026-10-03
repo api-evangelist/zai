@@ -181,6 +181,47 @@ paths:
                         self: /companies/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 components:
   schemas:
+    company:
+      type: object
+      properties:
+        legal_name:
+          type: string
+          example: Samuel's Gardening Pty Ltd
+        name:
+          type: string
+          example: Samuel's Gardening
+        tax_number:
+          type: string
+          example: 100200300
+        business_email:
+          type: string
+          example: samuel@email.com
+        charge_tax:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        phone:
+          type: string
+          example: 61400000000
+        id:
+          type: string
+          example: 7b85aa9c-fc54-4449-afef-f52fc2b94cd3
+        related:
+          type: object
+          properties:
+            address:
+              type: string
+              example: cae0ada1-8e31-4bfc-aa24-5331f888cb12
+            users:
+              type: string
+              example: b278dbd0-48da-4824-8ab7-f82008682df2
+        self:
+          type: object
+          properties:
+            self:
+              type: string
+              example: /companies
     simple_companies:
       type: object
       properties:
@@ -188,6 +229,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/simple_company'
+    simple_company:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 9280aa36-d7f8-4959-b1ed-0ace2c12cfa2
+        name:
+          type: string
+          example: Assembly Payments
+        legal_name:
+          type: string
+          example: PromisePay
+        business_email:
+          type: string
+          example: test@email.com
     company_requestBody:
       type: object
       required:
@@ -259,67 +315,20 @@ components:
           type: string
           example: buyer-70729325
           default: buyer-70729325
-    company:
-      type: object
-      properties:
-        legal_name:
-          type: string
-          example: Samuel's Gardening Pty Ltd
-        name:
-          type: string
-          example: Samuel's Gardening
-        tax_number:
-          type: string
-          example: 100200300
-        business_email:
-          type: string
-          example: samuel@email.com
-        charge_tax:
-          type:
-          - boolean
-          - 'null'
-          example: false
-        phone:
-          type: string
-          example: 61400000000
-        id:
-          type: string
-          example: 7b85aa9c-fc54-4449-afef-f52fc2b94cd3
-        related:
-          type: object
-          properties:
-            address:
-              type: string
-              example: cae0ada1-8e31-4bfc-aa24-5331f888cb12
-            users:
-              type: string
-              example: b278dbd0-48da-4824-8ab7-f82008682df2
-        self:
-          type: object
-          properties:
-            self:
-              type: string
-              example: /companies
     single_company:
       properties:
         companies:
           $ref: '#/components/schemas/company'
-    simple_company:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 9280aa36-d7f8-4959-b1ed-0ace2c12cfa2
-        name:
-          type: string
-          example: Assembly Payments
-        legal_name:
-          type: string
-          example: PromisePay
-        business_email:
-          type: string
-          example: test@email.com
   parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     limitParam:
       name: limit
       in: query
@@ -330,15 +339,6 @@ components:
         minimum: 1
         maximum: 200
         default: 10
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

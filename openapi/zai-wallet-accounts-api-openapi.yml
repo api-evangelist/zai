@@ -379,120 +379,6 @@ paths:
                         currency: AUD
 components:
   schemas:
-    ifti_address:
-      type: object
-      description: 'This represents address of an individual or non-individual customer of a NPP participant.
-
-        This object could be populated in one of formats below:'
-      properties:
-        address_type:
-          allOf:
-          - $ref: '#/components/schemas/address_type'
-        department:
-          maxLength: 70
-          minLength: 1
-          type: string
-          description: Department
-          example: Finance
-        sub_department:
-          maxLength: 70
-          minLength: 1
-          type: string
-          description: Sub Department
-          example: Billing
-        street_name:
-          maxLength: 70
-          minLength: 1
-          type: string
-          description: Street Name
-          example: Kent
-        bldg_name:
-          maxLength: 16
-          minLength: 1
-          type: string
-          description: Building name
-          example: '123'
-        postcode:
-          maxLength: 16
-          minLength: 1
-          type: string
-          description: Post Code
-          example: '2000'
-        town_name:
-          maxLength: 35
-          minLength: 1
-          type: string
-          description: Town name
-          example: Sydney
-        ctry_sub_division:
-          maxLength: 35
-          minLength: 1
-          type: string
-          description: Country Subdivision
-          example: NSW
-        country_code:
-          pattern: '[A-Z]{2,2}'
-          type: string
-          description: Country Code
-          example: AU
-        address_line:
-          maxItems: 7
-          minItems: 0
-          type: array
-          items:
-            maxLength: 70
-            minLength: 1
-            type: string
-          description: 'Address Lines:
-
-
-            "address_line": ["Melbourne", "2000" ]'
-    wallet_account_bpay_details:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-        bpay_details:
-          type: object
-          properties:
-            biller_code:
-              type: string
-            reference:
-              type: string
-            amount:
-              type: string
-            currency:
-              type: string
-    contact_details:
-      type: object
-      properties:
-        name_prefix:
-          type: string
-          enum:
-          - DOCT
-          - MIST
-          - MISS
-          - MADM
-        name:
-          maxLength: 140
-          type: string
-        phone_number:
-          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
-          type: string
-        mobile_number:
-          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
-          type: string
-        fax_number:
-          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
-          type: string
-        email_address:
-          maxLength: 2048
-          type: string
-        other:
-          maxLength: 35
-          type: string
     disbursement:
       type: object
       properties:
@@ -577,120 +463,6 @@ components:
             users:
               type: string
               example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/users
-    ifti_information_response:
-      type: object
-      properties:
-        instruction_identification:
-          type: string
-          example: BANKNTSTXXXI20180501000000000000010
-        ultimate_debtor_information:
-          allOf:
-          - $ref: '#/components/schemas/party_identification_sample'
-          - type: object
-        charge_bearer:
-          type: string
-          example: CRED
-        previous_instructing_agent:
-          type: object
-          properties:
-            agent_bic:
-              type: string
-              example: YOURBIC1234
-        creditor_agent_instruction:
-          type: object
-          properties:
-            instruction_information:
-              type: string
-              example: sample
-            code:
-              type: string
-              example: CHQB
-        initiating_party_information:
-          allOf:
-          - $ref: '#/components/schemas/party_identification_sample'
-          - type: object
-        instructed_amount:
-          type: object
-          properties:
-            currency:
-              type: string
-              example: AUD
-            amount:
-              type: string
-              example: '3.25'
-        ultimate_creditor_information:
-          allOf:
-          - $ref: '#/components/schemas/party_identification_sample'
-          - type: object
-        exchange_rate:
-          type: string
-          example: '1.23'
-        payment_purpose_proprietary:
-          type: string
-          example: Prtry
-        payment_information:
-          type: object
-          properties:
-            remittance_information_unstructured:
-              type: string
-              example: MAP_RE_Happy
-            payment_purpose_code:
-              type: string
-              example: EPAY
-        regulatory_reporting:
-          type: array
-          items:
-            type: object
-            properties:
-              authority_name:
-                type: string
-                example: Name
-        remittance_information_structured:
-          type: object
-          properties:
-            referred_document_amount:
-              type: object
-              properties:
-                due_payable_amount:
-                  type: object
-                  properties:
-                    currency:
-                      type: string
-                      example: AUD
-                    amount:
-                      type: string
-                      example: '3.25'
-        related_remittance_information:
-          type: array
-          items:
-            type: object
-            properties:
-              identification:
-                type: string
-                example: S010
-    address_type:
-      enum:
-      - ADDR
-      - BIZZ
-      - DLVY
-      - HOME
-      - MLTO
-      - PBOX
-      type: string
-      description: 'Address Type
-
-
-        ADDR - Postal Address is the complete postal address
-
-        BIZZ - Business Address is the business address
-
-        DLVY - Delivery To Address is the address to which delivery is to take place
-
-        HOME - Residential Address is the home address
-
-        MLTO - Mail To Address is the address to which mail is sent
-
-        PBOX - POBox Address is a postal office (PO) box'
     withdraw_requestBody:
       type: object
       required:
@@ -870,6 +642,58 @@ components:
                   identification:
                     type: string
                     example: S010
+    date_and_place_of_birth:
+      required:
+      - birth_date
+      - city_of_birth
+      - country_of_birth
+      type: object
+      properties:
+        birth_date:
+          type: string
+          format: date
+        place_of_birth:
+          maxLength: 35
+          type: string
+        city_of_birth:
+          maxLength: 35
+          type: string
+        country_of_birth:
+          pattern: '[A-Z]{2,2}'
+          type: string
+          example: AU
+    party_identification_sample:
+      properties:
+        name:
+          type: string
+          example: John Doe
+        country_of_residence:
+          type: string
+          example: AU
+        address:
+          type: object
+          properties:
+            country_code:
+              type: string
+              example: AU
+            address_line:
+              type: array
+              example:
+              - Level 4
+              - 1 Margaret
+        organisation_identification:
+          type: array
+          items:
+            type: object
+            properties:
+              identification:
+                type: string
+                example: ID12345
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
     party_identification:
       type: object
       properties:
@@ -900,11 +724,34 @@ components:
           example: AU
         contact_details:
           $ref: '#/components/schemas/contact_details'
-    single_user:
+    contact_details:
       type: object
       properties:
-        users:
-          $ref: '#/components/schemas/user'
+        name_prefix:
+          type: string
+          enum:
+          - DOCT
+          - MIST
+          - MISS
+          - MADM
+        name:
+          maxLength: 140
+          type: string
+        phone_number:
+          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+          type: string
+        mobile_number:
+          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+          type: string
+        fax_number:
+          pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+          type: string
+        email_address:
+          maxLength: 2048
+          type: string
+        other:
+          maxLength: 35
+          type: string
     generic_identification:
       required:
       - identification
@@ -924,58 +771,73 @@ components:
         identification_issuer:
           maxLength: 35
           type: string
-    wallet_account_npp_details:
+    bill_payment_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      properties:
+        account_id:
+          description: BPay Account to withdraw to. This needs to be a bpay_account id
+          type: string
+          example: c1824ad0-73f1-0138-3700-0a58a9feac09
+          default: c1824ad0-73f1-0138-3700-0a58a9feac09
+        amount:
+          description: Amount (in cents) to withdraw.
+          type: integer
+          example: '173'
+          default: ''
+        reference_id:
+          description: Unique reference information that can be specified for Pay a Bill request. This is an optional field and cannot contain '.' character.
+          type: string
+          example: test100
+          default: ''
+    wallet_account_bpay_details:
       type: object
       properties:
         id:
           type: string
           format: uuid
           example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-        npp_details:
+        bpay_details:
           type: object
           properties:
-            pay_id:
+            biller_code:
               type: string
-            marketplace_pay_ids:
-              type: array
-              items:
-                type: object
-                properties:
-                  pay_id:
-                    type: string
-                    example: npp@assemblypayments.com
-                  type:
-                    type: string
-                    enum:
-                    - emal
-                    - aubn
-                    - orgn
             reference:
               type: string
             amount:
               type: string
             currency:
               type: string
-    date_and_place_of_birth:
-      required:
-      - birth_date
-      - city_of_birth
-      - country_of_birth
+    single_disbursement:
       type: object
       properties:
-        birth_date:
-          type: string
-          format: date
-        place_of_birth:
-          maxLength: 35
-          type: string
-        city_of_birth:
-          maxLength: 35
-          type: string
-        country_of_birth:
-          pattern: '[A-Z]{2,2}'
-          type: string
-          example: AU
+        disbursements:
+          $ref: '#/components/schemas/disbursement'
+    address_type:
+      enum:
+      - ADDR
+      - BIZZ
+      - DLVY
+      - HOME
+      - MLTO
+      - PBOX
+      type: string
+      description: 'Address Type
+
+
+        ADDR - Postal Address is the complete postal address
+
+        BIZZ - Business Address is the business address
+
+        DLVY - Delivery To Address is the address to which delivery is to take place
+
+        HOME - Residential Address is the home address
+
+        MLTO - Mail To Address is the address to which mail is sent
+
+        PBOX - POBox Address is a postal office (PO) box'
     user:
       type: object
       properties:
@@ -1063,33 +925,165 @@ components:
               type: string
             wallet_accounts:
               type: string
-    party_identification_sample:
+    ifti_information_response:
+      type: object
       properties:
-        name:
+        instruction_identification:
           type: string
-          example: John Doe
-        country_of_residence:
+          example: BANKNTSTXXXI20180501000000000000010
+        ultimate_debtor_information:
+          allOf:
+          - $ref: '#/components/schemas/party_identification_sample'
+          - type: object
+        charge_bearer:
           type: string
-          example: AU
-        address:
+          example: CRED
+        previous_instructing_agent:
           type: object
           properties:
-            country_code:
+            agent_bic:
               type: string
-              example: AU
-            address_line:
-              type: array
-              example:
-              - Level 4
-              - 1 Margaret
-        organisation_identification:
+              example: YOURBIC1234
+        creditor_agent_instruction:
+          type: object
+          properties:
+            instruction_information:
+              type: string
+              example: sample
+            code:
+              type: string
+              example: CHQB
+        initiating_party_information:
+          allOf:
+          - $ref: '#/components/schemas/party_identification_sample'
+          - type: object
+        instructed_amount:
+          type: object
+          properties:
+            currency:
+              type: string
+              example: AUD
+            amount:
+              type: string
+              example: '3.25'
+        ultimate_creditor_information:
+          allOf:
+          - $ref: '#/components/schemas/party_identification_sample'
+          - type: object
+        exchange_rate:
+          type: string
+          example: '1.23'
+        payment_purpose_proprietary:
+          type: string
+          example: Prtry
+        payment_information:
+          type: object
+          properties:
+            remittance_information_unstructured:
+              type: string
+              example: MAP_RE_Happy
+            payment_purpose_code:
+              type: string
+              example: EPAY
+        regulatory_reporting:
+          type: array
+          items:
+            type: object
+            properties:
+              authority_name:
+                type: string
+                example: Name
+        remittance_information_structured:
+          type: object
+          properties:
+            referred_document_amount:
+              type: object
+              properties:
+                due_payable_amount:
+                  type: object
+                  properties:
+                    currency:
+                      type: string
+                      example: AUD
+                    amount:
+                      type: string
+                      example: '3.25'
+        related_remittance_information:
           type: array
           items:
             type: object
             properties:
               identification:
                 type: string
-                example: ID12345
+                example: S010
+    ifti_address:
+      type: object
+      description: 'This represents address of an individual or non-individual customer of a NPP participant.
+
+        This object could be populated in one of formats below:'
+      properties:
+        address_type:
+          allOf:
+          - $ref: '#/components/schemas/address_type'
+        department:
+          maxLength: 70
+          minLength: 1
+          type: string
+          description: Department
+          example: Finance
+        sub_department:
+          maxLength: 70
+          minLength: 1
+          type: string
+          description: Sub Department
+          example: Billing
+        street_name:
+          maxLength: 70
+          minLength: 1
+          type: string
+          description: Street Name
+          example: Kent
+        bldg_name:
+          maxLength: 16
+          minLength: 1
+          type: string
+          description: Building name
+          example: '123'
+        postcode:
+          maxLength: 16
+          minLength: 1
+          type: string
+          description: Post Code
+          example: '2000'
+        town_name:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Town name
+          example: Sydney
+        ctry_sub_division:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Country Subdivision
+          example: NSW
+        country_code:
+          pattern: '[A-Z]{2,2}'
+          type: string
+          description: Country Code
+          example: AU
+        address_line:
+          maxItems: 7
+          minItems: 0
+          type: array
+          items:
+            maxLength: 70
+            minLength: 1
+            type: string
+          description: 'Address Lines:
+
+
+            "address_line": ["Melbourne", "2000" ]'
     withdraw_disbursement:
       type: object
       allOf:
@@ -1102,27 +1096,6 @@ components:
           ifti_information:
             allOf:
             - $ref: '#/components/schemas/ifti_information_response'
-    bill_payment_requestBody:
-      type: object
-      required:
-      - account_id
-      - amount
-      properties:
-        account_id:
-          description: BPay Account to withdraw to. This needs to be a bpay_account id
-          type: string
-          example: c1824ad0-73f1-0138-3700-0a58a9feac09
-          default: c1824ad0-73f1-0138-3700-0a58a9feac09
-        amount:
-          description: Amount (in cents) to withdraw.
-          type: integer
-          example: '173'
-          default: ''
-        reference_id:
-          description: Unique reference information that can be specified for Pay a Bill request. This is an optional field and cannot contain '.' character.
-          type: string
-          example: test100
-          default: ''
     wallet_account:
       type: object
       properties:
@@ -1177,11 +1150,38 @@ components:
                 virtual_accounts:
                   type: object
                   example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
-    single_disbursement:
+    wallet_account_npp_details:
       type: object
       properties:
-        disbursements:
-          $ref: '#/components/schemas/disbursement'
+        id:
+          type: string
+          format: uuid
+          example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+        npp_details:
+          type: object
+          properties:
+            pay_id:
+              type: string
+            marketplace_pay_ids:
+              type: array
+              items:
+                type: object
+                properties:
+                  pay_id:
+                    type: string
+                    example: npp@assemblypayments.com
+                  type:
+                    type: string
+                    enum:
+                    - emal
+                    - aubn
+                    - orgn
+            reference:
+              type: string
+            amount:
+              type: string
+            currency:
+              type: string
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

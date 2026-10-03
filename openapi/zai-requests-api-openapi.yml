@@ -168,15 +168,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    callbacks:
+    callback:
       type: object
       properties:
-        callbacks:
-          type: array
-          items:
-            $ref: '#/components/schemas/callback'
-        links:
-          $ref: '#/components/schemas/links'
+        executed_utc:
+          type: string
+          format: date-time
+          example: '2020-10-05T05:22:11Z'
+        http_response:
+          type: integer
+          example: 200
+        detail:
+          type: string
+          example: '{"message": "hey thanks for the callback"}'
     item:
       type: object
       properties:
@@ -392,34 +396,6 @@ components:
               type: string
             tds_checks:
               type: string
-    callback:
-      type: object
-      properties:
-        executed_utc:
-          type: string
-          format: date-time
-          example: '2020-10-05T05:22:11Z'
-        http_response:
-          type: integer
-          example: 200
-        detail:
-          type: string
-          example: '{"message": "hey thanks for the callback"}'
-    status:
-      type: object
-      properties:
-        last_updated:
-          type: string
-          format: DateTime RFC3339
-          example: 2020-07-15T15:04:05Z07:00
-        submission_count:
-          type: integer
-          example: 0
-        message:
-          type: string
-          example: request awaiting submission
-        links:
-          $ref: '#/components/schemas/links'
     single_item:
       type: object
       properties:
@@ -438,6 +414,30 @@ components:
           format: URL
           description: Call this end point to retrieve callback tracking information. This property is only present if a callback was supplied with the original API invocation.
           example: https://tnq.api.assemblypay.com/request/d749f28378554394adab0b2401380bc7/callbacks
+    callbacks:
+      type: object
+      properties:
+        callbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/callback'
+        links:
+          $ref: '#/components/schemas/links'
+    status:
+      type: object
+      properties:
+        last_updated:
+          type: string
+          format: DateTime RFC3339
+          example: 2020-07-15T15:04:05Z07:00
+        submission_count:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: request awaiting submission
+        links:
+          $ref: '#/components/schemas/links'
   securitySchemes:
     basicAuth:
       type: http

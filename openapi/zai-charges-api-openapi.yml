@@ -308,11 +308,6 @@ paths:
                         wallet_accounts: /users/buyer-1556506027/wallet_accounts
 components:
   schemas:
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
     charge_status:
       type: object
       properties:
@@ -325,11 +320,11 @@ components:
         status:
           type: integer
           example: 22500
-    single_charge:
+    single_charge_status:
       type: object
       properties:
         charges:
-          $ref: '#/components/schemas/charge'
+          $ref: '#/components/schemas/charge_status'
     charges:
       type: object
       properties:
@@ -337,6 +332,88 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/charge'
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    single_charge:
+      type: object
+      properties:
+        charges:
+          $ref: '#/components/schemas/charge'
+    charge_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      - email
+      - zip
+      - country
+      properties:
+        account_id:
+          description: Bank Account or Card Account ID
+          type: string
+          example: 5ef44050-4c56-0137-abdf-0242ac110002
+          default: 5ef44050-4c56-0137-abdf-0242ac110002
+        name:
+          description: Description of the Charge being created.
+          type: string
+          example: Test Charge 001
+        amount:
+          description: The cost being charged in cents.
+          type: integer
+          example: '1000'
+          default: '1000'
+        email:
+          description: Email of the user associated with the account being charged.
+          type: string
+          example: buyer-1556505753@promisepay.com
+          default: buyer-1556505753@promisepay.com
+        zip:
+          description: Postcode
+          type: integer
+          example: '3000'
+          default: '3000'
+        country:
+          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code of the User being charged.'
+          type: string
+          example: AUS
+          default: AUS
+        user_id:
+          description: The ID of the User
+          type: string
+          example: buyer-1556505753
+        fee_ids:
+          description: A comma separated list of fee IDs to apply
+          type: string
+          example: ''
+        currency:
+          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
+          type: string
+          example: AUD
+        retain_account:
+          description: 'True - Enables the account to be charged in the future. False - Redacts the account after this charge.
+
+            '
+          type: boolean
+          example: ''
+        device_id:
+          description: Device Information for the device initiating the payment
+          type: string
+          example: ''
+        ip_address:
+          description: IP Information for the device initiating the payment
+          type: string
+          example: ''
+        custom_descriptor:
+          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
+          type: string
+          example: ''
+        cvv:
+          description: CVV / CVC
+          type: string
+          example: ''
     user:
       type: object
       properties:
@@ -424,83 +501,6 @@ components:
               type: string
             wallet_accounts:
               type: string
-    single_charge_status:
-      type: object
-      properties:
-        charges:
-          $ref: '#/components/schemas/charge_status'
-    charge_requestBody:
-      type: object
-      required:
-      - account_id
-      - amount
-      - email
-      - zip
-      - country
-      properties:
-        account_id:
-          description: Bank Account or Card Account ID
-          type: string
-          example: 5ef44050-4c56-0137-abdf-0242ac110002
-          default: 5ef44050-4c56-0137-abdf-0242ac110002
-        name:
-          description: Description of the Charge being created.
-          type: string
-          example: Test Charge 001
-        amount:
-          description: The cost being charged in cents.
-          type: integer
-          example: '1000'
-          default: '1000'
-        email:
-          description: Email of the user associated with the account being charged.
-          type: string
-          example: buyer-1556505753@promisepay.com
-          default: buyer-1556505753@promisepay.com
-        zip:
-          description: Postcode
-          type: integer
-          example: '3000'
-          default: '3000'
-        country:
-          description: '[ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements) country code of the User being charged.'
-          type: string
-          example: AUS
-          default: AUS
-        user_id:
-          description: The ID of the User
-          type: string
-          example: buyer-1556505753
-        fee_ids:
-          description: A comma separated list of fee IDs to apply
-          type: string
-          example: ''
-        currency:
-          description: '[ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is an optional field and if not provided, the item will be created with the default currency of the marketplace.'
-          type: string
-          example: AUD
-        retain_account:
-          description: 'True - Enables the account to be charged in the future. False - Redacts the account after this charge.
-
-            '
-          type: boolean
-          example: ''
-        device_id:
-          description: Device Information for the device initiating the payment
-          type: string
-          example: ''
-        ip_address:
-          description: IP Information for the device initiating the payment
-          type: string
-          example: ''
-        custom_descriptor:
-          description: When `custom_descriptors` are enabled, this is the information to appear on credit card and direct debit statements.
-          type: string
-          example: ''
-        cvv:
-          description: CVV / CVC
-          type: string
-          example: ''
     charge:
       type: object
       properties:
@@ -610,6 +610,15 @@ components:
               type: string
               example: /charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/status
   parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     limitParam:
       name: limit
       in: query
@@ -620,15 +629,6 @@ components:
         minimum: 1
         maximum: 200
         default: 10
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
