@@ -241,6 +241,11 @@ paths:
                     card_account: Successfully redacted
 components:
   schemas:
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
     card_account_deletion:
       properties:
         card_account:
@@ -253,11 +258,48 @@ components:
           description: CVV / CVC
           type: string
           example: '123'
-    single_user:
+    card_account_requestBody:
       type: object
+      required:
+      - full_name
+      - number
+      - expiry_month
+      - expiry_year
+      - cvv
+      - user_id
       properties:
-        users:
-          $ref: '#/components/schemas/user'
+        full_name:
+          description: User full name with at least a space
+          type: string
+          example: John Doe
+          default: John Doe
+        number:
+          description: Account number
+          type: string
+          example: '4444111122223333'
+          default: '4444111122223333'
+        expiry_month:
+          description: Expiry month (MM)
+          type: integer
+          maxLength: 2
+          example: '1'
+          default: '1'
+        expiry_year:
+          description: Expiry year (YYYY)
+          type: integer
+          maxLength: 4
+          example: '2025'
+          default: '2025'
+        cvv:
+          description: CVV / CVC
+          type: string
+          example: '123'
+          default: '123'
+        user_id:
+          description: User ID
+          type: string
+          example: 83f54680-9600-4bee-a6d1-84a5d0e10059
+          default: 83f54680-9600-4bee-a6d1-84a5d0e10059
     card_account:
       type: object
       properties:
@@ -404,48 +446,6 @@ components:
               type: string
             wallet_accounts:
               type: string
-    card_account_requestBody:
-      type: object
-      required:
-      - full_name
-      - number
-      - expiry_month
-      - expiry_year
-      - cvv
-      - user_id
-      properties:
-        full_name:
-          description: User full name with at least a space
-          type: string
-          example: John Doe
-          default: John Doe
-        number:
-          description: Account number
-          type: string
-          example: '4444111122223333'
-          default: '4444111122223333'
-        expiry_month:
-          description: Expiry month (MM)
-          type: integer
-          maxLength: 2
-          example: '1'
-          default: '1'
-        expiry_year:
-          description: Expiry year (YYYY)
-          type: integer
-          maxLength: 4
-          example: '2025'
-          default: '2025'
-        cvv:
-          description: CVV / CVC
-          type: string
-          example: '123'
-          default: '123'
-        user_id:
-          description: User ID
-          type: string
-          example: 83f54680-9600-4bee-a6d1-84a5d0e10059
-          default: 83f54680-9600-4bee-a6d1-84a5d0e10059
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

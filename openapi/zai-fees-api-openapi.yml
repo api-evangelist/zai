@@ -150,6 +150,26 @@ paths:
                         self: /fees/1e5e372a-df3a-4f77-af2f-ec294b1715ce
 components:
   schemas:
+    fees:
+      properties:
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/fee'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
     fee_requestBody:
       type: object
       required:
@@ -202,26 +222,6 @@ components:
       properties:
         fees:
           $ref: '#/components/schemas/fee'
-    fees:
-      properties:
-        fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/fee'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
     fee:
       type: object
       properties:

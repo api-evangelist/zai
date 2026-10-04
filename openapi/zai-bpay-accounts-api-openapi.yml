@@ -166,6 +166,11 @@ paths:
                         wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
 components:
   schemas:
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
     bpay_account_requestBody:
       type: object
       required:
@@ -194,6 +199,58 @@ components:
           type: string
           example: '987654321'
           default: '987654321'
+    bpay_account:
+      type: object
+      properties:
+        bpay_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            bpay_details:
+              type: object
+              properties:
+                account_name:
+                  type: string
+                  example: My biller 123
+                  description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
+                biller_code:
+                  type: integer
+                  example: 123456
+                biller_name:
+                  type: string
+                  description: Name of the biller as registered in BPay
+                  example: ABC Water
+                crn:
+                  type: integer
+                  example: 987654321
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                users:
+                  type: string
     user:
       type: object
       properties:
@@ -281,63 +338,6 @@ components:
               type: string
             wallet_accounts:
               type: string
-    bpay_account:
-      type: object
-      properties:
-        bpay_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            bpay_details:
-              type: object
-              properties:
-                account_name:
-                  type: string
-                  example: My biller 123
-                  description: Name assigned by the platform/marketplace to identify the account (similar to a nickname)
-                biller_code:
-                  type: integer
-                  example: 123456
-                biller_name:
-                  type: string
-                  description: Name of the biller as registered in BPay
-                  example: ABC Water
-                crn:
-                  type: integer
-                  example: 987654321
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                users:
-                  type: string
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

@@ -455,97 +455,12 @@ paths:
                       total: 55
 components:
   schemas:
-    disbursement:
-      type: object
+    transactions:
       properties:
-        id:
-          type: string
-          example: ad688d54-6791-4f1d-add7-88fbd89b70d1
-        reference_id:
-          type: string
-          example: 7190770-1-2908
-        amount:
-          type: integer
-          example: 10000
-        currency:
-          type: string
-          example: AUD
-        batch_id:
-          type: string
-          example: null
-        cuscal_payment_transaction_id:
-          type: string
-          example: null
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        state:
-          type: string
-          example: pending
-        to:
-          type: string
-          example: Bank Account
-        bank_name:
-          type: string
-          example: Bank of Australia
-        bank_account_name:
-          type: string
-          example: Samuel Seller
-        bank_account_number:
-          type: string
-          example: XXX234
-        bank_routing_number:
-          type: string
-          example: XXXXX3
-        npp_payout_state:
-          type: string
-          example: trying
-        account_name:
-          type: string
-          example: My Water Company
-        biller_name:
-          type: string
-          example: ABC Water
-        biller_code:
-          type: string
-          example: 123456
-        crn:
-          type: string
-          example: 0987654321
-        links:
-          type: object
-          properties:
-            transactions:
-              type: string
-              example: /disbursements/8a31ebfa-421b-4cbb-9241-632f71b3778a/transactions
-            wallet_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/wallet_accounts
-            paypal_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/paypal_accounts
-            bank_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bank_accounts
-            bpay_accounts:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bpay_accounts
-            items:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/items
-            users:
-              type: string
-              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/users
-    disbursements:
-      type: object
-      properties:
-        disbursements:
+        transactions:
           type: array
           items:
-            $ref: '#/components/schemas/disbursement'
+            $ref: '#/components/schemas/transaction'
         meta:
           type: object
           properties:
@@ -555,6 +470,11 @@ components:
               type: integer
             total:
               type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
     single_user:
       type: object
       properties:
@@ -723,6 +643,80 @@ components:
             supplementary_data:
               type: string
               example: /transactions/ea36e48a-4638-4d1a-a345-e1a0a584df8b/supplementary_data
+    items:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/item'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+    wallet_account:
+      type: object
+      properties:
+        wallet_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            balance:
+              type: integer
+            links:
+              type: object
+              properties:
+                self:
+                  type: object
+                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
+                users:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
+                batch_transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
+                transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
+                bpay_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
+                npp_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
+                virtual_accounts:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
     item:
       type: object
       required:
@@ -949,104 +943,13 @@ components:
               type: string
             tds_checks:
               type: string
-    single_disbursement:
+    disbursements:
       type: object
       properties:
         disbursements:
-          $ref: '#/components/schemas/disbursement'
-    user:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        full_name:
-          type: string
-          example: Samuel Seller
-        email:
-          type: string
-          format: email
-          example: samuel.seller@assemblypayments.com
-        mobile:
-          type: string
-          example: 61491570156
-        phone:
-          type: string
-        logo_url:
-          type: string
-        color_1:
-          type: string
-        color_2:
-          type: string
-        first_name:
-          type: string
-          example: Samuel
-        last_name:
-          type: string
-          example: Seller
-        id:
-          type: string
-          example: Seller_1234
-        custom_descriptor:
-          type: string
-        location:
-          type: string
-          example: AUS
-        verification_status:
-          type: string
-          example: pending
-        held_state:
-          type: boolean
-          example: false
-        roles:
           type: array
           items:
-            type: string
-            example: customer
-        dob:
-          type: string
-          example: encrypted
-        government_number:
-          type: string
-          example: encrypted
-        drivers_license:
-          type: string
-        flags:
-          type: object
-        related:
-          type: object
-          properties:
-            addresses:
-              type: string
-              example: fe602dcf-4175-4f88-b5be-3beb04092dcd
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-            items:
-              type: string
-            card_accounts:
-              type: string
-            paypal_accounts:
-              type: string
-            payid_accounts:
-              type: string
-            bpay_accounts:
-              type: string
-            bank_accounts:
-              type: string
-            wallet_accounts:
-              type: string
-    transactions:
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/transaction'
+            $ref: '#/components/schemas/disbursement'
         meta:
           type: object
           properties:
@@ -1056,11 +959,6 @@ components:
               type: integer
             total:
               type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
     bank_account_au:
       type: object
       properties:
@@ -1161,80 +1059,182 @@ components:
                   type: string
                 direct_debit_authorities:
                   type: string
-    wallet_account:
+    disbursement:
       type: object
       properties:
-        wallet_accounts:
+        id:
+          type: string
+          example: ad688d54-6791-4f1d-add7-88fbd89b70d1
+        reference_id:
+          type: string
+          example: 7190770-1-2908
+        amount:
+          type: integer
+          example: 10000
+        currency:
+          type: string
+          example: AUD
+        batch_id:
+          type: string
+          example: null
+        cuscal_payment_transaction_id:
+          type: string
+          example: null
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          example: pending
+        to:
+          type: string
+          example: Bank Account
+        bank_name:
+          type: string
+          example: Bank of Australia
+        bank_account_name:
+          type: string
+          example: Samuel Seller
+        bank_account_number:
+          type: string
+          example: XXX234
+        bank_routing_number:
+          type: string
+          example: XXXXX3
+        npp_payout_state:
+          type: string
+          example: trying
+        account_name:
+          type: string
+          example: My Water Company
+        biller_name:
+          type: string
+          example: ABC Water
+        biller_code:
+          type: string
+          example: 123456
+        crn:
+          type: string
+          example: 0987654321
+        links:
           type: object
           properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
+            transactions:
               type: string
-              format: date-time
-            updated_at:
+              example: /disbursements/8a31ebfa-421b-4cbb-9241-632f71b3778a/transactions
+            wallet_accounts:
               type: string
-              format: date-time
-            id:
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/wallet_accounts
+            paypal_accounts:
               type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/paypal_accounts
+            bank_accounts:
               type: string
-              example: AUD
-            verification_status:
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bank_accounts
+            bpay_accounts:
               type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            balance:
-              type: integer
-            links:
-              type: object
-              properties:
-                self:
-                  type: object
-                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
-                users:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
-                batch_transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
-                transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
-                bpay_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
-                npp_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
-                virtual_accounts:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
-    items:
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/bpay_accounts
+            items:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/items
+            users:
+              type: string
+              example: /disbursements/ea36e48a-4638-4d1a-a345-e1a0a584df8b/users
+    single_disbursement:
+      type: object
       properties:
-        items:
+        disbursements:
+          $ref: '#/components/schemas/disbursement'
+    user:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        full_name:
+          type: string
+          example: Samuel Seller
+        email:
+          type: string
+          format: email
+          example: samuel.seller@assemblypayments.com
+        mobile:
+          type: string
+          example: 61491570156
+        phone:
+          type: string
+        logo_url:
+          type: string
+        color_1:
+          type: string
+        color_2:
+          type: string
+        first_name:
+          type: string
+          example: Samuel
+        last_name:
+          type: string
+          example: Seller
+        id:
+          type: string
+          example: Seller_1234
+        custom_descriptor:
+          type: string
+        location:
+          type: string
+          example: AUS
+        verification_status:
+          type: string
+          example: pending
+        held_state:
+          type: boolean
+          example: false
+        roles:
           type: array
           items:
-            $ref: '#/components/schemas/item'
+            type: string
+            example: customer
+        dob:
+          type: string
+          example: encrypted
+        government_number:
+          type: string
+          example: encrypted
+        drivers_license:
+          type: string
+        flags:
+          type: object
+        related:
+          type: object
+          properties:
+            addresses:
+              type: string
+              example: fe602dcf-4175-4f88-b5be-3beb04092dcd
         links:
           type: object
           properties:
             self:
               type: string
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
+            items:
+              type: string
+            card_accounts:
+              type: string
+            paypal_accounts:
+              type: string
+            payid_accounts:
+              type: string
+            bpay_accounts:
+              type: string
+            bank_accounts:
+              type: string
+            wallet_accounts:
+              type: string
   parameters:
     offsetParam:
       name: offset

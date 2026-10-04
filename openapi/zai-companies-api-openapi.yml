@@ -180,6 +180,26 @@ paths:
                       links:
                         self: /companies/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
   schemas:
     company:
       type: object
@@ -222,28 +242,6 @@ components:
             self:
               type: string
               example: /companies
-    simple_companies:
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/simple_company'
-    simple_company:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 9280aa36-d7f8-4959-b1ed-0ace2c12cfa2
-        name:
-          type: string
-          example: Assembly Payments
-        legal_name:
-          type: string
-          example: PromisePay
-        business_email:
-          type: string
-          example: test@email.com
     company_requestBody:
       type: object
       required:
@@ -315,30 +313,32 @@ components:
           type: string
           example: buyer-70729325
           default: buyer-70729325
+    simple_companies:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/simple_company'
+    simple_company:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 9280aa36-d7f8-4959-b1ed-0ace2c12cfa2
+        name:
+          type: string
+          example: Assembly Payments
+        legal_name:
+          type: string
+          example: PromisePay
+        business_email:
+          type: string
+          example: test@email.com
     single_company:
       properties:
         companies:
           $ref: '#/components/schemas/company'
-  parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

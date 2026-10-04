@@ -160,6 +160,22 @@ components:
         maximum: 200
         default: 10
   schemas:
+    direct_debit_authority_requestBody:
+      type: object
+      required:
+      - account_id
+      - amount
+      properties:
+        account_id:
+          description: Bank account ID
+          type: string
+          example: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
+          default: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
+        amount:
+          description: Amount for direct debit in cents
+          type: integer
+          example: 100
+          default: 100
     direct_debit_authority:
       type: object
       properties:
@@ -196,22 +212,6 @@ components:
             self:
               type: string
               example: /direct_debit_authorities/9fda18e7-b1d3-4a83-830d-0cef0f62cd25
-    direct_debit_authority_requestBody:
-      type: object
-      required:
-      - account_id
-      - amount
-      properties:
-        account_id:
-          description: Bank account ID
-          type: string
-          example: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
-          default: 7fac6c60-6f5b-0138-eb9a-0a58a9feac03
-        amount:
-          description: Amount for direct debit in cents
-          type: integer
-          example: 100
-          default: 100
     list_direct_debit_authorities:
       properties:
         direct_debit_authorities:

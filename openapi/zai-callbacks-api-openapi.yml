@@ -383,6 +383,10 @@ paths:
                         responses: /callbacks/30403493-7249-433a-83ce-555388f75c01/responses
 components:
   schemas:
+    single_callback_response:
+      properties:
+        call_responses:
+          $ref: '#/components/schemas/callback_response'
     callback:
       type: object
       properties:
@@ -426,33 +430,12 @@ components:
               type: string
             responses:
               type: string
-    callback_deletion:
+    callbacks:
       properties:
         callbacks:
-          type: string
-          example: Successfully redacted
-    list_callback_responses:
-      properties:
-        callback_responses:
           type: array
           items:
-            $ref: '#/components/schemas/callback_response'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-            callbacks:
-              type: string
+            $ref: '#/components/schemas/callback'
     callback_requestBody:
       type: object
       required:
@@ -476,20 +459,28 @@ components:
           type: string
           default: 'true'
           example: 'true'
-    single_callback_response:
+    list_callback_responses:
       properties:
-        call_responses:
-          $ref: '#/components/schemas/callback_response'
-    callbacks:
-      properties:
-        callbacks:
+        callback_responses:
           type: array
           items:
-            $ref: '#/components/schemas/callback'
-    single_callback:
-      properties:
-        callbacks:
-          $ref: '#/components/schemas/callback'
+            $ref: '#/components/schemas/callback_response'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+            callbacks:
+              type: string
     callback_response:
       type: object
       properties:
@@ -517,6 +508,15 @@ components:
         response_code:
           type: integer
           example: 200
+    callback_deletion:
+      properties:
+        callbacks:
+          type: string
+          example: Successfully redacted
+    single_callback:
+      properties:
+        callbacks:
+          $ref: '#/components/schemas/callback'
   parameters:
     offsetParam:
       name: offset
