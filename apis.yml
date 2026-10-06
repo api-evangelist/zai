@@ -72,7 +72,7 @@ tags_raw:
 - Digital Wallets
 - Payouts
 created: '2026-07-24'
-modified: '2026-07-24'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: zai:zai-addresses-api
@@ -812,6 +812,10 @@ apis:
   - type: APIReference
     url: https://developer.hellozai.com/reference/async-overview
 common:
+- url: https://www.hellozai.com/blog/tag/company-news
+  type: Blog
+- url: https://www.hellozai.com/blog/rss.xml
+  type: BlogRSS
 - type: RateLimits
   url: rate-limits/zai-rate-limits.yml
 - type: Plans
