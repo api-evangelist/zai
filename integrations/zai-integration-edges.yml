@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/zai/integrations
+- https://n8n.io/integrations/zai/
+- https://composio.dev/toolkits/zai
+- https://monid.ai/tools/zai
+checked:
+- https://composio.dev/toolkits/zai
+- https://monid.ai/tools/zai
+- https://n8n.io/integrations/zai/
+- https://zapier.com/apps/zai/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
