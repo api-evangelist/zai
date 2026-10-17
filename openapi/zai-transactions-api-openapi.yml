@@ -479,6 +479,149 @@ paths:
                         wallet_accounts: /users/e6bc0480-57ae-0138-c46e-0a58a9feac03/wallet_accounts
 components:
   schemas:
+    single_user:
+      type: object
+      properties:
+        users:
+          $ref: '#/components/schemas/user'
+    wallet_account:
+      type: object
+      properties:
+        wallet_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            balance:
+              type: integer
+            links:
+              type: object
+              properties:
+                self:
+                  type: object
+                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
+                users:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
+                batch_transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
+                transactions:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
+                bpay_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
+                npp_details:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
+                virtual_accounts:
+                  type: object
+                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
+    single_transaction:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/transaction'
+    fees:
+      properties:
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/fee'
+        meta:
+          type: object
+          properties:
+            limit:
+              type: integer
+            offset:
+              type: integer
+            total:
+              type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    card_account:
+      type: object
+      properties:
+        card_accounts:
+          type: object
+          properties:
+            active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            id:
+              type: string
+              format: uuid
+              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
+            currency:
+              type: string
+              example: AUD
+            cvv_verified:
+              type: boolean
+              example: true
+            verification_status:
+              type: string
+              enum:
+              - verified
+              - not_verified
+              example: not_verified
+            card:
+              type: object
+              readOnly: true
+              properties:
+                type:
+                  type: string
+                  example: visa
+                full_name:
+                  type: string
+                  example: Bella Buyer
+                number:
+                  type: string
+                  example: XXXX-XXXX-XXXX-1111
+                expiry_month:
+                  type: string
+                  example: 10
+                expiry_year:
+                  type: string
+                  example: 2020
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  example: /users/buyer-71439598/card_accounts
+                users:
+                  type: string
+                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
     transactions:
       properties:
         transactions:
@@ -494,6 +637,49 @@ components:
               type: integer
             total:
               type: integer
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    fee:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 36020976-f345-4d0f-b860-9c025ccce668
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Seller Success Fee
+        fee_type_id:
+          type: string
+          example: 2
+        amount:
+          type: string
+          example: 200
+        cap:
+          type: string
+          example: null
+        min:
+          type: string
+          example: null
+        max:
+          type: string
+          example: null
+        to:
+          type: string
+          example: seller
+        calculated_fee:
+          type: integer
+          description: This field is only shown in case an item amount is passed
+          readOnly: true
+          example: 400
         links:
           type: object
           properties:
@@ -662,192 +848,6 @@ components:
             supplementary_data:
               type: string
               example: /transactions/ea36e48a-4638-4d1a-a345-e1a0a584df8b/supplementary_data
-    single_user:
-      type: object
-      properties:
-        users:
-          $ref: '#/components/schemas/user'
-    single_transaction:
-      type: object
-      properties:
-        transactions:
-          $ref: '#/components/schemas/transaction'
-    fees:
-      properties:
-        fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/fee'
-        meta:
-          type: object
-          properties:
-            limit:
-              type: integer
-            offset:
-              type: integer
-            total:
-              type: integer
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-    wallet_account:
-      type: object
-      properties:
-        wallet_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            balance:
-              type: integer
-            links:
-              type: object
-              properties:
-                self:
-                  type: object
-                  example: /transactions/aed45af0-6f63-0138-901c-0a58a9feac03/wallet_accounts
-                users:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/users
-                batch_transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/batch_transactions
-                transactions:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/transactions
-                bpay_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/bpay_details
-                npp_details:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/npp_details
-                virtual_accounts:
-                  type: object
-                  example: /wallet_accounts/5c1c6b10-4c56-0137-8cd7-0242ac110002/virtual_accounts
-    card_account:
-      type: object
-      properties:
-        card_accounts:
-          type: object
-          properties:
-            active:
-              type: boolean
-              example: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            id:
-              type: string
-              format: uuid
-              example: 46deb476-c1a6-41eb-8eb7-26a695bbe5bc
-            currency:
-              type: string
-              example: AUD
-            cvv_verified:
-              type: boolean
-              example: true
-            verification_status:
-              type: string
-              enum:
-              - verified
-              - not_verified
-              example: not_verified
-            card:
-              type: object
-              readOnly: true
-              properties:
-                type:
-                  type: string
-                  example: visa
-                full_name:
-                  type: string
-                  example: Bella Buyer
-                number:
-                  type: string
-                  example: XXXX-XXXX-XXXX-1111
-                expiry_month:
-                  type: string
-                  example: 10
-                expiry_year:
-                  type: string
-                  example: 2020
-            links:
-              type: object
-              properties:
-                self:
-                  type: string
-                  example: /users/buyer-71439598/card_accounts
-                users:
-                  type: string
-                  example: /card_accounts/35977230-7168-0138-0a1d-0a58a9feac07/users
-    fee:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 36020976-f345-4d0f-b860-9c025ccce668
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          example: Seller Success Fee
-        fee_type_id:
-          type: string
-          example: 2
-        amount:
-          type: string
-          example: 200
-        cap:
-          type: string
-          example: null
-        min:
-          type: string
-          example: null
-        max:
-          type: string
-          example: null
-        to:
-          type: string
-          example: seller
-        calculated_fee:
-          type: integer
-          description: This field is only shown in case an item amount is passed
-          readOnly: true
-          example: 400
-        links:
-          type: object
-          properties:
-            self:
-              type: string
     user:
       type: object
       properties:
@@ -1045,6 +1045,16 @@ components:
         type: integer
         minimum: 0
         default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
     transactionTypeMethod:
       name: transaction_type_method
       in: query
@@ -1076,16 +1086,6 @@ components:
         - fee
         - deposit
         - withdrawal
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

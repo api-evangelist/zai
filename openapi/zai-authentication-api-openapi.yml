@@ -90,6 +90,11 @@ paths:
                     error: something went wrong
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        error:
+          type: string
     tokens_response:
       type: object
       properties:
@@ -105,11 +110,6 @@ components:
           type: string
           description: Authorization header value prefix. This is a constant.
           example: Bearer
-    error:
-      type: object
-      properties:
-        error:
-          type: string
     tokens_request_body:
       type: object
       required:

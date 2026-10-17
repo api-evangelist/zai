@@ -180,68 +180,14 @@ paths:
                       links:
                         self: /companies/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 components:
-  parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of records to offset. Required for pagination.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Number of records to retrieve. Up to 200.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 10
   schemas:
-    company:
+    simple_companies:
       type: object
       properties:
-        legal_name:
-          type: string
-          example: Samuel's Gardening Pty Ltd
-        name:
-          type: string
-          example: Samuel's Gardening
-        tax_number:
-          type: string
-          example: 100200300
-        business_email:
-          type: string
-          example: samuel@email.com
-        charge_tax:
-          type:
-          - boolean
-          - 'null'
-          example: false
-        phone:
-          type: string
-          example: 61400000000
-        id:
-          type: string
-          example: 7b85aa9c-fc54-4449-afef-f52fc2b94cd3
-        related:
-          type: object
-          properties:
-            address:
-              type: string
-              example: cae0ada1-8e31-4bfc-aa24-5331f888cb12
-            users:
-              type: string
-              example: b278dbd0-48da-4824-8ab7-f82008682df2
-        self:
-          type: object
-          properties:
-            self:
-              type: string
-              example: /companies
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/simple_company'
     company_requestBody:
       type: object
       required:
@@ -313,13 +259,51 @@ components:
           type: string
           example: buyer-70729325
           default: buyer-70729325
-    simple_companies:
+    company:
       type: object
       properties:
+        legal_name:
+          type: string
+          example: Samuel's Gardening Pty Ltd
+        name:
+          type: string
+          example: Samuel's Gardening
+        tax_number:
+          type: string
+          example: 100200300
+        business_email:
+          type: string
+          example: samuel@email.com
+        charge_tax:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        phone:
+          type: string
+          example: 61400000000
+        id:
+          type: string
+          example: 7b85aa9c-fc54-4449-afef-f52fc2b94cd3
+        related:
+          type: object
+          properties:
+            address:
+              type: string
+              example: cae0ada1-8e31-4bfc-aa24-5331f888cb12
+            users:
+              type: string
+              example: b278dbd0-48da-4824-8ab7-f82008682df2
+        self:
+          type: object
+          properties:
+            self:
+              type: string
+              example: /companies
+    single_company:
+      properties:
         companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/simple_company'
+          $ref: '#/components/schemas/company'
     simple_company:
       type: object
       properties:
@@ -335,10 +319,26 @@ components:
         business_email:
           type: string
           example: test@email.com
-    single_company:
-      properties:
-        companies:
-          $ref: '#/components/schemas/company'
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of records to offset. Required for pagination.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Number of records to retrieve. Up to 200.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 10
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
