@@ -1,0 +1,12 @@
+{
+ "url": "https://api.swaggerhub.com/apis/AssemblyPlatforms/assembly-api/2.3/swagger.json",
+ "requested_url": "https://api.swaggerhub.com/apis/AssemblyPlatforms/assembly-api/2.3/swagger.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 268343,
+ "sha256": "4bcc52c22140fdd39969cc7833981fad86369796c4134d34ff10f8929567ebac",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
